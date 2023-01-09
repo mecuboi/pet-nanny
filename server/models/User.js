@@ -29,6 +29,10 @@ const userSchema = new Schema({
     type: String,
     required: true,
   },
+  postcode: {
+    type: Int,
+    required: true,
+  },
   isNanny: {
     type: Boolean,
   },

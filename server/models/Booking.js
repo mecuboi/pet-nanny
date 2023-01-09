@@ -12,7 +12,7 @@ const bookingSchema = new Schema({
     type: Date,
     // YYYY-MM-DD Format
     // the minimum the date can be in 1st Jan 2023.
-    min: '2023-01-01'
+    min: Date.now()
   },
   // BookedBy
    User: {
