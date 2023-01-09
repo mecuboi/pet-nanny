@@ -10,7 +10,7 @@ const bookingSchema = new Schema({
   // https://mongoosejs.com/docs/tutorials/dates.html Doc about type: Date
   BookedDate: {
     type: Date,
-    // YYYY-MM-DD Format
+    get: value => moment(value).format("DD MMM YYYY"),
     // the minimum the date can be in 1st Jan 2023.
     min: Date.now()
   },
