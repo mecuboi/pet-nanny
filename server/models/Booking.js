@@ -1,3 +1,5 @@
+// FOR NANNIES
+
 const mongoose = require('mongoose');
 
 const { Schema } = mongoose;
@@ -5,7 +7,7 @@ const { Schema } = mongoose;
 const bookingSchema = new Schema({
   CreatedAt: {
     type: Date,
-    default: Date.now
+    default: Date.now()
   },
   // https://mongoosejs.com/docs/tutorials/dates.html Doc about type: Date
   BookedDate: {
@@ -14,9 +16,14 @@ const bookingSchema = new Schema({
     // the minimum the date can be in 1st Jan 2023.
     min: Date.now()
   },
+  price: {
+    type: Number,
+    default: 100,
+    required: true,
+  },
   // BookedBy
-   User: {
-    type:Schema.Types.ObjectId,
+   BookedBy: {
+    type: Schema.Types.ObjectId,
     ref: 'User'
   },
 });

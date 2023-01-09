@@ -1,3 +1,5 @@
+// FOR USERS
+
 const mongoose = require('mongoose');
 
 const { Schema } = mongoose;
@@ -5,7 +7,7 @@ const { Schema } = mongoose;
 const orderSchema = new Schema({
   purchaseDate: {
     type: Date,
-    default: Date.now
+    default: Date.now()
   },
   bookings: [
     {
