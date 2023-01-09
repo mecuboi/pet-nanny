@@ -37,8 +37,8 @@ const typeDefs = gql`
     all: [User]
     users(role: String): [User]
     user(id: ID!, role: String): User
-    nannies: [User]
-    nanny: (id: ID!): User
+    nannies(role: String): [User]
+    nanny: (id: ID!, role: String): User
     orders: [Order]
     order: (id: ID!): Order
     bookings: [Booking]
@@ -46,8 +46,8 @@ const typeDefs = gql`
   }
  
   type Mutation {
-    addUser(firstName: String!, lastName: String!, email: String!, password: String!, address: String, picture: String, description: String): Auth
-    updateUser(firstName: String, lastName: String, email: String, password: String, address: String, picture: String, description: String): User
+    addUser(firstName: String!, lastName: String!, email: String!, password: String!, address: String, picture: String, description: String, role: String): Auth
+    updateUser(firstName: String, lastName: String, email: String, password: String, address: String, picture: String, description: String, role: String): User
     deleteUser(_id: ID!): User
     addOrder(bookings: [ID]!): Order
     deleteOrder(bookings: [ID]!): Order

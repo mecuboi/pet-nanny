@@ -12,16 +12,22 @@ const resolvers = {
       return await User.find({ role: 'User' });
     },
     user: async (_, args) => {
-      return await User.findOne({ _id: args.id, role: args.role });
+      return await User.findOne({ _id: args.id, role: 'User'});
+    },
+    nannies: async () => {
+      return await User.find({ role: 'Nanny'});
+    },
+    nanny: async (_, args) => {
+      return await User.findOne({ _id: args.id, role: 'Nanny'});
     },
     orders: async () => {
-      return await Order.find().populate()
+      return await Order.find().populate('bookings');
     },
     order: async (parent, { _id }, context) => {
       if (context.user) {
         const user = await User.findById(context.user._id).populate({
           path: 'orders.bookings',
-          populate: 'booking'
+          populate: 'bookings'
         });
 
         return user.orders.id(_id);
@@ -29,21 +35,27 @@ const resolvers = {
 
       throw new AuthenticationError('Not logged in');
     },
-    booking: async (parent, {_id}) => {
-      return await Booking.findById(_id).populate('user');
-    },
     bookings: async () => {
       return await Booking.find().populate('user');
     },
-    nannies: async (parent, { isNanny }) => {
-      return await User.find({ isNanny }).populate('booking');
+    booking: async (parent, {_id}, context) => {
+      if (context.user) {
+        const user = await User.findById(context.user._id).populate({
+          path: 'bookings.bookedBy',
+          populate: 'bookedBy'
+        });
+
+        return user.orders.id(_id);
+      }
+
+      throw new AuthenticationError('Not logged in');
     },
     checkout: async (parent, args, context) => {
       const url = new URL(context.headers.referer).origin;
       const order = new Order({ bookings: args.bookings });
       const line_items = [];
 
-      const { bookings } = await order.populate('booking');
+      const { bookings } = await order.populate('bookings');
 
       for (let i = 0; i < bookings.length; i++) {
         const product = await stripe.products.create({
@@ -95,12 +107,6 @@ const resolvers = {
       }
 
       throw new AuthenticationError('Not logged in');
-    },
-    addNanny: async (parent, args) => {
-      const nanny = await Nanny.create(args);
-      const token = signToken(nanny);
-
-      return { token, user: nanny };
     },
     addOrder: async (parent, {  bookings }, context) => {
       if (context.user) {
