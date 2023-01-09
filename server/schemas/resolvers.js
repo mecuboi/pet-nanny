@@ -1,18 +1,27 @@
 const { AuthenticationError } = require('apollo-server-express');
-const { User, Booking, Order } = require('../models');
+const { User, Booking, Order} = require('../models');
 const { signToken } = require('../utils/auth');
 const stripe = require('stripe')('sk_test_4eC39HqLyjWDarjtT1zdp7dc');
 
 const resolvers = {
   Query: {
+    all: async () => {
+      return await User.find();
+    },
     users: async () => {
-      return await User.find().populate('booking');
+      return await User.find({ role: 'User' });
+    },
+    user: async (_, args) => {
+      return await User.findOne({ _id: args.id, role: args.role });
+    },
+    orders: async () => {
+      return await Order.find().populate()
     },
     order: async (parent, { _id }, context) => {
       if (context.user) {
         const user = await User.findById(context.user._id).populate({
-          path: 'orders.products',
-          populate: 'category'
+          path: 'orders.bookings',
+          populate: 'booking'
         });
 
         return user.orders.id(_id);
@@ -21,7 +30,7 @@ const resolvers = {
       throw new AuthenticationError('Not logged in');
     },
     booking: async (parent, {_id}) => {
-      return await Booking.findById(id).populate('user');
+      return await Booking.findById(_id).populate('user');
     },
     bookings: async () => {
       return await Booking.find().populate('user');
@@ -34,7 +43,7 @@ const resolvers = {
       const order = new Order({ bookings: args.bookings });
       const line_items = [];
 
-      const { bookings } = await order.populate('bookings');
+      const { bookings } = await order.populate('booking');
 
       for (let i = 0; i < bookings.length; i++) {
         const product = await stripe.products.create({
@@ -86,6 +95,12 @@ const resolvers = {
       }
 
       throw new AuthenticationError('Not logged in');
+    },
+    addNanny: async (parent, args) => {
+      const nanny = await Nanny.create(args);
+      const token = signToken(nanny);
+
+      return { token, user: nanny };
     },
     addOrder: async (parent, {  bookings }, context) => {
       if (context.user) {

@@ -1,18 +1,18 @@
 const db = require('./connection');
-const { User, Product, Category } = require('../models');
+const { Booking, Order, User } = require('../models');
 
 db.once('open', async () => {
   await Category.deleteMany();
 
-  const categories = await Category.insertMany([
-    { name: 'Food' },
-    { name: 'Household Supplies' },
-    { name: 'Electronics' },
-    { name: 'Books' },
-    { name: 'Toys' }
+  const bookings = await Booking.insertMany([
+    { BookedDate: '2023-01-02', BookedBy: User[2]._id },
+    { BookedDate: '2023-01-02', BookedBy: User[2]._id },
+    { BookedDate: '2023-01-02', BookedBy: User[2]._id },
+    { BookedDate: '2023-01-02', BookedBy: User[2]._id },
+    { BookedDate: '2023-01-02', BookedBy: User[2]._id },
   ]);
 
-  console.log('categories seeded');
+  console.log('booking seeded');
 
   await Product.deleteMany();
 
@@ -131,23 +131,49 @@ db.once('open', async () => {
   await User.deleteMany();
 
   await User.create({
+    firstName: 'Steve',
+    lastName: 'Legend',
+    email: 'steve@testmail.com',
+    password: 'password12345',
+    address: 'somewhere',
+    isNanny: true,
+    picture: 'https://images.unsplash.com/face-springmorning.jpg?q=80&fm=jpg&crop=faces&fit=crop&h=128&w=128',
+    orders: [
+      {
+        bookings: [bookings[0]._id, bookings[1]._id]
+      }
+    ]
+  });
+  await User.create({
     firstName: 'Pamela',
     lastName: 'Washington',
     email: 'pamela@testmail.com',
     password: 'password12345',
+    address: 'over the',
+    isNanny: true,
+    picture: 'https://images.unsplash.com/face-springmorning.jpg?q=80&fm=jpg&crop=faces&fit=crop&h=128&w=128',
     orders: [
       {
-        products: [products[0]._id, products[0]._id, products[1]._id]
+        bookings: [bookings[2]._id, bookings[3]._id]
       }
     ]
   });
 
   await User.create({
-    firstName: 'Elijah',
-    lastName: 'Holt',
-    email: 'eholt@testmail.com',
-    password: 'password12345'
+    firstName: 'John',
+    lastName: 'Doe',
+    email: 'john@testmail.com',
+    password: 'password12345',
+    address: 'rainbow',
+    isNanny: false,
+    picture: 'https://images.unsplash.com/face-springmorning.jpg?q=80&fm=jpg&crop=faces&fit=crop&h=128&w=128',
+    orders: [
+      {
+        bookings: []
+      }
+    ]
   });
+
 
   console.log('users seeded');
 

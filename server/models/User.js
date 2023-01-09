@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 
 const { Schema } = mongoose;
 const bcrypt = require('bcrypt');
+const Order = require('./Order');
 const Booking = require('./Booking');
 
 const userSchema = new Schema({
@@ -29,8 +30,9 @@ const userSchema = new Schema({
     type: String,
     required: true,
   },
-  isNanny: {
-    type: Boolean,
+  postcode: {
+    type: Number,
+    required: true,
   },
   picture: {
     type: String,
@@ -40,17 +42,19 @@ const userSchema = new Schema({
     type: String,
     required: false,
   },
-  price: {
-    type: Number,
-    // required: true && isNanny: true
-    // In English: Price is required if User a nanny
-    // Defaults to undefined is User is not a nanny, and null if user is.
-    required: function() { return this.isNanny; },
-    default: function() { return this.isNanny ? undefined : null; }
-  }, 
-  orders: [Order.schema]
-  
-
+  role: {
+    type: String,
+    required: true,
+    default: 'User'
+  },
+  orders: {
+    type: role === 'User' ? [Order.schema] : null,
+    required: false
+  },
+  bookings: {
+    type: role === 'Nanny' ? [Booking.schema] : null,
+    required: false
+  }
 });
 
 // set up pre-save middleware to create password
