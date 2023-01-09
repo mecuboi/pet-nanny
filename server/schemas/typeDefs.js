@@ -8,6 +8,7 @@ const typeDefs = gql`
     email: String
     password: String
     address: String
+    postcode: Int
     isNanny: Boolean
     picture: String
     description: String
