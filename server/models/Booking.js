@@ -32,6 +32,6 @@ bookingSchema.methods.getBookedDate = () => {
   return bookingSchema.BookedDate
 };
 
-const Booking = mongoose.model('Order', bookingSchema);
+const Booking = mongoose.model('Booking', bookingSchema);
 
 module.exports = Booking;

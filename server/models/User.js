@@ -5,7 +5,13 @@ const bcrypt = require('bcrypt');
 const Order = require('./Order');
 const Booking = require('./Booking');
 
-const userSchema = new Schema({
+  const userSchema = new Schema({
+    _id: {
+      type: Id,
+      required: true,
+      unique: true,
+        // TODO add auto increment from 1 
+    },
   firstName: {
     type: String,
     required: true,
@@ -33,31 +39,28 @@ const userSchema = new Schema({
   postcode: {
     type: Number,
     required: true,
+    default: 3001
   },
   picture: {
     type: String,
     required: false,
     default:'https://images.unsplash.com/face-springmorning.jpg?q=80&fm=jpg&crop=faces&fit=crop&h=128&w=128',
   },
-  // TODO add ternary operator to default, if role = User.. etc
   description: {
     type: String,
     required: false,
-    default: 'I am a new User'
+    default: `I am a new User`
   },
   role: {
     type: String,
     required: true,
     default: 'User'
   },
-  orders: {
-    type: role === 'User' ? [Order.schema] : null,
-    required: false
-  },
-  bookings: {
-    type: role === 'Nanny' ? [Booking.schema] : null,
-    required: false
-  }
+  // TODO fix this
+  // orders: [Order.Schema],
+  // bookings: [Booking.Schema]
+  orders: this.role === 'User' ? [Order.schema] : null,
+  bookings: this.role === 'Nanny' ? [Booking.schema] : null,
 });
 
 // set up pre-save middleware to create password
