@@ -8,46 +8,45 @@ const typeDefs = gql`
     email: String
     password: String
     address: String
-    postcode: Int
-    isNanny: Boolean
+    postcode: Integer
     picture: String
     description: String
-    price: Float
     orders: [Order]
   }
   type Booking {
     id: ID
     CreatedAt: Date
     BookedDate: Date
-    User: User
+    price: Float
+    BookedBy: User
   }
-
   type Order {
     _id: ID
     purchaseDate: String
-    bookings: [Booking]
+    bookings: Booking
   }
-
   type Checkout {
     session: ID
   }
-
   type Auth {
     token: ID
     user: User
+    nanny: Nanny
   }
-
   type Query {
-    users: [User]
-    user: (id: ID!): User
-    booking(id: ID!): Booking
+    all: [User]
+    users(role: String): [User]
+    user(id: ID!, role: String): User
+    nannies: [User]
+    nanny: (id: ID!): User
+    orders: [Order]
+    order: (id: ID!): Order
     bookings: [Booking]
-    nannies(isNanny: Boolean = true): [User]
-    nanny(isNanny: Boolean = true, id: ID!): User
+    booking(id: ID!): Booking
   }
  
   type Mutation {
-    addUser(firstName: String!, lastName: String!, email: String!, password: String!): Auth
+    addUser(firstName: String!, lastName: String!, email: String!, password: String!, address: String, picture: String, description: String): Auth
     updateUser(firstName: String, lastName: String, email: String, password: String, address: String, picture: String, description: String): User
     deleteUser(_id: ID!): User
     addOrder(bookings: [ID]!): Order

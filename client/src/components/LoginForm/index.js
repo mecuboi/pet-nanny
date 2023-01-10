@@ -1,4 +1,3 @@
-// see SignupForm.js for comments
 import React, { useState } from 'react';
 import { Form, Button, Alert } from 'react-bootstrap';
 import { useMutation } from '@apollo/client';
@@ -49,9 +48,9 @@ const LoginForm = () => {
           Something went wrong with your login credentials!
         </Alert>
       <Form.Group className="mb-3" controlId="formBasicEmail">
-        <Form.Label>Email address</Form.Label>
+        <Form.Label >Email address</Form.Label>
         <Form.Control
-          type="email"
+          type="text"
           placeholder="Enter email"
           name='email'
           onChange={handleInputChange}
@@ -62,7 +61,7 @@ const LoginForm = () => {
       </Form.Group>
 
       <Form.Group className="mb-3" controlId="formBasicPassword">
-        <Form.Label>Password</Form.Label>
+        <Form.Label htmlFor='password'>Password</Form.Label>
         <Form.Control
           type="password"
           placeholder="Password"
