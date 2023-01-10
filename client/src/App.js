@@ -11,12 +11,12 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 
 import Home from './pages/Home';
 // import Detail from './pages/Detail';
-import NoMatch from './pages/NoMatch';
-import Login from './pages/Login';
-import Signup from './pages/Signup';
+// import NoMatch from './pages/NoMatch';
+// import Login from './pages/Login';
+// import Signup from './pages/Signup';
 import Navigation from './components/Nav';
 // import { StoreProvider } from './utils/GlobalState';
-import Success from './pages/Success';
+// import Success from './pages/Success';
 // import OrderHistory from './pages/OrderHistory';
 
 const httpLink = createHttpLink({
@@ -50,7 +50,7 @@ function App() {
                 path="/" 
                 element={<Home />} 
               />
-              <Route 
+              {/* <Route 
                 path="/login" 
                 element={<Login />} 
               />
@@ -66,7 +66,7 @@ function App() {
               <Route 
                 path="*" 
                 element={<NoMatch />} 
-              />
+              /> */}
             </Routes>
 
         </div>
