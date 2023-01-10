@@ -6,12 +6,12 @@ const Order = require('./Order');
 const Booking = require('./Booking');
 
   const userSchema = new Schema({
-    _id: {
-      type: Id,
-      required: true,
-      unique: true,
-        // TODO add auto increment from 1 
-    },
+    // _id: {
+    //   type: Id,
+    //   required: true,
+    //   unique: true,
+    //     // TODO add auto increment from 1 
+    // },
   firstName: {
     type: String,
     required: true,
@@ -59,8 +59,8 @@ const Booking = require('./Booking');
   // TODO fix this
   // orders: [Order.Schema],
   // bookings: [Booking.Schema]
-  orders: this.role === 'User' ? [Order.schema] : null,
-  bookings: this.role === 'Nanny' ? [Booking.schema] : null,
+  orders: [Order.schema],
+  bookings: [Booking.schema],
 });
 
 // set up pre-save middleware to create password

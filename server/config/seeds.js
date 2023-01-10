@@ -68,11 +68,11 @@ db.once('open', async () => {
     password: 'password12345',
     address: 'clouds',
     role: 'Nanny',
-    bookings: [
-      {
-        _id: bookings[0]._id
-      }
-    ]
+    // bookings: [
+    //   {
+    //     _id: bookings[0]._id
+    //   }
+    // ]
   });
 
  await User.create({
@@ -82,11 +82,11 @@ db.once('open', async () => {
     password: 'password12345',
     address: 'above',
     role: 'Nanny',
-    bookings: [
-      {
-        _id: bookings[1]._id
-      }
-    ]
+    // bookings: [
+    //   {
+    //     _id: bookings[1]._id
+    //   }
+    // ]
   });
 
  await User.create({
@@ -96,11 +96,11 @@ db.once('open', async () => {
     password: 'password12345',
     address: 'high',
     role: 'Nanny',
-    bookings: [
-      {
-        _id: bookings[2]._id
-      }
-    ]
+    // bookings: [
+    //   {
+    //     _id: bookings[2]._id
+    //   }
+    // ]
   });
 
   console.log('users seeded');

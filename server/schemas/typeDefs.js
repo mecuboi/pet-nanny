@@ -8,15 +8,17 @@ const typeDefs = gql`
     email: String
     password: String
     address: String
-    postcode: Integer
+    postcode: Int
     picture: String
     description: String
+    role: String
     orders: [Order]
+    bookings: [Booking]
   }
   type Booking {
     id: ID
-    CreatedAt: Date
-    BookedDate: Date
+    CreatedAt: Int
+    BookedDate: Int
     price: Float
     BookedBy: User
   }
@@ -31,16 +33,15 @@ const typeDefs = gql`
   type Auth {
     token: ID
     user: User
-    nanny: Nanny
   }
   type Query {
     all: [User]
     users(role: String): [User]
     user(id: ID!, role: String): User
     nannies(role: String): [User]
-    nanny: (id: ID!, role: String): User
+    nanny(id: ID!, role: String): User
     orders: [Order]
-    order: (id: ID!): Order
+    order(id: ID!): Order
     bookings: [Booking]
     booking(id: ID!): Booking
   }
@@ -51,7 +52,7 @@ const typeDefs = gql`
     deleteUser(_id: ID!): User
     addOrder(bookings: [ID]!): Order
     deleteOrder(bookings: [ID]!): Order
-    updateBooking(_id: ID!, BookedDate: Date!): Booking
+    updateBooking(_id: ID!, BookedDate: Int!): Booking
     login(email: String!, password: String!): Auth
   }
 `;
