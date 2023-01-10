@@ -2,6 +2,7 @@ import { Container, Nav, Navbar, Modal, Tab } from 'react-bootstrap';
 import React, { useState } from 'react';
 import Auth from '../../utils/auth';
 import LoginForm from '../LoginForm';
+import SignupForm from '../SignupForm';
 
 
 function Navigation() {
@@ -69,7 +70,7 @@ function Navigation() {
                 <LoginForm/>
               </Tab.Pane>
               <Tab.Pane eventKey='signup'>
-                {/* <SignUpForm handleModalClose={() => setShowModal(false)} /> */}
+                <SignupForm/>
               </Tab.Pane>
             </Tab.Content>
           </Modal.Body>
