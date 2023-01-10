@@ -1,0 +1,66 @@
+[
+    {
+        "firstName": "Tom",
+        "lastName": "Cruise",
+        "email": "Iamtom@test.com",
+        "password": "Password12345",
+        "address": "78 Campbells River Road, Warrigal NSW",
+        "postcode": "2825",
+        "isNanny": "true",
+        "picture": "",
+        "description": "Huge dog lover. I feel sorry for people who don't have dogs. I hear they have to pick up food they drop on the floor",
+        "price": "150"
+    },
+
+    {
+        "firstName": "Will",
+        "lastName": "smith",
+        "email": "Freshprince@halleluja.com",
+        "password": "Password12345",
+        "address": "10 Cornish Street, Laverton VIC",
+        "postcode": "3028",
+        "isNanny": "true",
+        "picture": " ",
+        "description": "I love my cats however they can always work out mathematically the exact place to sit that will cause the most inconvinience.",
+        "price": "200"
+    },
+
+    {
+        "firstName": "Taylor",
+        "lastName": "Swift",
+        "email": "whytaylor@test.com",
+        "password": "Password12345",
+        "address": " 92 Capper Street, Penwhaupell QLD",
+        "postcode": "4625",
+        "isNanny": "false",
+        "picture": " ",
+        "description": "I ain't no nanny",
+        "price": "null"
+    },
+
+    {
+        "firstName": "Britney",
+        "lastName": " Spears ",
+        "email": "popqueen@forreal.com",
+        "password": "Password12345",
+        "address": "33 Benny Street, Quoiba Tas",
+        "postcode": "7310",
+        "isNanny": "true",
+        "picture": " ",
+        "description": "I occasionally enjoy a sing along with my pet parrot",
+        "price": "50"
+    },
+
+    {
+        "firstName": "Dwayne",
+        "lastName": "Johnson",
+        "email": "Drock@mymail.com",
+        "password": "Password12345",
+        "address": "4 Wollombi street, Dunolly NSW",
+        "postcode": "2330",
+        "isNanny": "true",
+        "picture": " ",
+        "description": "I have extensive experience in the wild. I am able to engage with all sorts of exotic pets.",
+        "price": "500"
+    }
+]
