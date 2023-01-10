@@ -124,6 +124,7 @@ const resolvers = {
 
         const order = await Order.findById(_id)
 
+        -
         await User.findByIdAndUpdate(context.user._id, { $pull: { orders: order } });
 
         return order;

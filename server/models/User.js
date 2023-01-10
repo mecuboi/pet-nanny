@@ -37,10 +37,13 @@ const userSchema = new Schema({
   picture: {
     type: String,
     required: false,
+    default:'https://images.unsplash.com/face-springmorning.jpg?q=80&fm=jpg&crop=faces&fit=crop&h=128&w=128',
   },
+  // TODO add ternary operator to default, if role = User.. etc
   description: {
     type: String,
     required: false,
+    default: 'I am a new User'
   },
   role: {
     type: String,
