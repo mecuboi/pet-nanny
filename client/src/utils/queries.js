@@ -70,6 +70,9 @@ export const QUERY_USER = gql`
 //     email
 //     firstName
 //     lastName
+//     picture
+//     postcode
+//     role
 //     bookings {
 //       price
 //       BookedDate
@@ -87,9 +90,6 @@ export const QUERY_USER = gql`
 //       }
 //       purchaseDate
 //     }
-//     picture
-//     postcode
-//     role
 //   }
 // }
 // `;

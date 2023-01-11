@@ -2,7 +2,25 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    /* TODO remove outline once done */
+    outline:#4CAF50  1px solid;
 }
+
+.edit-button-container {
+    position: relative;
+    right: -100px;
+  }
+  
+.edit-button {
+    background-color: transparent;
+    border: none;
+    padding: 0;
+  }
+  
+.edit-icon {
+    width: 30px;
+    height: 30px;
+  }
 
 .profile-picture {
     width: 200px;
@@ -24,9 +42,10 @@
 .address {
     font-size: 18px;
     margin-bottom: 20px;
+    font-style: italic;
 }
 
 .description {
-    font-size: 18px;
+    font-size: 16px;
     margin-bottom: 20px;
 }

@@ -11,6 +11,7 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 
 import Home from './pages/Home';
 import Profile from './pages/Profile';
+import TestProfile from './pages/TestProfile'
 // import Detail from './pages/Detail';
 // import NoMatch from './pages/NoMatch';
 // import Login from './pages/Login';
@@ -55,6 +56,10 @@ function App() {
               <Route
                 path="/profile"
                 element={<Profile />}
+              />
+              <Route
+                path="/testprofile"
+                element={<TestProfile />}
               />
               {/* <Route 
                 path="/login" 
