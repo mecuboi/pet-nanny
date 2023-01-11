@@ -10,6 +10,7 @@ import { setContext } from '@apollo/client/link/context';
 import 'bootstrap/dist/css/bootstrap.min.css'
 
 import Home from './pages/Home';
+import Profile from './pages/Profile';
 // import Detail from './pages/Detail';
 // import NoMatch from './pages/NoMatch';
 // import Login from './pages/Login';
@@ -38,17 +39,22 @@ const client = new ApolloClient({
   cache: new InMemoryCache(),
 });
 
+
+
 function App() {
   return (
     <ApolloProvider client={client}>
       <Router>
         <div>
-
             <Navigation />
             <Routes>
               <Route 
                 path="/" 
                 element={<Home />} 
+              />
+              <Route
+                path="/profile"
+                element={<Profile />}
               />
               {/* <Route 
                 path="/login" 

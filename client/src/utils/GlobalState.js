@@ -1,4 +1,24 @@
-// import React, { createContext, useContext } from "react";
+import React, { createContext, useContext } from "react";
+
+const UserIdContext = createContext();
+// const { Provider } = UserIdContext;
+
+const UserIdProvider = ({ userId, children}) => {
+  return (
+    <UserIdContext.Provider 
+      value={userId}>
+      {children}
+    </UserIdContext.Provider>
+  );
+}
+
+const useUserIdContext = () => {
+  return useContext(UserIdContext)
+};
+
+export { UserIdProvider, useUserIdContext};
+
+
 // import { useProductReducer } from './reducers'
 
 // const StoreContext = createContext();
