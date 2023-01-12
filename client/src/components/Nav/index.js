@@ -1,5 +1,4 @@
 import { Container, Nav, Navbar, Modal, Tab } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
 import React, { useState } from 'react';
 import Auth from '../../utils/auth';
 import LoginForm from '../LoginForm';
@@ -26,18 +25,28 @@ function Navigation() {
     }
   }
 
+  function showProfile() {
+    if (Auth.loggedIn()) {
+      return (
+        <Nav.Link href='/testprofile'>Profile</Nav.Link>
+      )
+    } else {
+      return 
+    }
+  }
+
 
 
   return (
     <>
       <Navbar bg="light" expand="lg">
         <Container>
-          <Navbar.Brand href="#home">PetNanny!</Navbar.Brand>
+          <Navbar.Brand href="/">PetNanny!</Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">
               <Nav.Link href="#nannylist">Search for a Nanny</Nav.Link>
-              <Nav.Link href='#profile'>Profile</Nav.Link>
+              {showProfile()}
             </Nav>
             <Nav>
               {showLogout()}
