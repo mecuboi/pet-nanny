@@ -31,6 +31,7 @@ query allNannies {
     _id
     firstName
     lastName
+    description
     picture
   }
 }

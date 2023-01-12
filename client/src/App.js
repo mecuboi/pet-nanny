@@ -17,6 +17,7 @@ import TestProfile from './pages/TestProfile'
 // import Login from './pages/Login';
 // import Signup from './pages/Signup';
 import Navigation from './components/Nav';
+import NannyList from './pages/NannyList';
 // import { StoreProvider } from './utils/GlobalState';
 // import Success from './pages/Success';
 // import OrderHistory from './pages/OrderHistory';
@@ -56,6 +57,10 @@ function App() {
               <Route
                 path="/profile"
                 element={<Profile />}
+              />
+              <Route
+                path="/nannylist"
+                element={<NannyList />}
               />
               <Route
                 path="/testprofile"
