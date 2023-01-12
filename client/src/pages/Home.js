@@ -33,8 +33,8 @@ function Home() {
         />
 
         <Carousel.Caption>
-          <h3 className='text-dark text-lg'>Your pets are worth it.</h3>
-          <p className='text-dark'>Trust Pet Nanny!</p>
+          <h3 className='text-secondary text-lg'>Your pets are worth it.</h3>
+          <p className='text-secondary'>Trust Pet Nanny!</p>
         </Carousel.Caption>
       </Carousel.Item>
       <Carousel.Item>

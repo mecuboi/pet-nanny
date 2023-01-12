@@ -28,6 +28,12 @@ const SignupForm = () => {
     setUserFormData({ ...userFormData, [name]: value })
   };
 
+  const validateNumberOnly =(event) => {
+    if (!/[0-9]/.test(event.key)) {
+      event.preventDefault();
+    }
+  }
+
   const handleFormSubmit = async (event) => {
     event.preventDefault();
 
@@ -40,7 +46,7 @@ const SignupForm = () => {
 
     try {
       const { data } = await addUser({
-        variables: { ...userFormData },
+        variables: userFormData,
       });
 
       Auth.login(data.createUser.token);
@@ -51,12 +57,6 @@ const SignupForm = () => {
     }
 
     setUserFormData({
-      firstName: '',
-      lastName: '',
-      address: '',
-      postcode: '',
-      role: '',
-      email: '',
       password: ''
     });
   };
@@ -127,6 +127,7 @@ const SignupForm = () => {
           <Form.Select
           name='role'
           onChange={handleInputChange}
+          onKeyPress={validateNumberOnly}
           value={userFormData.role}
           required>
             <option>Pawrent</option>

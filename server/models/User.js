@@ -36,7 +36,7 @@ const Booking = require('./Booking');
     required: true,
   },
   postcode: {
-    type: Number,
+    type: String,
     required: true,
     default: 3001
   },
