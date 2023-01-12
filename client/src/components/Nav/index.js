@@ -54,7 +54,7 @@ function Navigation() {
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">
-              <Nav.Link href="#nannylist">Search for a Nanny</Nav.Link>
+              <Nav.Link href="/nannylist">Search for a Nanny</Nav.Link>
               {showProfile()}
             </Nav>
             <Nav>

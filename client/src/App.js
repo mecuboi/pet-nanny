@@ -18,6 +18,7 @@ import FooterNav from './components/Footer'
 // import Login from './pages/Login';
 // import Signup from './pages/Signup';
 import Navigation from './components/Nav';
+import NannyList from './pages/NannyList';
 // import { StoreProvider } from './utils/GlobalState';
 // import Success from './pages/Success';
 // import OrderHistory from './pages/OrderHistory';
@@ -68,6 +69,7 @@ function App() {
               path="/testprofile"
               element={<TestProfile />}
             />
+
 
           </Routes>
           <FooterNav />
