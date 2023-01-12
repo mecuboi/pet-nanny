@@ -17,6 +17,7 @@
     "concurrently": "^5.1.0"
   },
   "dependencies": {
+    "force": "^0.0.3",
     "mdb-react-ui-kit": "^5.1.0"
   }
 }

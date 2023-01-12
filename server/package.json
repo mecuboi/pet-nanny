@@ -15,6 +15,7 @@
     "apollo-server-express": "^3.6.1",
     "bcrypt": "^4.0.1",
     "express": "^4.17.2",
+    "force": "^0.0.3",
     "graphql": "^16.3.0",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.1.8",
@@ -24,4 +25,3 @@
     "nodemon": "^2.0.2"
   }
 }
-
