@@ -1,4 +1,5 @@
 import { Container, Nav, Navbar, Modal, Tab } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 import React, { useState } from 'react';
 import Auth from '../../utils/auth';
 import LoginForm from '../LoginForm';
@@ -36,7 +37,7 @@ function Navigation() {
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">
               <Nav.Link href="#nannylist">Search for a Nanny</Nav.Link>
-              <Nav.Link href="#myprofile">Profile</Nav.Link>
+              <Nav.Link href='#profile'>Profile</Nav.Link>
             </Nav>
             <Nav>
               {showLogout()}

@@ -13,7 +13,7 @@ const bookingSchema = new Schema({
   BookedDate: {
     type: Date,
     get: value => moment(value).format("DD MMM YYYY"),
-    // the minimum the date can be in 1st Jan 2023.
+    // the minimum the date can be in 11 Jan 2023.
     min: Date.now()
   },
   price: {
@@ -21,7 +21,6 @@ const bookingSchema = new Schema({
     default: 100,
     required: true,
   },
-  // BookedBy
    BookedBy: {
     type: Schema.Types.ObjectId,
     ref: 'User'
