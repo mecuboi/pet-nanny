@@ -9,6 +9,8 @@ function Navigation() {
 
   const [showModal, setShowModal] = useState(false);
 
+  const getUser = localStorage.getItem('firstName');
+
   function showLogout() {
     if (Auth.loggedIn()) {
       return (
@@ -28,7 +30,7 @@ function Navigation() {
   function showProfile() {
     if (Auth.loggedIn()) {
       return (
-        <Nav.Link href='/testprofile'>Profile</Nav.Link>
+        <Nav.Link href='/testprofile'>My Profile: <span className="text-primary">{getUser}</span></Nav.Link>
       )
     } else {
       return 
@@ -41,7 +43,14 @@ function Navigation() {
     <>
       <Navbar bg="light" expand="lg">
         <Container>
-          <Navbar.Brand href="/">PetNanny!</Navbar.Brand>
+          
+          <Navbar.Brand href="/" className="text-secondary"><img
+              alt=""
+              src="/logo192.png"
+              width="30"
+              height="30"
+              className="d-inline-block align-top"
+            />{' '}PetNanny!</Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">

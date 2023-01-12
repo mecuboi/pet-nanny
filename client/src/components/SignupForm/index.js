@@ -28,8 +28,15 @@ const SignupForm = () => {
     setUserFormData({ ...userFormData, [name]: value })
   };
 
+  const validateNumberOnly =(event) => {
+    if (!/[0-9]/.test(event.key)) {
+      event.preventDefault();
+    }
+  }
+
   const handleFormSubmit = async (event) => {
     event.preventDefault();
+    console.log(userFormData)
 
     // check if form has everything (as per react-bootstrap docs)
     const form = event.currentTarget;
@@ -40,10 +47,14 @@ const SignupForm = () => {
 
     try {
       const { data } = await addUser({
-        variables: { ...userFormData },
+        variables: {...userFormData},
       });
 
-      Auth.login(data.createUser.token);
+      console.log(data.addUser.user.firstName)
+
+      Auth.login(data.addUser.token, data.addUser.user.firstName);
+      
+      
 
     } catch (err) {
       console.error(err);
@@ -55,7 +66,7 @@ const SignupForm = () => {
       lastName: '',
       address: '',
       postcode: '',
-      role: '',
+      role: 'Pawrent',
       email: '',
       password: ''
     });
@@ -127,6 +138,7 @@ const SignupForm = () => {
           <Form.Select
           name='role'
           onChange={handleInputChange}
+          onKeyPress={validateNumberOnly}
           value={userFormData.role}
           required>
             <option>Pawrent</option>
@@ -161,7 +173,7 @@ const SignupForm = () => {
           <Form.Control.Feedback type='invalid'>Password is required!</Form.Control.Feedback>
         </Form.Group>
         <Button
-          disabled={!(userFormData.firstName && userFormData.lastName && userFormData.email && userFormData.password && userFormData.address && userFormData.role && userFormData.postcode)}
+          
           type='submit'
           variant='primary'
           className='mt-3'>
