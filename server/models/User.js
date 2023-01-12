@@ -4,14 +4,13 @@ const { Schema } = mongoose;
 const bcrypt = require('bcrypt');
 const Order = require('./Order');
 const Booking = require('./Booking');
-
+// _id: {
+    //   type: String, 
+    //   required: true},
+    // seq: { 
+    //   type: Number, 
+    //   default: 1 },
   const userSchema = new Schema({
-    // _id: {
-    //   type: Id,
-    //   required: true,
-    //   unique: true,
-    //     // TODO add auto increment from 1 
-    // },
   firstName: {
     type: String,
     required: true,
@@ -56,9 +55,6 @@ const Booking = require('./Booking');
     required: true,
     default: 'User'
   },
-  // TODO fix this
-  // orders: [Order.Schema],
-  // bookings: [Booking.Schema]
   orders: [Order.schema],
   bookings: [Booking.schema],
 });
@@ -69,9 +65,20 @@ userSchema.pre('save', async function(next) {
     const saltRounds = 10;
     this.password = await bcrypt.hash(this.password, saltRounds);
   }
-
   next();
 });
+
+// userSchema.pre('save', async function(next) {
+//   User.findByIdAndUpdateAsync({_id: 'entityId'}, {$inc: { seq: 1} }, {new: true, upsert: true}).then(function(count) {
+//     // console.log("...count: "+JSON.stringify(count));
+//     this.sort = count.seq;
+//     next();
+// })
+// .catch(function(error) {
+//     console.error("counter error-> : "+error);
+//     throw error;
+// });
+// })
 
 // compare the incoming password with the hashed password
 userSchema.methods.isCorrectPassword = async function(password) {

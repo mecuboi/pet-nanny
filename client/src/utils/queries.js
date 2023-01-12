@@ -48,23 +48,48 @@ import { gql } from '@apollo/client';
 //   }
 // `;
 
+export const QUERY_USER = gql`
+    query User($id: ID!) {
+        user(id: $id) {
+            firstName
+            lastName
+            email
+            address
+            postcode
+            picture
+            description
+        }
+    }
+`;
+
 // export const QUERY_USER = gql`
-//   {
-//     user {
-//       firstName
-//       lastName
-//       orders {
-//         _id
-//         purchaseDate
-//         products {
+// query User($userId: ID!) {
+//   user(id: $userId) {
+//     address
+//     description
+//     email
+//     firstName
+//     lastName
+//     picture
+//     postcode
+//     role
+//     bookings {
+//       price
+//       BookedDate
+//     }
+//     orders {
+//       bookings {
+//         price
+//         BookedBy {
 //           _id
-//           name
-//           description
-//           price
-//           quantity
-//           image
+//           lastName
+//           firstName
+//           email
 //         }
+//         BookedDate
 //       }
+//       purchaseDate
 //     }
 //   }
+// }
 // `;
