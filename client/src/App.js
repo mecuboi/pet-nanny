@@ -12,6 +12,7 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import Home from './pages/Home';
 import Profile from './pages/Profile';
 import TestProfile from './pages/TestProfile'
+import FooterNav from './components/Footer'
 // import Detail from './pages/Detail';
 // import NoMatch from './pages/NoMatch';
 // import Login from './pages/Login';
@@ -45,41 +46,31 @@ const client = new ApolloClient({
 function App() {
   return (
     <ApolloProvider client={client}>
+      <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
+        integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65"
+        crossorigin="anonymous"
+      />
       <Router>
         <div>
-            <Navigation />
-            <Routes>
-              <Route 
-                path="/" 
-                element={<Home />} 
-              />
-              <Route
-                path="/profile"
-                element={<Profile />}
-              />
-              <Route
-                path="/testprofile"
-                element={<TestProfile />}
-              />
-              {/* <Route 
-                path="/login" 
-                element={<Login />} 
-              />
-              <Route 
-                path="/signup" 
-                element={<Signup />} 
-              />
-              <Route 
-                path="/success" 
-                element={<Success />} 
-              />
-             
-              <Route 
-                path="*" 
-                element={<NoMatch />} 
-              /> */}
-            </Routes>
+          <Navigation />
+          <Routes>
+            <Route
+              path="/"
+              element={<Home />}
+            />
+            <Route
+              path="/profile"
+              element={<Profile />}
+            />
+            <Route
+              path="/testprofile"
+              element={<TestProfile />}
+            />
 
+          </Routes>
+          <FooterNav />
         </div>
       </Router>
     </ApolloProvider>
