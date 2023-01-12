@@ -4,14 +4,14 @@ const { Booking, Order, User } = require('../models');
 db.once('open', async () => {
   await Booking.deleteMany();
 
-  const bookings = await Booking.insertMany([
-    { BookedDate: '02 Jan 2023', BookedBy: 1 },
-    { BookedDate: '01 Jan 2023', BookedBy: 2 },
-    { BookedDate: '03 Jan 2023', BookedBy: 3 },
-    { BookedDate: '04 Jan 2023', BookedBy: 4 },
-    { BookedDate: '05 Jan 2023', BookedBy: 5 },
-    { BookedDate: '06 Jan 2023', BookedBy: 6 },
-  ]);
+  // const bookings = await Booking.insertMany([
+  //   { BookedDate: '02 Jan 2023', BookedBy: 1 },
+  //   { BookedDate: '01 Jan 2023', BookedBy: 2 },
+  //   { BookedDate: '03 Jan 2023', BookedBy: 3 },
+  //   { BookedDate: '04 Jan 2023', BookedBy: 4 },
+  //   { BookedDate: '05 Jan 2023', BookedBy: 5 },
+  //   { BookedDate: '06 Jan 2023', BookedBy: 6 },
+  // ]);
 
   console.log('booking seeded');
 
