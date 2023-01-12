@@ -6,6 +6,7 @@ export const LOGIN = gql`
       token
       user {
         _id
+        firstName
       }
     }
   }
@@ -52,6 +53,7 @@ export const ADD_USER = gql`
       token
       user {
         _id
+        firstName
       }
     }
   }

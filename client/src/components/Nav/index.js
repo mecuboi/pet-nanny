@@ -9,6 +9,8 @@ function Navigation() {
 
   const [showModal, setShowModal] = useState(false);
 
+  const getUser = localStorage.getItem('firstName');
+
   function showLogout() {
     if (Auth.loggedIn()) {
       return (
@@ -28,7 +30,7 @@ function Navigation() {
   function showProfile() {
     if (Auth.loggedIn()) {
       return (
-        <Nav.Link href='/testprofile'>Profile</Nav.Link>
+        <Nav.Link href='/testprofile'>My Profile: <span className="text-primary">{getUser}</span></Nav.Link>
       )
     } else {
       return 
