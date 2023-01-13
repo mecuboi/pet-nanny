@@ -1,36 +1,85 @@
 import React from 'react';
 // Import Link component for all internal application hyperlinks
 import { Link } from 'react-router-dom';
+import './AllNanies.css'
 
-const AllNannyList = ({ profiles, title }) => {
+const AllNannyList = ({ profiles}) => {
   if (!profiles.length) {
     return <h3>No Profiles Yet</h3>;
   }
 
   return (
     <div>
-      <h3 className="text-primary">{title}</h3>
+      
       <div className="flex-row justify-space-between my-4">
         {profiles &&
           profiles.map((profile) => (
-            <div key={profile._id} className="col-12 col-xl-6">
-              <div className="card mb-3">
-                <h4 className="card-header bg-dark text-light p-2 m-0">
-                  {profile.firstName} {profile.lastName} <br />
-                  <span className="text-white" style={{ fontSize: '1rem' }}>
-                    currently has {profile.description}
-                  </span>
-                </h4>
+            <div class="container mt-5 d-flex justify-content-center">
+            <div class="card p-4 mt-3">
+                   <div class="first">
+                    <h6 class="heading">{profile.firstName} {profile.lastName}</h6>
+                     <div class="time d-flex flex-row align-items-center justify-content-between mt-3">
+                       
+                       <div class="d-flex align-items-center">
+                           <i class="fa fa-clock-o clock"></i>
+                           <span class="hour ml-1">3 hrs</span>
+                       </div>
+        
+                       <div>
+                           <span class="font-weight-bold">$90</span>
+                       </div>
+                    </div>
+        
+        
+        
+        </div>
+        <div class="second d-flex flex-row mt-2">
+                            <div class="image mr-3">
+                             <img src="https://i.imgur.com/0LKZQYM.jpg" class="rounded-circle" width="60"/>
+                            </div>   
+        
+                            <div class="">
+        
+                                <div class="d-flex flex-row mb-1">
+                                  <div class= "d-flex flex-row ml-3"> 
+                                  <p>{profile.description}</p>
 
-                {/* Use <Link> component to create an internal hyperlink reference. Use `to` prop to set the path instead of `href` */}
-                <Link
-                  className="btn btn-block btn-squared btn-light text-dark"
-                  to={`/profiles/${profile._id}`}
-                >
-                  View and endorse their skills.
-                </Link>
-              </div>
-            </div>
+                                  </div>
+        
+                                    
+        
+                                    <div class="ratings ml-2">
+        
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        
+                                    </div>
+                                    
+                                </div>
+        
+                                
+                            </div> 
+        
+        
+        
+        
+        </div>
+        
+        
+        <hr class="line-color"/>
+        
+        
+        <div class="third mt-4">
+        
+           <button class="btn btn-success btn-block"><i class="fa fa-clock-o"></i> Book Now</button>
+        
+        
+        </div>
+        </div>
+        </div>
           ))}
       </div>
     </div>
