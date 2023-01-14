@@ -15,13 +15,12 @@ function NannyList() {
 
   return (
     <>
-      <div className="col-12 col-md-10 my-3">
+      <div>
           {loading ? (
             <div>Loading...</div>
           ) : (
             <AllNannyList
               profiles={nannies}
-              title="Here's a list of available Nannies ..."
             />
           )}
         </div>
