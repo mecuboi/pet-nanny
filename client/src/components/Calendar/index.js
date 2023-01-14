@@ -1,6 +1,7 @@
 import React from 'react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 class Calendar extends React.Component {
     constructor(props) {
@@ -19,11 +20,15 @@ class Calendar extends React.Component {
 
     render() {
         return (
-            <DatePicker 
-                selected={this.state.selectedDate}
-                onChange={this.handleDateChange}
-                dateFormat="dd MMM yyyy"
-            />
+            <button className="btn btn-success">
+                Book
+                <DatePicker 
+                    selected={this.state.selectedDate}
+                    onChange={this.handleDateChange}
+                    dateFormat="dd MMM yyyy"
+                    className="form-control"
+                />
+            </button>
         );
     }
 }

@@ -12,24 +12,6 @@ export const LOGIN = gql`
   }
 `;
 
-// export const ADD_ORDER = gql`
-//   mutation addOrder($products: [ID]!) {
-//     addOrder(products: $products) {
-//       purchaseDate
-//       products {
-//         _id
-//         name
-//         description
-//         price
-//         quantity
-//         category {
-//           name
-//         }
-//       }
-//     }
-//   }
-// `;
-
 export const ADD_USER = gql`
   mutation addUser(
     $firstName: String!
@@ -58,3 +40,57 @@ export const ADD_USER = gql`
     }
   }
 `;
+
+export const UPDATE_USER = gql`
+  mutation Mutation(
+    $firstName: String, 
+    $lastName: String, 
+    $email: String, 
+    $address: String, 
+    $picture: String, 
+    $description: String
+    ) {
+    updateUser(
+      firstName: $firstName, 
+      lastName: $lastName, 
+      email: $email, 
+      address: $address, 
+      picture: $picture, 
+      description: $description
+      ) {
+      firstName
+      lastName
+      email
+      description
+      address
+      picture
+      postcode
+    }
+  }
+  `;
+
+export const DELETE_USER = gql`
+  mutation deleteUser($_id: String!) {
+    deleteUser(_id: $_id) {
+      message
+    }
+  }
+`;
+
+export const ADD_ORDER = gql`
+  mutation AddOrder($bookings: [ID]!) {
+    addOrder(bookings: $bookings) {
+      _id
+      purchaseDate
+      bookings {
+        id
+        BookedDate
+        price
+      }
+    }
+  }
+`;
+
+
+
+
