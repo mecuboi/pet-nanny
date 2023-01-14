@@ -20,7 +20,7 @@ function Home() {
           src="https://images.pexels.com/photos/406014/pexels-photo-406014.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
           alt="First slide"
         />
-        <Carousel.Caption className="">
+        <Carousel.Caption className="mb-5 pb-5">
           <h3 className="text-xl">Let us give your pet a good time to let you have a good time</h3>
           <p>Trust Pet Nanny!</p>
         </Carousel.Caption>
@@ -32,7 +32,7 @@ function Home() {
           alt="Second slide"
         />
 
-        <Carousel.Caption>
+        <Carousel.Caption className="mb-5 pb-5">
           <h3 className='text-secondary text-lg'>Your pets are worth it.</h3>
           <p className='text-secondary'>Trust Pet Nanny!</p>
         </Carousel.Caption>
@@ -44,8 +44,8 @@ function Home() {
           alt="Third slide"
         />
 
-        <Carousel.Caption>
-          <h3>The pets’ daycare.</h3>
+        <Carousel.Caption className="mb-5 pb-5">
+          <h3 className='text-lg'>The pets’ daycare.</h3>
           <p>
           Trust Pet Nanny!
           </p>
