@@ -77,14 +77,13 @@ const SignupForm = () => {
   return (
     <>
       {/* This is needed for the validation functionality above */}
-      <Form validated={validated} onSubmit={handleFormSubmit}>
+      <Form className="w-100" validated={validated} onSubmit={handleFormSubmit}>
         {/* show alert if server response is bad */}
         <Alert dismissible onClose={() => setShowAlert(false)} show={showAlert} variant='danger'>
           Something went wrong with your signup!
         </Alert>
 
-        <Form.Group 
-        validation="validationCustom01">
+        <Form.Group >
           <Form.Label >First Name</Form.Label>
           <Form.Control
             type='text'
