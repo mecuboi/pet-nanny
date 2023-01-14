@@ -20,6 +20,10 @@ function Profile() {
                     <p className="email">bobby1209@gmail.com</p>
                     <p className="address">11 Chicken St, New York, 50000</p>
                     <p className="description">HI I AM BOB. I AM A HUMAN LOREM LOREM LOREM  LOREM LOREM LOREM  LOREM LOREM LOREM LOREM LOREM LOREM</p>
+                    <div className="button-container">
+                        <button>Message</button>
+                        <button>Book</button>
+                    </div>
                 </div> 
             );
 }

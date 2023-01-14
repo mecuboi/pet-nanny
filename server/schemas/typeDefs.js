@@ -52,7 +52,9 @@ const typeDefs = gql`
     deleteUser(_id: ID!): User
     addOrder(bookings: [ID]!): Order
     deleteOrder(bookings: [ID]!): Order
+    addBooking(BookedDate: Int!, price: Float!): Booking
     updateBooking(_id: ID!, BookedDate: Int!): Booking
+    deleteBooking(id: ID!): Booking
     login(email: String!, password: String!): Auth
   }
 `;

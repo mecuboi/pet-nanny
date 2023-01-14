@@ -70,11 +70,10 @@ db.once('open', async () => {
     password: 'password12345',
     address: 'clouds',
     role: 'Nanny',
-    // bookings: [
-    //   {
-    //     _id: bookings[0]._id
-    //   }
-    // ]
+    bookings: [
+      { BookedDate: '20 Jan 2023', BookedBy: User[0]._id },
+      { BookedDate: '21 Jan 2023', BookedBy: User[0]._id },
+    ]
   });
 
  await User.create({
@@ -84,11 +83,10 @@ db.once('open', async () => {
     password: 'password12345',
     address: 'above',
     role: 'Nanny',
-    // bookings: [
-    //   {
-    //     _id: bookings[1]._id
-    //   }
-    // ]
+    bookings: [
+      { BookedDate: '22 Jan 2023', BookedBy: User[1]._id },
+      { BookedDate: '23 Jan 2023', BookedBy: User[1]._id },
+    ]
   });
 
  await User.create({
@@ -98,14 +96,14 @@ db.once('open', async () => {
     password: 'password12345',
     address: 'high',
     role: 'Nanny',
-    // bookings: [
-    //   {
-    //     _id: bookings[2]._id
-    //   }
-    // ]
+    bookings: [
+      { BookedDate: '24 Jan 2023', BookedBy: User[2]._id  },
+      { BookedDate: '25 Jan 2023', BookedBy: User[2]._id },
+    ]
   });
 
   console.log('users seeded');
+
 
   // const bookings = await Booking.insertMany([
   //   { BookedDate: '20 Jan 2023', BookedBy: User[0]._id },

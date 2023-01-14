@@ -1,77 +1,112 @@
 import { gql } from '@apollo/client';
 
 export const QUERY_All_PROFILES = gql`
-query allProfiles {
-  all {
+  query All {
+    all {
+      _id
+      address
+      description
+      email
+      firstName
+      lastName
+      picture
+      postcode
+      role
+      bookings {
+        id
+        BookedDate
+        price
+        BookedBy {
+          _id
+        }
+      }
+      orders {
+        _id
+        purchaseDate
+        bookings {
+          id
+          price
+          BookedDate
+        }
+      }
+    }
+  }
+`;
+
+export const QUERY_ALL_Nannies = gql`
+query Nannies($role: String) {
+  nannies(role: $role) {
     _id
     address
-    bookings {
-      id
-      BookedDate
-      price
-    }
     description
     email
     firstName
     lastName
-    orders {
-      _id
-      purchaseDate
-    }
     picture
     postcode
     role
-  }
-}
-`;
-
-export const QUERY_ALL_Nannies = gql`
-query allNannies {
-  nannies {
-    _id
-    firstName
-    lastName
-    description
-    picture
+    bookings {
+      id
+      BookedBy {
+        _id
+        firstName
+        lastName
+      }
+      BookedDate
+      price
+    }
   }
 }
 `;
 
 export const QUERY_SINGLE_Nanny = gql`
-query singleNanny ($nannyId: ID!) {
-  nanny(id: $nannyId) {
+query User($nannyId: ID!, $role: String) {
+  nanny(id: $nannyId, role: $role) {
     _id
-    firstName
-    lastName
-    address
-    description
-    postcode
-    picture
-  }
-}
-`;
-
-export const QUERY_SINGLE_USER = gql`
-query singleUser($userId: ID!) {
-  user(id: $userId) {
     address
     description
     email
     firstName
     lastName
-    postcode
     picture
-    orders {
-      _id
-      bookings {
-        BookedDate
-        CreatedAt
-        price
+    postcode
+    role
+    bookings {
+      id
+      price
+      BookedDate
+      BookedBy {
+        _id
+        firstName
+        lastName
       }
-      purchaseDate
     }
   }
 }
+`;
 
+export const QUERY_SINGLE_USER = gql`
+query User($userId: ID!, $role: String) {
+  user(id: $userId, role: $role) {
+    _id
+    address
+    description
+    email
+    firstName
+    lastName
+    picture
+    postcode
+    role
+    orders {
+      _id
+      purchaseDate
+      bookings {
+        id
+        price
+        BookedDate
+      }
+    }
+  }
+}
 `;
 

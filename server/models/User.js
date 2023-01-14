@@ -4,12 +4,7 @@ const { Schema } = mongoose;
 const bcrypt = require('bcrypt');
 const Order = require('./Order');
 const Booking = require('./Booking');
-// _id: {
-    //   type: String, 
-    //   required: true},
-    // seq: { 
-    //   type: Number, 
-    //   default: 1 },
+
   const userSchema = new Schema({
   firstName: {
     type: String,

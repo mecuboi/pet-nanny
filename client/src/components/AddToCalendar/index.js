@@ -7,7 +7,7 @@ const AddToCalendar = ({bookings}) => {
     setName(e.target.value);
   };
   return (
-    <form onSubmit={e => {
+    <button onClick={e => {
       e.preventDefault();
       atcb_action({
         name: name,
@@ -28,13 +28,12 @@ const AddToCalendar = ({bookings}) => {
       });
     }}>
       <input value={name} onChange={changeName} />
-      <input type="submit" value="save" />
-    </form>
+      <span>Add to Calendar <i className="fa fa-check-circle"></i></span>
+    </button>
   );
 }
 
 export default AddToCalendar;
-
     // <div class="atcb" style="display:none;">
 
     // </div>
