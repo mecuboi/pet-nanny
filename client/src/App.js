@@ -62,8 +62,8 @@ function App() {
               element={<Home />}
             />
             <Route
-              path="/profile"
-              element={<Profile />}
+              path="/NannyList"
+              element={<NannyList />}
             />
             <Route
               path="/testprofile"
