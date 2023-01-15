@@ -1,7 +1,7 @@
 import React from 'react';
+import { MDBCol, MDBContainer, MDBRow, MDBCard, MDBCardText, MDBCardBody, MDBCardImage, MDBTypography, MDBIcon } from 'mdb-react-ui-kit';
 // Import Link component for all internal application hyperlinks
 import { Link } from 'react-router-dom';
-import './AllNanies.css'
 
 const AllNannyList = ({ profiles}) => {
   if (!profiles.length) {
@@ -9,80 +9,77 @@ const AllNannyList = ({ profiles}) => {
   }
 
   return (
-    <div>
+    
+    <div className=" w-100 p-3 my-4 " style={{ backgroundColor: '#eee' }} >
+    <MDBContainer className="my-4">
+      <MDBRow>
       
-      <div className="flex-row justify-space-between my-4">
         {profiles &&
           profiles.map((profile) => (
-            <div class="container mt-5 d-flex justify-content-center">
-            <div class="card p-4 mt-3">
-                   <div class="first">
-                    <h6 class="heading">{profile.firstName} {profile.lastName}</h6>
-                     <div class="time d-flex flex-row align-items-center justify-content-between mt-3">
-                       
-                       <div class="d-flex align-items-center">
-                           <i class="fa fa-clock-o clock"></i>
-                           <span class="hour ml-1">3 hrs</span>
-                       </div>
-        
-                       <div>
-                           <span class="font-weight-bold">$90</span>
-                       </div>
-                    </div>
-        
-        
-        
-        </div>
-        <div class="second d-flex flex-row mt-2">
-                            <div class="image mr-3">
-                             <img src="https://i.imgur.com/0LKZQYM.jpg" class="rounded-circle" width="60"/>
-                            </div>   
-        
-                            <div class="">
-        
-                                <div class="d-flex flex-row mb-1">
-                                  <div class= "d-flex flex-row ml-3"> 
-                                  <p>{profile.description}</p>
+           
+              
+                 
+              <MDBCol size='md'>
 
-                                  </div>
-        
-                                    
-        
-                                    <div class="ratings ml-2">
-        
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        
-                                    </div>
-                                    
-                                </div>
-        
-                                
-                            </div> 
-        
-        
-        
-        
-        </div>
-        
-        
-        <hr class="line-color"/>
-        
-        
-        <div class="third mt-4">
-        
-           <button class="btn btn-success btn-block"><i class="fa fa-clock-o"></i> Book Now</button>
-        
-        
-        </div>
-        </div>
-        </div>
+                  <MDBCard className="w-auto mx-3 my-2 "  style={{ borderRadius: '15px', backgroundColor: '#ffff' }}>
+                    <MDBCardBody className="p-4 text-black">
+                      <div>
+                        <MDBTypography tag='h5'>{profile.firstName} {profile.lastName}</MDBTypography>
+                        <div className="d-flex align-items-center justify-content-between mb-3">
+                          <p className="small mb-0"><MDBIcon far icon="clock me-2" />3 hrs</p>
+                          <p className="fw-bold mb-0">$90</p>
+                        </div>
+                      </div>
+                      <div className="d-flex align-items-center mb-4">
+                        <div className="flex-shrink-0">
+                          <MDBCardImage
+                            style={{ width: '75px' }}
+                            className="img-fluid rounded-circle border border-dark border-3"
+                            src={'https://riverlegacy.org/wp-content/uploads/2021/07/blank-profile-photo.jpeg'}
+                            alt='Generic placeholder image'
+                            fluid />
+                        </div>
+                        <div className="flex-grow-1 ms-3">
+                          <div className="d-flex flex-row align-items-center mb-2">
+                            <p className="mb-0 me-2">{profile.description}</p>
+                            <ul className="mb-0 list-unstyled d-flex flex-row" style={{ color: '#1B7B2C' }}>
+                              <li>
+                                <MDBIcon fas icon="star fa-xs" />
+                              </li>
+                              <li>
+                                <MDBIcon fas icon="star fa-xs" />
+                              </li>
+                              <li>
+                                <MDBIcon fas icon="star fa-xs" />
+                              </li>
+                              <li>
+                                <MDBIcon fas icon="star fa-xs" />
+                              </li>
+                              <li>
+                                <MDBIcon fas icon="star fa-xs" />
+                              </li>
+                            </ul>
+      
+                          </div>
+                        </div>
+                      </div>
+                      <hr />
+                      <button type="button" class="btn btn-primary">
+                      <MDBIcon far icon="clock me-2" /> Book now
+                      </button>
+                    </MDBCardBody>
+                  </MDBCard>
+             
+              </MDBCol>
+            
+                        
+         
           ))}
-      </div>
-    </div>
+          </MDBRow>
+      
+          </MDBContainer>
+          </div>
+    
   );
 };
 
