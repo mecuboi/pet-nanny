@@ -61,7 +61,7 @@ query nannies($role: String) {
 
 export const QUERY_SINGLE_NANNY = gql`
 query nanny($nannyId: ID!, $role: String) {
-  nanny(id: $nannyId, role: $role) {
+  nanny(_id: $nannyId, role: $role) {
     _id
     address
     description
@@ -87,7 +87,7 @@ query nanny($nannyId: ID!, $role: String) {
 
 export const QUERY_SINGLE_USER = gql`
 query user($userId: ID!, $role: String) {
-  user(id: $userId, role: $role) {
+  user(_id: $userId, role: $role) {
     _id
     address
     description
@@ -123,13 +123,77 @@ query orders {
   }
 `
 
-export const QUERY_USER_ORDERS = gql `
-query orders($orderId: ID!)  {
-  order(id: $orderId) {
+export const QUERY_USER_ORDER = gql `
+query userOrder($userId: ID!)  {
+  order(_id: $userId) {
     _id
     purchaseDate
     bookings {
       _id
+    }
+  }
+}
+`
+
+export const QUERY_SINGLE_ORDER = gql `
+query order($orderId: ID!)  {
+  order(_id: $orderId) {
+    _id
+    purchaseDate
+    bookings {
+      _id
+    }
+  }
+}
+`
+
+
+export const QUERY_ALL_BOOKINGS = gql `
+query bookings {
+  bookings {
+    _id
+    createdAt
+    bookedDate
+    price
+    bookedBy{
+      _id
+      email
+      firstName
+      LastName
+    }
+  }
+  }
+`
+
+export const QUERY_USER_BOOKING = gql `
+query userBooking ($userId: ID!) {
+  userBooking (_id: userId) {
+    _id
+    createdAt
+    bookedDate
+    price
+    bookedBy{
+      _id
+      email
+      firstName
+      LastName
+    }
+  }
+  }
+`
+
+export const QUERY_SINGLE_BOOKING = gql `
+query singleBooking($bookingId: ID!)  {
+  order(_id: $bookingId) {
+    _id
+    createdAt
+    bookedDate
+    price
+    bookedBy{
+      _id
+      email
+      firstName
+      LastName
     }
   }
 }

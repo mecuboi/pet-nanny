@@ -21,10 +21,10 @@ const resolvers = {
       return await User.findOne({ _id: args.id, role: 'Nanny' });
     },
     orders: async () => {
-      return await Order.find().populate("bookings").populate("bookings.bookedBy.email")
+      return await Order.find().populate("bookings")
       
     },
-    order: async (parent, { _id }, context) => {
+    userOrder: async (parent, { _id }, context) => {
       if (context.user) {
         const user = await User.findById(context.user._id).populate({
           path: 'orders.bookings',
@@ -32,25 +32,46 @@ const resolvers = {
         });
 
         return user.orders.id(_id);
-      }
+      }      
 
       throw new AuthenticationError('Not logged in');
     },
+
+    singleOrder: async (__, { _id }, context) => {
+      if (context.user) {
+        return await Order.findById( _id ).populate("bookings")
+      }     
+    },
+
     bookings: async () => {
       return await Booking.find().populate('user');
     },
-    booking: async (parent, { _id }, context) => {
+    userBooking: async (parent, { _id }, context) => {
       if (context.user) {
         const user = await User.findById(context.user._id).populate({
           path: 'bookings.bookedBy',
           populate: 'bookedBy'
         });
 
-        return user.orders.id(_id);
+        return user.bookings.id(_id);
       }
 
       throw new AuthenticationError('Not logged in');
     },
+
+    singleBooking: async (parent, { _id }, context) => {
+      if (context.user) {
+        const booking = await Booking.findById(_id).populate({
+          path: 'bookings.bookedBy',
+          populate: 'bookedBy'
+        });
+
+        return booking
+      }
+
+      throw new AuthenticationError('Not logged in');
+    },
+
     // checkout: async (parent, args, context) => {
     //   const url = new URL(context.headers.referer).origin;
     //   const order = new Order({ bookings: args.bookings });
