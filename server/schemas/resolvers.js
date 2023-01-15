@@ -121,7 +121,7 @@ const resolvers = {
     deleteOrder: async (parent, { _id, bookingId }, context) => {
       if (context.user) {
         const order = await Order.findByIdAndDelete(_id)
-        await User.findByIdAndUpdate(context.user._id, { $pull: { orders: order } });
+        await User.findByIdAndUpdate(context.user._id, { $pull: {_id: _id}  });
         return { message: 'Order deleted' };
       }
       throw new AuthenticationError('Not logged in');
