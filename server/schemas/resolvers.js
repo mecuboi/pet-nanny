@@ -145,7 +145,7 @@ const resolvers = {
     deleteBooking: async (parent, { _id }, context) => {
       if (context.user) {
         const booking = await Booking.findByIdAndDelete(_id);
-        await User.findByIdAndUpdate(context.user._id, { $pull: { bookings: booking } });
+        await User.findByIdAndUpdate(context.user._id, { $pull: { bookings: {_id: _id}} });
         if (!booking) {
           throw new Error('Booking not found');
         }
