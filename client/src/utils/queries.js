@@ -1,7 +1,7 @@
 import { gql } from '@apollo/client';
 
-export const QUERY_All_PROFILES = gql`
-  query All {
+export const QUERY_All_USERS = gql`
+  query all {
     all {
       _id
       address
@@ -33,8 +33,8 @@ export const QUERY_All_PROFILES = gql`
   }
 `;
 
-export const QUERY_ALL_Nannies = gql`
-query Nannies($role: String) {
+export const QUERY_ALL_NANNIES = gql`
+query nannies($role: String) {
   nannies(role: $role) {
     _id
     address
@@ -59,8 +59,8 @@ query Nannies($role: String) {
 }
 `;
 
-export const QUERY_SINGLE_Nanny = gql`
-query User($nannyId: ID!, $role: String) {
+export const QUERY_SINGLE_NANNY = gql`
+query nanny($nannyId: ID!, $role: String) {
   nanny(id: $nannyId, role: $role) {
     _id
     address
@@ -86,7 +86,7 @@ query User($nannyId: ID!, $role: String) {
 `;
 
 export const QUERY_SINGLE_USER = gql`
-query User($userId: ID!, $role: String) {
+query user($userId: ID!, $role: String) {
   user(id: $userId, role: $role) {
     _id
     address
@@ -110,3 +110,27 @@ query User($userId: ID!, $role: String) {
 }
 `;
 
+export const QUERY_ALL_ORDERS = gql `
+query orders {
+  orders {
+    _id
+    purchaseDate
+    bookings {
+      _id
+    }
+    
+  }
+  }
+`
+
+export const QUERY_USER_ORDERS = gql `
+query orders($orderId: ID!)  {
+  order(id: $orderId) {
+    _id
+    purchaseDate
+    bookings {
+      _id
+    }
+  }
+}
+`

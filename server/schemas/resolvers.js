@@ -21,7 +21,8 @@ const resolvers = {
       return await User.findOne({ _id: args.id, role: 'Nanny' });
     },
     orders: async () => {
-      return await Order.find().populate('bookings');
+      return await Order.find().populate("bookings").populate("bookings.bookedBy.email")
+      
     },
     order: async (parent, { _id }, context) => {
       if (context.user) {
