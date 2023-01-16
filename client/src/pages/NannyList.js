@@ -1,16 +1,15 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-
 import { useQuery } from '@apollo/client';
 import AllNannyList from '../components/AllNanies';
 import { QUERY_ALL_NANNIES } from '../utils/queries';
 
 function NannyList() {
   const { loading, data } = useQuery(QUERY_ALL_NANNIES);
-  let nannies;
+  let nannies = false;
 
   if (data) {
-    nannies = data.nannies;
+    nannies = data?.nannies;
   }
 
   return (
