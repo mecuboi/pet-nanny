@@ -13,10 +13,10 @@ export const QUERY_All_USERS = gql`
       postcode
       role
       bookings {
-        id
-        BookedDate
+        _id
+        bookedDate
         price
-        BookedBy {
+        bookedBy {
           _id
         }
       }
@@ -24,9 +24,9 @@ export const QUERY_All_USERS = gql`
         _id
         purchaseDate
         bookings {
-          id
+          _id
           price
-          BookedDate
+          bookedDate
         }
       }
     }
@@ -46,13 +46,13 @@ query Nannies($role: String) {
     postcode
     role
     bookings {
-      id
-      BookedBy {
+      _id
+      bookedBy {
         _id
         firstName
         lastName
       }
-      BookedDate
+      bookedDate
       price
     }
   }
@@ -72,10 +72,10 @@ query User($nannyId: ID!, $role: String) {
     postcode
     role
     bookings {
-      id
+      _id
       price
-      BookedDate
-      BookedBy {
+      bookedDate
+      bookedBy {
         _id
         firstName
         lastName
@@ -101,9 +101,9 @@ query User($userId: ID!) {
       _id
       purchaseDate
       bookings {
-        id
+        _id
         price
-        BookedDate
+        bookedDate
       }
     }
   }
@@ -111,7 +111,7 @@ query User($userId: ID!) {
 `;
 
 export const QUERY_ME = gql`
-query Me {
+query me {
   me {
     _id
     firstName
@@ -123,21 +123,21 @@ query Me {
     description
     address
     bookings {
-      BookedBy {
+      bookedBy {
         _id
         firstName
         lastName
         email
       }
-      BookedDate
-      id
+      bookedDate
+      _id
       price
     }
     orders {
       _id
       bookings {
-        BookedDate
-        id
+        bookedDate
+        _id
         price
       }
     }

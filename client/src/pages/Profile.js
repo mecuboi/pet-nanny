@@ -19,10 +19,14 @@ import OrderList from './OrderList';
 const Profile = () => {
     const { profileId } = useParams();
 
-    const { data, loading, error } = useQuery( profileId ? QUERY_SINGLE_USER : QUERY_ME,
-        {
-          variables: { profileId: profileId },
-        }
+    // const { data, loading, error } = useQuery( profileId ? QUERY_SINGLE_USER : QUERY_ME,
+    //     {
+    //       variables: { profileId: profileId },
+    //     }
+    //   );
+
+      const { data, loading, error } = useQuery( QUERY_ME
+        
       );
 
       const user = data?.me || data?.user || {};
@@ -68,6 +72,7 @@ const Profile = () => {
       }
   
     return (
+
         <div>
              <div className="profile-container">
              {Auth.getProfile().data._id === profileId &&   
