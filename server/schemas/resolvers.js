@@ -6,7 +6,6 @@ const stripe = require('stripe')('sk_test_51MQpZQCIw6RfRCJYsWbRBGrgYW5YVwMK5ml5w
 const resolvers = {
   Query: {
     me: async (parent, args, context) => {
-      console.log(context.user); // Log the context object
       if (context.user) {
         const userData = await User.findOne({
           _id: context.user._id
@@ -132,10 +131,13 @@ const resolvers = {
     },
     updateUser: async (parent, args, context) => {
       if (context.user) {
-        const { picture } = args;
-        const pictureBuffer = new Buffer.from(picture.split(',')[1], 'base64');
-        args.picture = pictureBuffer;
-        return await User.findByIdAndUpdate(context.user._id, args, { new: true });
+        const updatedUser = await User.findByIdAndUpdate(context.user._id, args, { new: true})
+       
+        return updatedUser;
+        // const { picture } = args;
+        // const pictureBuffer = new Buffer.from(picture.split(',')[1], 'base64');
+        // args.picture = pictureBuffer;
+        // return await User.findByIdAndUpdate(context.user._id, args, { new: true });
       }
     
       throw new AuthenticationError('Not logged in');

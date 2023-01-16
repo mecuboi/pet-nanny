@@ -25,30 +25,12 @@ const Profile = () => {
         }
       );
 
-
       const user = data?.me || data?.user || {};
 
       // Use React Router's `<Redirect />` component to redirect to personal profile page if username is yours
       if (Auth.loggedIn() && Auth.getProfile().data._id === profileId) {
         return <Navigate to="/me" />;
       }  
-    // const [firstName, setFirstName] = useState('');
-    // const [lastName, setLastName] = useState('');
-    // const [email, setEmail] = useState('');
-    // const [address, setAddress] = useState('');
-    // const [postcode, setPostcode] = useState('');
-    // const [picture, setPicture] = useState('');
-    // const [description, setDescription] = useState('');
-    // const [role, setRole] = useState('');
-
-    // setFirstName(user.firstName);
-    // setLastName(user.lastName);
-    // setEmail(user.email);
-    // setAddress(user.address);
-    // setPostcode(user.postcode);
-    // setPicture(`data:image/jpeg;base64,${user.picture}`);
-    // setDescription(user.description);
-    // setRole(user.role);
 
     if (loading) return <img
             src="https://media.giphy.com/media/3oEjI6SIIHBdRxXI40/giphy.gif"
@@ -72,7 +54,7 @@ const Profile = () => {
 
         <div>
              <div className="profile-container">
-             {Auth.getProfile().data._id === profileId &&   
+             {Auth.getProfile().data._id === user._id &&   
               <Link to="/update-user-form">
                     <button className="update-user-btn">
                         <FontAwesomeIcon icon={faCog} className="settings-icon" />
