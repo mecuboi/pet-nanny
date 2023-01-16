@@ -31,7 +31,7 @@ function Navigation() {
   function showProfile() {
     if (Auth.loggedIn()) {
       return (
-        <Nav.Link href='/profile'>My Profile: <span className="text-primary">{getUser}</span></Nav.Link>
+        <Nav.Link href='/me'>My Profile: <span className="text-primary">{getUser}</span></Nav.Link>
       )
     } else {
       return 
