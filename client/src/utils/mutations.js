@@ -21,7 +21,6 @@ export const ADD_USER = gql`
     $address: String!
     $postcode: String!
     $role: String!
-
   ) {
     addUser(
       firstName: $firstName

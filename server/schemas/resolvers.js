@@ -5,13 +5,7 @@ const stripe = require('stripe')('sk_test_4eC39HqLyjWDarjtT1zdp7dc');
 
 const resolvers = {
   Query: {
-    all: async () => {
-      return await User.find();
-    },
-    users: async () => {
-      return await User.find({ role: 'User' });
-    },
-    user: async (_, args, context) => {
+    me: async (parent, args, context) => {
       if (context.user) {
         const userData = await User.findOne({
           _id: context.user._id
@@ -19,7 +13,14 @@ const resolvers = {
 
         return userData
       }
+
       throw new AuthenticationError('Not logged in')
+    },
+    users: async () => {
+      return await User.find({ role: 'Pawrent' });
+    },
+    user: async (_, args) => {
+      return await User.findOne({ _id: args.id});
     },
     nannies: async () => {
       return await User.find({ role: 'Nanny'});

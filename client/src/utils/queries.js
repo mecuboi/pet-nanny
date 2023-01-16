@@ -110,3 +110,37 @@ query User($userId: ID!) {
 }
 `;
 
+export const GET_ME = gql`
+query Me {
+  me {
+    _id
+    firstName
+    lastName
+    email
+    picture
+    postcode
+    role
+    description
+    address
+    bookings {
+      BookedBy {
+        _id
+        firstName
+        lastName
+        email
+      }
+      BookedDate
+      id
+      price
+    }
+    orders {
+      _id
+      bookings {
+        BookedDate
+        id
+        price
+      }
+    }
+  }
+}
+`
