@@ -22,6 +22,7 @@ const AllNannyList = ({ profiles }) => {
   }
   const profileRows = chunk(profiles, 3);
   return (
+
     <div className=" w-100 p-3 my-4 " style={{ backgroundColor: "#eee" }}>
       <MDBContainer className="my-4">
         {profileRows.map((profileRow) => (

@@ -19,15 +19,12 @@ import OrderList from './OrderList';
 const Profile = () => {
     const { profileId } = useParams();
 
-    // const { data, loading, error } = useQuery( profileId ? QUERY_SINGLE_USER : QUERY_ME,
-    //     {
-    //       variables: { profileId: profileId },
-    //     }
-    //   );
-
-      const { data, loading, error } = useQuery( QUERY_ME
-        
+    const { data, loading, error } = useQuery( profileId ? QUERY_SINGLE_USER : QUERY_ME,
+        {
+          variables: { profileId: profileId },
+        }
       );
+
 
       const user = data?.me || data?.user || {};
 
