@@ -5,9 +5,11 @@ import { Form, Button, Alert, Col, Row, InputGroup } from 'react-bootstrap';
 import { QUERY_ME } from '../utils/queries';
 import { UPDATE_USER } from '../utils/mutations';
 import { useEffect } from 'react';
+import TestFrom from './TestForm';
 import Dropzone from 'react-dropzone';
 
 import Auth from '../utils/auth';
+import TestForm from './TestForm';
 
 const UpdateUserForm = () => {
 
@@ -89,6 +91,7 @@ useEffect(() => {
                 email: userFormData.email,
                 address: userFormData.address,
                 picture: userFormData.picture,
+                postcode: userFormData.postcode,
                 description: userFormData.description
                 }
         });
@@ -168,10 +171,15 @@ useEffect(() => {
             placeholder='e.g. 2000'
             name='postcode'
             onChange={handleInputChange}
+            onKeyPress={validateNumberOnly}
             value={userFormData.postcode}
             required
           />
           <Form.Control.Feedback type='invalid'>Postcode is required!</Form.Control.Feedback>
+        </Form.Group>
+
+        <Form.Group className='mt-3'>
+            {/* <TestForm /> */}
         </Form.Group>
 
         <Row className='w-75 mx-auto'>
