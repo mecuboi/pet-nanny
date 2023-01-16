@@ -16,11 +16,11 @@ const typeDefs = gql`
     bookings: [Booking]
   }
   type Booking {
-    id: ID
-    CreatedAt: Int
-    BookedDate: Int
+    _id: ID
+    createdAt: String
+    bookedDate: String
     price: Float
-    BookedBy: User
+    bookedBy: User
   }
   type Order {
     _id: ID
@@ -37,13 +37,15 @@ const typeDefs = gql`
   type Query {
     all: [User]
     users(role: String): [User]
-    user(id: ID!, role: String): User
+    user(_id: ID!, role: String): User
     nannies(role: String): [User]
-    nanny(id: ID!, role: String): User
+    nanny(_id: ID!, role: String): User
     orders: [Order]
-    order(id: ID!): Order
+    userOrder(_id: ID!): Order
+    singleOrder(_id: ID!): Order
     bookings: [Booking]
-    booking(id: ID!): Booking
+    userBooking(_id: ID!): Booking
+    singleBooking(_id: ID!): Booking
   }
  
   type Mutation {
@@ -51,10 +53,10 @@ const typeDefs = gql`
     updateUser(firstName: String, lastName: String, email: String, password: String, address: String, picture: String, description: String, role: String): User
     deleteUser(_id: ID!): User
     addOrder(bookings: [ID]!): Order
-    deleteOrder(bookings: [ID]!): Order
-    addBooking(BookedDate: Int!, price: Float!): Booking
-    updateBooking(_id: ID!, BookedDate: Int!): Booking
-    deleteBooking(id: ID!): Booking
+    deleteOrder(_id: ID!, bookingId: [ID]!): Order
+    addBooking(bookedDate: String!, price: Float!): Booking
+    updateBooking(_id: ID!, bookedDate: String!): Booking
+    deleteBooking(_id: ID!): Booking
     login(email: String!, password: String!): Auth
   }
 `;

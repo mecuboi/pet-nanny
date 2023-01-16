@@ -5,14 +5,14 @@ const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
 const bookingSchema = new Schema({
-  CreatedAt: {
+  createdAt: {
     type: Date,
     default: Date.now()
   },
   // https://mongoosejs.com/docs/tutorials/dates.html Doc about type: Date
-  BookedDate: {
+  bookedDate: {
     type: Date,
-    get: value => moment(value).format("DD MMM YYYY"),
+    // get: value => moment(value).format("DD MMM YYYY"),
     // the minimum the date can be in 11 Jan 2023.
     min: Date.now()
   },
@@ -21,7 +21,7 @@ const bookingSchema = new Schema({
     default: 100,
     required: true,
   },
-   BookedBy: {
+   bookedBy: {
     type: Schema.Types.ObjectId,
     ref: 'User'
   },

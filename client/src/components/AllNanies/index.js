@@ -4,7 +4,7 @@ import { MDBCol, MDBContainer, MDBRow, MDBCard, MDBCardText, MDBCardBody, MDBCar
 import { Link } from 'react-router-dom';
 
 const AllNannyList = ({ profiles}) => {
-  if (!profiles.length) {
+  if (!profiles) {
     return <h3>No Profiles Yet</h3>;
   }
 

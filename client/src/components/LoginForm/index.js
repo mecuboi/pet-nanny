@@ -43,7 +43,7 @@ const LoginForm = () => {
   }
 
   return (
-    <Form noValidate validated={validated} onSubmit={handleSubmit}>
+    <Form className="w-100 w-md-75" validated={validated} onSubmit={handleSubmit}>
       <Alert dismissible onClose={() => setShowAlert(false)} show={showAlert} variant='danger'>
           Something went wrong with your login credentials!
         </Alert>
@@ -61,7 +61,7 @@ const LoginForm = () => {
       </Form.Group>
 
       <Form.Group className="mb-3" controlId="formBasicPassword">
-        <Form.Label htmlFor='password'>Password</Form.Label>
+        <Form.Label>Password</Form.Label>
         <Form.Control
           type="password"
           placeholder="Password"
@@ -71,7 +71,10 @@ const LoginForm = () => {
           required />
           <Form.Control.Feedback type='invalid'>Password is required!</Form.Control.Feedback>
       </Form.Group>
-      <Button variant="primary" type="submit" >
+      <Button 
+      variant="primary" 
+      type="submit" 
+      disabled={!(userFormData.email && userFormData.password)}>
         Login
       </Button>
     </Form>

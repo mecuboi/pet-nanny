@@ -9,12 +9,12 @@ const orderSchema = new Schema({
     type: Date,
     default: Date.now()
   },
-  bookings: [
+  bookings: 
     {
       type: Schema.Types.ObjectId,
       ref: 'Booking'
     }
-  ]
+  
 });
 
 const Order = mongoose.model('Order', orderSchema);
