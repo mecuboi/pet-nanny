@@ -1,10 +1,10 @@
 {
-  "name": "mern-server",
+  "name": "server-pet-nanny",
   "version": "1.0.0",
   "description": "",
   "main": "server.js",
   "engines": {
-    "node": "16.18.0",
+    "node": "^16.18.0",
     "npm": "8.19.2"
   },
   "scripts": {
