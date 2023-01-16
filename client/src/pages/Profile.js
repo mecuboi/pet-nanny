@@ -1,68 +1,99 @@
-// import React, { useState, useContext } from 'react';
-// import { useUserIdContext } from '../utils/GlobalState';
-// import { Link } from 'react-router-dom';
+import React, { useState } from 'react';
+import { Link, useParams, Navigate  } from 'react-router-dom';
+import { useQuery } from '@apollo/client';
+import { QUERY_ME, QUERY_SINGLE_USER } from '../utils/queries';
 
-// import { useQuery } from '@apollo/client';
-// import { QUERY_USER } from '../utils/queries';
+import { Container, Row, Col } from 'react-bootstrap';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCog } from '@fortawesome/free-solid-svg-icons';
+import '@fortawesome/react-fontawesome';
+
+import Auth from '../utils/auth';
+
 
 import './Profile.css';
+import BookingList from './BookingList';
+import OrderList from './OrderList';
 
-function Profile() {
+
+const Profile = () => {
+    const { profileId } = useParams();
+
+    const { data, loading, error } = useQuery( profileId ? QUERY_SINGLE_USER : QUERY_ME,
+        {
+          variables: { profileId: profileId },
+        }
+      );
+
+      const user = data?.me || data?.user || {};
+
+      // Use React Router's `<Redirect />` component to redirect to personal profile page if username is yours
+      if (Auth.loggedIn() && Auth.getProfile().data._id === profileId) {
+        return <Navigate to="/me" />;
+      }  
+    // const [firstName, setFirstName] = useState('');
+    // const [lastName, setLastName] = useState('');
+    // const [email, setEmail] = useState('');
+    // const [address, setAddress] = useState('');
+    // const [postcode, setPostcode] = useState('');
+    // const [picture, setPicture] = useState('');
+    // const [description, setDescription] = useState('');
+    // const [role, setRole] = useState('');
+
+    // setFirstName(user.firstName);
+    // setLastName(user.lastName);
+    // setEmail(user.email);
+    // setAddress(user.address);
+    // setPostcode(user.postcode);
+    // setPicture(`data:image/jpeg;base64,${user.picture}`);
+    // setDescription(user.description);
+    // setRole(user.role);
+
+    if (loading) return <img
+            src="https://media.giphy.com/media/3oEjI6SIIHBdRxXI40/giphy.gif"
+            className="animation"
+            alt="loading"
+             />;
+    if (error) return <p>Error</p>;
+
+    if (!user?.firstName) {
+        return (
+            <Container fluid className="p-5 vh-100 d-grid place-items-center">
+              <h4 className="text-center">
+                You need to be logged in to see your profile page. Use the navigation
+                links above to sign up or log in!
+              </h4>
+            </Container>
+          );
+      }
+  
     return (
-                 <div className="profile-container">
-                   <div className="edit-button-container">
-                        <button className="edit-button">
-                        <img src="path/to/favicon.ico" alt="Edit button" className="edit-icon" />
-                        </button>
-                    </div>
-                    <img src="https://picsum.photos/200/300" alt="Chicken" className="profile-picture" />
-                    <h1 className="name">Bob Legend</h1>
-                    <p className="email">bobby1209@gmail.com</p>
-                    <p className="address">11 Chicken St, New York, 50000</p>
-                    <p className="description">HI I AM BOB. I AM A HUMAN LOREM LOREM LOREM  LOREM LOREM LOREM  LOREM LOREM LOREM LOREM LOREM LOREM</p>
-                    <div className="button-container">
-                        <button>Message</button>
-                        <button>Book</button>
-                    </div>
-                </div> 
-            );
-}
-    
-// const Profile = async () => {
-
-//     const [firstName, setFirstName] = useState('');
-//     const [lastName, setLastName] = useState('');
-//     const [email, setEmail] = useState('');
-//     const [address, setAddress] = useState('');
-//     const [postcode, setPostcode] = useState('');
-//     const [picture, setPicture] = useState('');
-//     const [description, setDescription] = useState('');
-
-//     const { data, loading, error } = useQuery(QUERY_USER, {
-//         variables: {id: useUserIdContext}
-//     });
-
-//     if (loading) return <p>Loading...</p>;
-//     if (error) return <p>Error</p>;
-
-//     const user = data.user;
-//     setFirstName(user.firstName);
-//     setLastName(user.lastName);
-//     setEmail(user.email);
-//     setAddress(user.address);
-//     setPostcode(user.postcode);
-//     setPicture(user.picture);
-//     setDescription(user.description);
-    
-//     return (
-//          <div className="profile-container">
-//             <img src={picture} alt={firstName + " " + lastName} className="profile-picture" />
-//             <h1 className="name">{firstName} {lastName}</h1>
-//             <p className="email">{email}</p>
-//             <p className="address">{address}, {postcode}</p>
-//             <p className="description">{description}</p>
-//         </div> 
-//     );
-// };
+        <div>
+             <div className="profile-container">
+             {Auth.getProfile().data._id === profileId &&   
+              <Link to="/update-user-form">
+                    <button className="update-user-btn">
+                        <FontAwesomeIcon icon={faCog} className="settings-icon" />
+                    </button>
+                </Link>}
+                <img src={`data:image/jpeg;base64,${user.picture}`} alt={user.firstName + " " + user.lastName} className="profile-picture" />
+                <h1 className="name">{user.firstName} {user.lastName}</h1>
+                <p className="email">{user.email}</p>
+                <p className="address">{user.address}, {user.postcode}</p>
+                <p className="description">{user.description}</p>
+            </div> 
+            { user.role === 'Nanny' && 
+                <div className="booking-container">
+                    <BookingList />
+                </div>
+            }
+            { user.role === 'Pawrent' && 
+                <div className="order-container">
+                    <OrderList />
+                </div>
+            }
+        </div>
+    );
+};
 
 export default Profile;

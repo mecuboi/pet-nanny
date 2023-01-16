@@ -35,9 +35,10 @@ const typeDefs = gql`
     user: User
   }
   type Query {
+    me: User
     all: [User]
     users(role: String): [User]
-    user(_id: ID!, role: String): User
+    user(id: ID!): User
     nannies(role: String): [User]
     nanny(_id: ID!, role: String): User
     orders: [Order]
@@ -50,7 +51,7 @@ const typeDefs = gql`
  
   type Mutation {
     addUser(firstName: String!, lastName: String!, email: String!, password: String!, postcode: String, address: String, picture: String, description: String, role: String): Auth
-    updateUser(firstName: String, lastName: String, email: String, password: String, address: String, picture: String, description: String, role: String): User
+    updateUser(firstName: String, lastName: String, email: String, password: String, address: String, postcode: String, picture: String, description: String, role: String): User
     deleteUser(_id: ID!): User
     addOrder(bookings: [ID]!): Order
     deleteOrder(_id: ID!, bookingId: [ID]!): Order
