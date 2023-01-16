@@ -28,6 +28,7 @@ db.once('open', async () => {
     email: 'steve@testmail.com',
     password: 'password12345',
     address: 'somewhere',
+  
     // orders: [
     //   {
     //     bookings: [bookings[0]._id, bookings[1]._id]
