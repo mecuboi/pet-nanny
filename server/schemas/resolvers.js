@@ -171,14 +171,17 @@ const resolvers = {
       }
       throw new AuthenticationError('Not logged in');
     },
+
+    // Do not use first
     deleteBooking: async (parent, { _id }, context) => {
       if (context.user) {
         const booking = await Booking.findByIdAndDelete(_id);
-        await User.findByIdAndUpdate(context.user._id, { $pull: { bookings: {_id: _id}} });
-        await 
+        await User.findByIdAndUpdate(context.user._id, { $pull: { bookings: {_id: _id}} }); 
+
         if (!booking) {
           throw new Error('Booking not found');
         }
+
         return { message: 'Booking deleted' };
       }
       throw new AuthenticationError('Not logged in');
