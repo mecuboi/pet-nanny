@@ -1,5 +1,5 @@
 const { AuthenticationError } = require('apollo-server-express');
-const { User, Booking, Order} = require('../models');
+const { User, Booking, Order } = require('../models');
 const { signToken } = require('../utils/auth');
 const stripe = require('stripe')('sk_test_4eC39HqLyjWDarjtT1zdp7dc');
 
@@ -24,15 +24,16 @@ const resolvers = {
       return await User.findOne({ _id: profileId});
     },
     nannies: async () => {
-      return await User.find({ role: 'Nanny'});
+      return await User.find({ role: 'Nanny' });
     },
     nanny: async (_, args) => {
-      return await User.findOne({ _id: args.id, role: 'Nanny'});
+      return await User.findOne({ _id: args.id, role: 'Nanny' });
     },
     orders: async () => {
-      return await Order.find().populate('bookings');
+      return await Order.find().populate("bookings")
+      
     },
-    order: async (parent, { _id }, context) => {
+    userOrder: async (parent, { _id }, context) => {
       if (context.user) {
         const user = await User.findById(context.user._id).populate({
           path: 'orders.bookings',
@@ -40,25 +41,46 @@ const resolvers = {
         });
 
         return user.orders.id(_id);
-      }
+      }      
 
       throw new AuthenticationError('Not logged in');
     },
+
+    singleOrder: async (__, { _id }, context) => {
+      if (context.user) {
+        return await Order.findById( _id ).populate("bookings")
+      }     
+    },
+
     bookings: async () => {
       return await Booking.find().populate('user');
     },
-    booking: async (parent, {_id}, context) => {
+    userBooking: async (parent, { _id }, context) => {
       if (context.user) {
         const user = await User.findById(context.user._id).populate({
           path: 'bookings.bookedBy',
           populate: 'bookedBy'
         });
 
-        return user.orders.id(_id);
+        return user.bookings.id(_id);
       }
 
       throw new AuthenticationError('Not logged in');
     },
+
+    singleBooking: async (parent, { _id }, context) => {
+      if (context.user) {
+        const booking = await Booking.findById(_id).populate({
+          path: 'bookings.bookedBy',
+          populate: 'bookedBy'
+        });
+
+        return booking
+      }
+
+      throw new AuthenticationError('Not logged in');
+    },
+
     // checkout: async (parent, args, context) => {
     //   const url = new URL(context.headers.referer).origin;
     //   const order = new Order({ bookings: args.bookings });
@@ -113,62 +135,61 @@ const resolvers = {
     
       throw new AuthenticationError('Not logged in');
     },
-    deleteUser: async(parent, args, context) => {
+    deleteUser: async (parent, args, context) => {
       if (context.user) {
         return await User.findByIdAndRemove(context.user._id)
       }
 
       throw new AuthenticationError('Not logged in');
     },
-    addOrder: async (parent, args, context) => {
+    addOrder: async (parent, { bookings, nanny }, context) => {
       if (context.user) {
-        const updateUser = await User.findByIdAndUpdate(
-          { _id: context.user._id },
-          { $addToSet: {orders: args.newBook}},
-          { new: true, runValidators: true },
-        );
-        return updateUser
-          // const order = new Order({ bookings });
-          // await order.save();
-          // await User.findByIdAndUpdate({_id: context.user._id}, { $push: { orders: order } }, { new: true});
+        const order = new Order({ bookings });
+        await order.save();
+        await User.findByIdAndUpdate(context.user._id, { $push: { orders: order } });
+
+        return order
       }
       throw new AuthenticationError('Not logged in');
-  },
-  deleteOrder: async (parent, {_id, bookings }, context) => {
-    if (context.user) {
+    },
+    deleteOrder: async (parent, { _id, bookingId }, context) => {
+      if (context.user) {
         const order = await Order.findByIdAndDelete(_id)
-        await User.findByIdAndUpdate(context.user._id, { $pull: { orders: order } });
+        await User.findByIdAndUpdate(context.user._id, { $pull: {_id: _id}  });
+        if (!booking) {
+          throw new Error('Order not found');
+        }
         return { message: 'Order deleted' };
-    }
-    throw new AuthenticationError('Not logged in');
-},
-  addBooking: async (parent, args, context) => {
-    if (context.user) {
+      }
+      throw new AuthenticationError('Not logged in');
+    },
+    addBooking: async (parent, args, context) => {
+      if (context.user) {
         // make sure that the BookedBy field is populated with the current user's id
-        args.BookedBy = context.user._id;
+        args.bookedBy = context.user._id;
         const booking = await Booking.create(args);
         return booking;
-    }
-    throw new AuthenticationError('Not logged in');
-  },
-    updateBooking: async (parent, { _id, BookedDate }, context) => {
-      if (context.user) {
-          const booking = await Booking.findByIdAndUpdate(_id, { BookedDate }, { new: true });
-          return booking;
       }
       throw new AuthenticationError('Not logged in');
-  },
-  deleteBooking: async (parent, { _id }, context) => {
+    },
+    updateBooking: async (parent, { _id, bookedDate }, context) => {
       if (context.user) {
-          const booking = await Booking.findByIdAndDelete(_id);
-          await User.findByIdAndUpdate(context.user._id, { $pull: { bookings: booking }});
-          if (!booking) {
-              throw new Error('Booking not found');
-          }
-          return { message: 'Booking deleted' };
+        const booking = await Booking.findByIdAndUpdate(_id, { bookedDate }, { new: true });
+        return booking;
       }
       throw new AuthenticationError('Not logged in');
-  },
+    },
+    deleteBooking: async (parent, { _id }, context) => {
+      if (context.user) {
+        const booking = await Booking.findByIdAndDelete(_id);
+        await User.findByIdAndUpdate(context.user._id, { $pull: { bookings: {_id: _id}} });
+        if (!booking) {
+          throw new Error('Booking not found');
+        }
+        return { message: 'Booking deleted' };
+      }
+      throw new AuthenticationError('Not logged in');
+    },
     login: async (parent, { email, password }) => {
       const user = await User.findOne({ email });
 

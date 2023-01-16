@@ -84,7 +84,7 @@ function Navigation() {
             </Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <Tab.Content>
+            <Tab.Content className="">
               <Tab.Pane eventKey='login'>
                 <LoginForm/>
               </Tab.Pane>

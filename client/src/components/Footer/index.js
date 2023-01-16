@@ -12,7 +12,7 @@ import {
     }
 
   return (
-    <MDBFooter className='text-center text-white px' style={{ backgroundColor: '#ddd' }}>
+    <MDBFooter className='text-center text-white px' style={{ backgroundColor: '#ccc' }}>
 
       <div className='text-center text-dark p-3'>
         © 2023 Copyright: <span> </span>

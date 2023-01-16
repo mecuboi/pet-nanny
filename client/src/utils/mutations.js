@@ -41,7 +41,7 @@ export const ADD_USER = gql`
 `;
 
 export const UPDATE_USER = gql`
-  mutation Mutation(
+  mutation updateUser(
     $firstName: String, 
     $lastName: String, 
     $email: String, 
@@ -79,57 +79,62 @@ export const DELETE_USER = gql`
 `;
 
 export const ADD_ORDER = gql`
-  mutation AddOrder($bookings: [ID]!) {
+  mutation addOrder($bookings: [ID]!) {
     addOrder(bookings: $bookings) {
       _id
       purchaseDate
-      bookings {
-        id
-        BookedDate
-        price
-      }
     }
   }
 `;
-
-export const DELETE_ORDER = gql`
-mutation Mutation($bookings: [ID]!) {
-  deleteOrder(bookings: $bookings) {
-    _id
-  }
-}
-`;
-
 
 export const ADD_BOOKING = gql`
-mutation Mutation($bookedDate: Int!, $price: Float!) {
-  addBooking(BookedDate: $bookedDate, price: $price) {
-    BookedBy {
+  mutation addBooking($bookedDate: String!, $price: Float!) {
+    addBooking (bookedDate: $bookedDate, price: $price) {
       _id
-      email
-      firstName
-      lastName
-    }
-    BookedDate
-    id
-    price
-  }
-}
+      createdAt
+      bookedDate
+      price
+      bookedBy {
+        _id
+        email
+        firstName
+        lastName
+      }
+    }}
 `;
 
 export const UPDATE_BOOKING = gql`
-mutation Mutation($id: ID!, $bookedDate: Int!) {
-  updateBooking(_id: $id, BookedDate: $bookedDate) {
-    id
-    BookedDate
+  mutation updateBooking($id: ID!, $bookedDate: String!) {
+    updateBooking (_id: $id, bookedDate: $bookedDate){
+      _id
+      bookedDate
+      price
+      createdAt
+      bookedBy {
+        _id
+        email
+        firstName
+        lastName
+      }
+    }
   }
-}
-`;
+`
 
-export const DELETE_BOOKING = gql`
-mutation Mutation($deleteBookingId: ID!) {
-  deleteBooking(id: $deleteBookingId) {
-    id
+//delete function works, however in apollo, it will not return anything since the booking has been deleted.
+export const DELETE_BOOKING = gql `
+  mutation deleteBooking($_id: ID!) {
+  deleteBooking (_id: $_id){
+    _id
   }
 }
-`;
+
+`
+
+export const DELETE_ORDER = gql `
+  mutation deleteOrder($_id: ID!, $bookingId: ID!) {
+  deleteOrder (_id: $_id, bookingId: $bookingId) {
+    _id
+  }
+}
+
+`

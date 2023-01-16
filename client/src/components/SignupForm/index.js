@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
-import { Form, Button, Alert } from 'react-bootstrap';
+import { Form, Button, Alert, Col, Row, InputGroup } from 'react-bootstrap';
 import { useMutation } from '@apollo/client';
 import { ADD_USER } from '../../utils/mutations';
 import Auth from '../../utils/auth';
 
+
+
 const SignupForm = () => {
-  // set initial form state
+  //set initial form state
   const [userFormData, setUserFormData] = useState(
     {
       firstName: '',
@@ -75,14 +77,14 @@ const SignupForm = () => {
   return (
     <>
       {/* This is needed for the validation functionality above */}
-      <Form noValidate validated={validated} onSubmit={handleFormSubmit}>
+      <Form className="w-100" validated={validated} onSubmit={handleFormSubmit}>
         {/* show alert if server response is bad */}
         <Alert dismissible onClose={() => setShowAlert(false)} show={showAlert} variant='danger'>
           Something went wrong with your signup!
         </Alert>
 
-        <Form.Group>
-          <Form.Label htmlFor='first-name'>First Name</Form.Label>
+        <Form.Group >
+          <Form.Label >First Name</Form.Label>
           <Form.Control
             type='text'
             placeholder='Your First Name'
@@ -95,7 +97,7 @@ const SignupForm = () => {
         </Form.Group>
 
         <Form.Group className='mt-3'>
-          <Form.Label htmlFor='last-name'>Last Name</Form.Label>
+          <Form.Label >Last Name</Form.Label>
           <Form.Control
             type='text'
             placeholder='Your Last Name'
@@ -108,7 +110,7 @@ const SignupForm = () => {
         </Form.Group>
 
         <Form.Group className='mt-3'>
-          <Form.Label htmlFor='address'>Address</Form.Label>
+          <Form.Label >Address</Form.Label>
           <Form.Control
             type='text'
             placeholder='29 Example Street'
@@ -121,12 +123,13 @@ const SignupForm = () => {
         </Form.Group>
 
         <Form.Group className='mt-3'>
-          <Form.Label htmlFor='postcode'>Postcode</Form.Label>
+          <Form.Label >Postcode</Form.Label>
           <Form.Control
-            type='number'
+            type='text'
             placeholder='e.g. 2000'
             name='postcode'
             onChange={handleInputChange}
+            onKeyPress={validateNumberOnly}
             value={userFormData.postcode}
             required
           />
@@ -134,11 +137,10 @@ const SignupForm = () => {
         </Form.Group>
 
         <Form.Group className='mt-3'>
-          <Form.Label htmlFor='role'>Role</Form.Label>
+          <Form.Label >Role</Form.Label>
           <Form.Select
           name='role'
           onChange={handleInputChange}
-          onKeyPress={validateNumberOnly}
           value={userFormData.role}
           required>
             <option>Pawrent</option>
@@ -148,7 +150,7 @@ const SignupForm = () => {
         </Form.Group>
 
         <Form.Group className='mt-3'>
-          <Form.Label htmlFor='email'>Email</Form.Label>
+          <Form.Label>Email</Form.Label>
           <Form.Control
             type='email'
             placeholder='sarah@example.com'
@@ -161,7 +163,7 @@ const SignupForm = () => {
         </Form.Group>
 
         <Form.Group className='mt-3'>
-          <Form.Label htmlFor='password'>Password</Form.Label>
+          <Form.Label>Password</Form.Label>
           <Form.Control
             type='password'
             placeholder='Your password'
@@ -182,6 +184,8 @@ const SignupForm = () => {
       </Form>
     </>
   );
+
+  
 };
 
 export default SignupForm;

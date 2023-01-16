@@ -68,6 +68,10 @@ function App() {
               element={<Profile />}
             />
             <Route
+              path="/NannyList"
+              element={<NannyList />}
+            />
+            <Route
               path="/profiles/:profileId"
               element={<Profile />}
             />

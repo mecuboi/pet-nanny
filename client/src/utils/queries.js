@@ -1,7 +1,7 @@
 import { gql } from '@apollo/client';
 
-export const QUERY_All_PROFILES = gql`
-  query All {
+export const QUERY_All_USERS = gql`
+  query all {
     all {
       _id
       address
@@ -140,6 +140,70 @@ query Me {
         id
         price
       }
+    }
+  }
+}
+`
+
+export const QUERY_SINGLE_ORDER = gql `
+query order($orderId: ID!)  {
+  order(_id: $orderId) {
+    _id
+    purchaseDate
+    bookings {
+      _id
+    }
+  }
+}
+`
+
+
+export const QUERY_ALL_BOOKINGS = gql `
+query bookings {
+  bookings {
+    _id
+    createdAt
+    bookedDate
+    price
+    bookedBy{
+      _id
+      email
+      firstName
+      LastName
+    }
+  }
+  }
+`
+
+export const QUERY_USER_BOOKING = gql `
+query userBooking ($userId: ID!) {
+  userBooking (_id: userId) {
+    _id
+    createdAt
+    bookedDate
+    price
+    bookedBy{
+      _id
+      email
+      firstName
+      LastName
+    }
+  }
+  }
+`
+
+export const QUERY_SINGLE_BOOKING = gql `
+query singleBooking($bookingId: ID!)  {
+  order(_id: $bookingId) {
+    _id
+    createdAt
+    bookedDate
+    price
+    bookedBy{
+      _id
+      email
+      firstName
+      LastName
     }
   }
 }
