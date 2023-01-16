@@ -143,8 +143,9 @@ const resolvers = {
     deleteOrder: async (parent, { _id, bookingId }, context) => {
       if (context.user) {
         const order = await Order.findByIdAndDelete(_id)
-        await User.findByIdAndUpdate(context.user._id, { $pull: {_id: _id}  });
-        if (!booking) {
+        await User.findByIdAndUpdate(context.user._id, { $pull: {orders: {_id: _id}}  });
+        await Booking.findByIdAndDelete(bookingId)
+        if (!order) {
           throw new Error('Order not found');
         }
         return { message: 'Order deleted' };
@@ -156,7 +157,10 @@ const resolvers = {
         // make sure that the BookedBy field is populated with the current user's id
         args.bookedBy = context.user._id;
         const booking = await Booking.create(args);
-        return booking;
+
+        const order = await Order.create({bookings: booking._id})
+
+        return {booking, order};
       }
       throw new AuthenticationError('Not logged in');
     },
@@ -171,6 +175,7 @@ const resolvers = {
       if (context.user) {
         const booking = await Booking.findByIdAndDelete(_id);
         await User.findByIdAndUpdate(context.user._id, { $pull: { bookings: {_id: _id}} });
+        await 
         if (!booking) {
           throw new Error('Booking not found');
         }
