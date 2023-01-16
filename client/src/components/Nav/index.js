@@ -31,7 +31,7 @@ function Navigation() {
   function showProfile() {
     if (Auth.loggedIn()) {
       return (
-        <Nav.Link href='/me'>
+        <Navbar.Text href='/me'>
           <Link to='me' className='text-secondary text-decoration-none'>
             My Profile: <span className="text-primary">{getUser}</span>
           </Link>
