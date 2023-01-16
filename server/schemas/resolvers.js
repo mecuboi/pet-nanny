@@ -1,7 +1,7 @@
 const { AuthenticationError } = require('apollo-server-express');
 const { User, Booking, Order } = require('../models');
 const { signToken } = require('../utils/auth');
-const stripe = require('stripe')('sk_test_4eC39HqLyjWDarjtT1zdp7dc');
+const stripe = require('stripe')('sk_test_51MQpZQCIw6RfRCJYsWbRBGrgYW5YVwMK5ml5wRXASIFbJJEMGXObq31rAx0tZ2dDqZgF4We6nNfaA2ICrGzYck7100zSZKYleX');
 
 const resolvers = {
   Query: {
@@ -81,42 +81,47 @@ const resolvers = {
       throw new AuthenticationError('Not logged in');
     },
 
-    // checkout: async (parent, args, context) => {
-    //   const url = new URL(context.headers.referer).origin;
-    //   const order = new Order({ bookings: args.bookings });
-    //   const line_items = [];
+    checkout: async (parent, args, context) => {
+      const url = new URL(context.headers.referer).origin;
+      const order = new Order({ bookings: args.bookings });
+      const line_items = [
+        {
+          price: args.bookings.price,
+          quantity: 1
+        }
+      ];
 
-    //   const { bookings } = await order.populate('bookings');
+      const { bookings } = await order.populate('bookings');
 
-    //   for (let i = 0; i < bookings.length; i++) {
-    //     const product = await stripe.products.create({
-    //       name: bookings[i].name,
-    //       description: bookings[i].description,
-    //       images: [`${url}/images/${bookings[i].image}`]
-    //     });
+      // for (let i = 0; i < bookings.length; i++) {
+      //   const product = await stripe.products.create({
+      //     name: bookings[i].name,
+      //     description: bookings[i].description,
+      //     images: [`${url}/images/${bookings[i].image}`]
+      //   });
 
-    //     const price = await stripe.prices.create({
-    //       product: product.id,
-    //       unit_amount: bookings[i].price * 100,
-    //       currency: 'aud',
-    //     });
+      //   const price = await stripe.prices.create({
+      //     product: product.id,
+      //     unit_amount: bookings[i].price * 100,
+      //     currency: 'aud',
+      //   });
 
-    //     line_items.push({
-    //       price: price.id,
-    //       quantity: 1
-    //     });
-    //   }
+      //   line_items.push({
+      //     price: price.id,
+      //     quantity: 1
+      //   });
+      // }
 
-    //   const session = await stripe.checkout.sessions.create({
-    //     payment_method_types: ['card'],
-    //     line_items,
-    //     mode: 'payment',
-    //     success_url: `${url}/success?session_id={CHECKOUT_SESSION_ID}`,
-    //     cancel_url: `${url}/`
-    //   });
+      const session = await stripe.checkout.sessions.create({
+        payment_method_types: ['card'],
+        line_items,
+        mode: 'payment',
+        success_url: `${url}/success?session_id={CHECKOUT_SESSION_ID}`,
+        cancel_url: `${url}/`
+      });
 
-    //   return { session: session.id };
-    // }
+      return { session: session.id };
+    }
   },
   Mutation: {
     addUser: async (parent, args) => {

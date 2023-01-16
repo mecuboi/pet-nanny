@@ -47,6 +47,7 @@ const typeDefs = gql`
     bookings: [Booking]
     userBooking(_id: ID!): Booking
     singleBooking(_id: ID!): Booking
+    checkout(order: ID!): Checkout
   }
  
   type Mutation {
