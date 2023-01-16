@@ -39,7 +39,7 @@ const Booking = require('./Booking');
   picture: {
     type: String,
     required: false,
-    default:'https://images.unsplash.com/face-springmorning.jpg?q=80&fm=jpg&crop=faces&fit=crop&h=128&w=128',
+    default:"https://riverlegacy.org/wp-content/uploads/2021/07/blank-profile-photo.jpeg"
   },
   description: {
     type: String,
