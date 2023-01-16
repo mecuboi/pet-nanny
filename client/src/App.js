@@ -11,7 +11,7 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 
 import Home from './pages/Home';
 import Profile from './pages/Profile';
-import TestProfile from './pages/TestProfile'
+// import TestProfile from './pages/TestProfile'
 import FooterNav from './components/Footer'
 // import Detail from './pages/Detail';
 // import NoMatch from './pages/NoMatch';
@@ -23,6 +23,7 @@ import UpdateUserForm from './pages/UpdateUserForm';
 // import { StoreProvider } from './utils/GlobalState';
 // import Success from './pages/Success';
 // import OrderHistory from './pages/OrderHistory';
+import TestForm from './pages/TestForm'
 
 const httpLink = createHttpLink({
   uri: '/graphql',
@@ -73,6 +74,10 @@ function App() {
             <Route
               path="/update-user-form"
               element={<UpdateUserForm />}
+            />
+            <Route
+              path="/test"
+              element={<TestForm />}
             />
           </Routes>
           <FooterNav />

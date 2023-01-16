@@ -3,6 +3,7 @@ import { Link, useParams, Navigate  } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
 import { QUERY_ME, QUERY_SINGLE_USER } from '../utils/queries';
 
+import { Container, Row, Col } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCog } from '@fortawesome/free-solid-svg-icons';
 import '@fortawesome/react-fontawesome';
@@ -26,8 +27,6 @@ const Profile = () => {
 
       const user = data?.me || data?.user || {};
 
-      console.log(Auth.getProfile())
-
       // Use React Router's `<Redirect />` component to redirect to personal profile page if username is yours
       if (Auth.loggedIn() && Auth.getProfile().data._id === profileId) {
         return <Navigate to="/me" />;
@@ -50,16 +49,22 @@ const Profile = () => {
     // setDescription(user.description);
     // setRole(user.role);
 
-    if (loading) return <p>Loading...</p>;
+    if (loading) return <img
+            src="https://media.giphy.com/media/3oEjI6SIIHBdRxXI40/giphy.gif"
+            className="animation"
+            alt="loading"
+             />;
     if (error) return <p>Error</p>;
 
     if (!user?.firstName) {
         return (
-          <h4>
-            You need to be logged in to see your profile page. Use the navigation
-            links above to sign up or log in!
-          </h4>
-        );
+            <Container fluid className="p-5 vh-100 d-grid place-items-center">
+              <h4 className="text-center">
+                You need to be logged in to see your profile page. Use the navigation
+                links above to sign up or log in!
+              </h4>
+            </Container>
+          );
       }
   
     return (
@@ -77,12 +82,12 @@ const Profile = () => {
                 <p className="address">{user.address}, {user.postcode}</p>
                 <p className="description">{user.description}</p>
             </div> 
-            { user.role === 'nanny' && 
+            { user.role === 'Nanny' && 
                 <div className="booking-container">
                     <BookingList />
                 </div>
             }
-            { user.role === 'pawrent' && 
+            { user.role === 'Pawrent' && 
                 <div className="order-container">
                     <OrderList />
                 </div>

@@ -7,11 +7,12 @@ import Dropzone from 'react-dropzone';
 
 import Auth from '../utils/auth';
 
-
 const UpdateUserForm = () => {
 const [updateUserMutation, { loading, error }] = useMutation(UPDATE_USER);
 
 const { data } = useQuery(QUERY_ME);
+const user = data?.me || data?.user || {};
+
 const [formData, setFormData] = useState({
   firstName: '',
   lastName: '',
@@ -22,8 +23,6 @@ const [formData, setFormData] = useState({
 });
 
 useEffect(() => {
-    if (data) {
-      const user = data.user;
       setFormData({
         firstName: user.firstName,
         lastName: user.lastName,
@@ -32,7 +31,6 @@ useEffect(() => {
         picture: user.picture,
         description: user.description,
       });
-    }
   }, [data]);
 
     const [img, setImg] = useState();
@@ -74,14 +72,14 @@ useEffect(() => {
         <input type="text" name="lastName" value={formData.lastName} onChange={(e) => setFormData({ ...formData, lastName: e.target.value })} placeholder="Last Name" />
         <input type="email" name="email" value={formData.email} onChange={(e) => setFormData({ ...formData, email: e.target.value })} placeholder="Email" />
         <input type="text" name="address" value={formData.address} onChange={(e) => setFormData({ ...formData, address: e.target.value })} placeholder="Address" />
-          <Dropzone onDrop={handleOnDrop}>
-        {({ getRootProps, getInputProps }) => (
-          <div {...getRootProps()}>
-            <input {...getInputProps()} />
-            <p>Drag 'n' drop some files here, or click to select files</p>
-          </div>
-        )}
-      </Dropzone>
+          {/* <Dropzone onDrop={handleOnDrop}>
+            {({ getRootProps, getInputProps }) => (
+            <div {...getRootProps()}>
+                <input {...getInputProps()} />
+                <p>Drag 'n' drop some files here, or click to select files</p>
+            </div>
+            )}
+          </Dropzone> */}
         <textarea name="description" value={formData.description} onChange={(e) => setFormData({ ...formData, description: e.target.value })} placeholder="Description"></textarea>
         <button type="submit">Save</button>
     </form>
