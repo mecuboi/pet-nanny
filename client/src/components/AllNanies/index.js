@@ -10,6 +10,7 @@ import {
   MDBTypography,
   MDBIcon,
 } from "mdb-react-ui-kit";
+import Dropdown from "react-bootstrap/Dropdown"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {faClock, faStar, faMagnifyingGlass} from '@fortawesome/free-solid-svg-icons';
 import '@fortawesome/react-fontawesome';
@@ -18,6 +19,7 @@ import { Link } from "react-router-dom";
 import { chunk } from "lodash";
 
 const AllNannyList = ({ profiles }) => {
+  let sortProfile = [...profiles]
 
 const [nannyname, setnannyName] = useState('')
 const [renderProfile, setrenderProfile] = useState(profiles)
@@ -40,6 +42,14 @@ const profileArray = []
 
 }
 
+const alphabeticalSort = () => {
+ sortProfile.sort(
+  (a, b) => a.firstName.toLowerCase() > b.firstName.toLowerCase() ? 1 : -1
+ )
+setrenderProfile(sortProfile)
+}
+  
+
 
   if (!profiles) {
     return <h3>No Profiles Yet</h3>;
@@ -47,7 +57,9 @@ const profileArray = []
   const profileRows = chunk(renderProfile, 3);
   return (
     <div>
-          <MDBCol md="10" style={{marginLeft: "2%"}}>
+      <div className="d-flex flex-row">
+
+          <MDBCol md="10" style={{marginLeft: "2%", paddingRight:"1px"}}>
       <div className="input-group md-form form-sm form-1 pl-0">
         <input
           className="form-control my-0 py-1"
@@ -56,13 +68,13 @@ const profileArray = []
           onChange={(e) => {setnannyName(e.target.value)}}
           placeholder="Search"
           aria-label="Search"
-        />
+          />
         <div className="input-group-prepend">
-          <button style={{backgroundColor: "#c5ced2"}}
+          <button className="btn btn-secondary"
           onClick={searchNanny}
           >
           <span className="input-group-text purple lighten-3" id="basic-text1">
-            <FontAwesomeIcon icon={faMagnifyingGlass} size="2x" />
+            <FontAwesomeIcon icon={faMagnifyingGlass} size="1x" />
           </span>
 
           </button>
@@ -70,6 +82,18 @@ const profileArray = []
       </div>
     </MDBCol>
 
+    <Dropdown style={{marginTop: "2px"}}>
+      <Dropdown.Toggle variant="secondary" id="dropdown-basic">
+        Sort
+      </Dropdown.Toggle>
+
+      <Dropdown.Menu>
+        <Dropdown.Item href="#/sort/A - Z" onClick={alphabeticalSort}>A - Z</Dropdown.Item>
+        <Dropdown.Item href="#/sort/Price">Price</Dropdown.Item>
+        <Dropdown.Item href="#sort/Nearest to me">Nearest to me</Dropdown.Item>
+      </Dropdown.Menu>
+    </Dropdown>
+            </div>
     
     <div className=" w-100 p-3 my-4 " style={{ backgroundColor: "#eee", backgroundImage:"url(https://thumbs.dreamstime.com/z/paw-prints-background-6936081.jpg)" }}>
       <MDBContainer className="my-4">
@@ -140,7 +164,7 @@ const profileArray = []
                       </div>
                     </div>
                     <hr />
-                    <button type="button" class="btn btn-primary">
+                    <button type="button" class="btn btn-secondary">
                       <FontAwesomeIcon far icon={faClock} /> Book now
                     </button>
                   </MDBCardBody>
