@@ -31,7 +31,11 @@ function Navigation() {
   function showProfile() {
     if (Auth.loggedIn()) {
       return (
-        <Nav.Link href='/me'>My Profile: <span className="text-primary">{getUser}</span></Nav.Link>
+        <Nav.Link href='/me'>
+          <Link to='me' className='text-secondary text-decoration-none'>
+          My Profile: <span className="text-primary">{getUser}</span>
+          </Link>
+          </Nav.Link>
       )
     } else {
       return 
@@ -55,9 +59,9 @@ function Navigation() {
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">
-              {/* <Nav.Link href="/NannyList"> */}
-                <Link to='NannyList'>Search for a Nanny</Link>
-                {/* </Nav.Link> */}
+              <Nav.Link href="/NannyList">
+                <Link to='NannyList' className='text-secondary text-decoration-none'>Search for a Nanny</Link>
+                </Nav.Link>
               
               {showProfile()}
             </Nav>
