@@ -18,6 +18,11 @@
   "license": "MIT",
   "devDependencies": {
     "concurrently": "^5.1.0"
+<<<<<<< HEAD
+  },
+  "dependencies": {
+=======
+>>>>>>> b3e7a5d4ae61260563a98fd800de9ef261ec9ed0
   }
   
 }

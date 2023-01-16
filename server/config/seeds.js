@@ -14,7 +14,7 @@ db.once('open', async () => {
   //   { BookedDate: '06 Jan 2023', BookedBy: 6 },
   // ]);
 
-  console.log('booking seeded');
+  // console.log('booking seeded'); 
 
 
   await Order.deleteMany();
@@ -56,25 +56,31 @@ db.once('open', async () => {
     address: 'rainbow',
     // orders: [
     //   {
-    //     bookings: [bookings[0]._id, bookings[5]._id]
+    //     bookings: [bookings[4]._id, bookings[5]._id]
     //   }
     // ]
   });
 
   // Nannies
 
- await User.create({
-    firstName: 'Fanny',
-    lastName: 'Ishere',
-    email: 'fanny@testmail.com',
-    password: 'password12345',
-    address: 'clouds',
-    role: 'Nanny',
-    bookings: [
-      { BookedDate: '20 Jan 2023', BookedBy: User[0]._id },
-      { BookedDate: '21 Jan 2023', BookedBy: User[0]._id },
-    ]
-  });
+  const steve = await User.findOne({ email: 'steve@testmail.com' });
+  if (!steve) throw new Error('User not found');
+  
+  await User.create({
+      firstName: 'Fanny',
+      lastName: 'Ishere',
+      email: 'fanny@testmail.com',
+      password: 'password12345',
+      address: 'clouds',
+      role: 'Nanny',
+      bookings: [
+        { BookedDate: '20 Jan 2023', BookedBy: steve._id },
+        { BookedDate: '21 Jan 2023', BookedBy: steve._id },
+      ]
+    });
+
+    const anon = await User.findOne({ email: 'anon@testmail.com' });
+    if (!anon) throw new Error('User not found');
 
  await User.create({
     firstName: 'Nanny',
@@ -84,10 +90,14 @@ db.once('open', async () => {
     address: 'above',
     role: 'Nanny',
     bookings: [
-      { BookedDate: '22 Jan 2023', BookedBy: User[1]._id },
-      { BookedDate: '23 Jan 2023', BookedBy: User[1]._id },
+      { BookedDate: '22 Jan 2023', BookedBy: anon._id },
+      { BookedDate: '23 Jan 2023', BookedBy: anon._id },
     ]
   });
+
+
+  const catdog = await User.findOne({ email: 'catdog@testmail.com' });
+  if (!catdog) throw new Error('User not found');
 
  await User.create({
     firstName: 'Janny',
@@ -97,24 +107,29 @@ db.once('open', async () => {
     address: 'high',
     role: 'Nanny',
     bookings: [
-      { BookedDate: '24 Jan 2023', BookedBy: User[2]._id  },
-      { BookedDate: '25 Jan 2023', BookedBy: User[2]._id },
+      { BookedDate: '24 Jan 2023', BookedBy: catdog._id  },
+      { BookedDate: '25 Jan 2023', BookedBy: catdog._id },
     ]
   });
 
-  console.log('users seeded');
+  console.log('users & bookings seeded');
 
+  // const bookings = await Booking.find({});
 
-  // const bookings = await Booking.insertMany([
-  //   { BookedDate: '20 Jan 2023', BookedBy: User[0]._id },
-  //   { BookedDate: '21 Jan 2023', BookedBy: User[0]._id },
-  //   { BookedDate: '22 Jan 2023', BookedBy: User[1]._id },
-  //   { BookedDate: '23 Jan 2023', BookedBy: User[1]._id },
-  //   { BookedDate: '24 Jan 2023', BookedBy: User[2]._id  },
-  //   { BookedDate: '25 Jan 2023', BookedBy: User[2]._id },
-  // ]);
+  // await User.findOneAndUpdate(
+  //   { email: 'steve@testmail.com' },
+  //   { $push: { orders: { bookings: [bookings[0]._id, bookings[1]._id] } } }
+  // );
+  // await User.findOneAndUpdate(
+  //   { email: 'anon@testmail.com' },
+  //   { $push: { orders: { bookings: [bookings[2]._id, bookings[3]._id] } } }
+  // );
+  // await User.findOneAndUpdate(
+  //   { email: 'catdog@testmail.com' },
+  //   { $push: { orders: { bookings: [bookings[4]._id, bookings[5]._id] } } }
+  // );
 
-  // console.log('booking seeded');
+  // console.log('orders seeded');
 
   process.exit();
 });

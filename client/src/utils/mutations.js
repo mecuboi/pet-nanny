@@ -21,7 +21,6 @@ export const ADD_USER = gql`
     $address: String!
     $postcode: String!
     $role: String!
-
   ) {
     addUser(
       firstName: $firstName
@@ -46,7 +45,8 @@ export const UPDATE_USER = gql`
     $firstName: String, 
     $lastName: String, 
     $email: String, 
-    $address: String, 
+    $address: String,
+    $postcode: String, 
     $picture: String, 
     $description: String
     ) {
@@ -55,6 +55,7 @@ export const UPDATE_USER = gql`
       lastName: $lastName, 
       email: $email, 
       address: $address, 
+      postcode: $postcode,
       picture: $picture, 
       description: $description
       ) {
@@ -72,7 +73,7 @@ export const UPDATE_USER = gql`
 export const DELETE_USER = gql`
   mutation deleteUser($_id: String!) {
     deleteUser(_id: $_id) {
-      message
+      _id
     }
   }
 `;
@@ -100,7 +101,7 @@ export const ADD_BOOKING = gql`
         lastName
       }
     }}
-`
+`;
 
 export const UPDATE_BOOKING = gql`
   mutation updateBooking($id: ID!, $bookedDate: String!) {

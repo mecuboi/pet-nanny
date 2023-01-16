@@ -19,7 +19,8 @@ const Booking = require('./Booking');
   email: {
     type: String,
     required: true,
-    unique: true
+    unique: true,
+    match: [/.+@.+\..+/, 'Must match an email address!'],
   },
   password: {
     type: String,
@@ -48,7 +49,7 @@ const Booking = require('./Booking');
   role: {
     type: String,
     required: true,
-    default: 'User'
+    default: 'Pawrent'
   },
   orders: [Order.schema],
   bookings: [Booking.schema],
