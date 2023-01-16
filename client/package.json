@@ -1,9 +1,6 @@
 {
   "name": "pet-nanny",
   "version": "0.1.0",
-  "engines": {
-    "node": "^16.18.0"
-  },
   "private": true,
   "proxy": "http://localhost:3001/",
   "dependencies": {
