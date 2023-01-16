@@ -1,4 +1,4 @@
-import MyBookings from './MyBookings';
+import MyBookings from '../components/MyBookings';
 
 import { useQuery } from '@apollo/client';
 import { GET_ME } from '../utils/queries';

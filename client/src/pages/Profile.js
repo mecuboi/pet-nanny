@@ -1,10 +1,15 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
 import { GET_ME } from '../utils/queries';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCog } from '@fortawesome/free-solid-svg-icons';
+import '@fortawesome/react-fontawesome';
 
 import './Profile.css';
 import BookingList from './BookingList';
 import OrderList from './OrderList';
+
 
 const Profile = () => {
     const { data, loading, error } = useQuery(GET_ME)
@@ -27,14 +32,20 @@ const Profile = () => {
         setEmail(user.email);
         setAddress(user.address);
         setPostcode(user.postcode);
-        setPicture(user.picture);
+        setPicture(`data:image/jpeg;base64,${user.picture}`);
         setDescription(user.description);
         setRole(user.role);
     }
-    
+
+  
     return (
         <div>
-            <div className="profile-container">
+             <div className="profile-container">
+             <Link to="/update-user-form">
+                    <button className="update-user-btn">
+                        <FontAwesomeIcon icon={faCog} className="settings-icon" />
+                    </button>
+                </Link>
                 <img src={picture} alt={firstName + " " + lastName} className="profile-picture" />
                 <h1 className="name">{firstName} {lastName}</h1>
                 <p className="email">{email}</p>

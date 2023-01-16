@@ -104,9 +104,12 @@ const resolvers = {
     },
     updateUser: async (parent, args, context) => {
       if (context.user) {
+        const { picture } = args;
+        const pictureBuffer = new Buffer.from(picture.split(',')[1], 'base64');
+        args.picture = pictureBuffer;
         return await User.findByIdAndUpdate(context.user._id, args, { new: true });
       }
-
+    
       throw new AuthenticationError('Not logged in');
     },
     deleteUser: async(parent, args, context) => {
@@ -124,9 +127,9 @@ const resolvers = {
           { new: true, runValidators: true },
         );
         return updateUser
-          const order = new Order({ bookings });
-          await order.save();
-          await User.findByIdAndUpdate({_id: context.user._id}, { $push: { orders: order } }, { new: true});
+          // const order = new Order({ bookings });
+          // await order.save();
+          // await User.findByIdAndUpdate({_id: context.user._id}, { $push: { orders: order } }, { new: true});
       }
       throw new AuthenticationError('Not logged in');
   },

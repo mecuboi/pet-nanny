@@ -45,7 +45,8 @@ export const UPDATE_USER = gql`
     $firstName: String, 
     $lastName: String, 
     $email: String, 
-    $address: String, 
+    $address: String,
+    $postcode: String, 
     $picture: String, 
     $description: String
     ) {
@@ -54,6 +55,7 @@ export const UPDATE_USER = gql`
       lastName: $lastName, 
       email: $email, 
       address: $address, 
+      postcode: $postcode,
       picture: $picture, 
       description: $description
       ) {

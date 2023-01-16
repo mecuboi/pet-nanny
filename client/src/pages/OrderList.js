@@ -1,4 +1,4 @@
-import MyBookings from './MyBookings';
+import MyOrders from '../components/MyOrders';
 
 import { useQuery } from '@apollo/client';
 import { GET_ME } from '../utils/queries';
@@ -17,7 +17,7 @@ const OrderList = (props) => {
     return (
       <div>
         {orders.map(booking => (
-          <MyBookings 
+          <MyOrders 
             key={booking.id}
             BookedDate={booking.bookings.bookedDate} 
             id={booking.id} 

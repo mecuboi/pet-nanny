@@ -19,6 +19,7 @@ import FooterNav from './components/Footer'
 // import Signup from './pages/Signup';
 import Navigation from './components/Nav';
 import NannyList from './pages/NannyList';
+import UpdateUserForm from './pages/UpdateUserForm';
 // import { StoreProvider } from './utils/GlobalState';
 // import Success from './pages/Success';
 // import OrderHistory from './pages/OrderHistory';
@@ -62,15 +63,13 @@ function App() {
               element={<Home />}
             />
             <Route
-              path="/profile:_id"
+              path="/profile"
               element={<Profile />}
             />
             <Route
-              path="/testprofile"
-              element={<TestProfile />}
+              path="/update-user-form"
+              element={<UpdateUserForm />}
             />
-
-
           </Routes>
           <FooterNav />
         </div>

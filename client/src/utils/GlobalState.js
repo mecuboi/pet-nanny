@@ -1,43 +1,47 @@
-import React, { createContext, useContext } from "react";
+import { gql } from '@apollo/client';
+import { createContext, useContext, useQuery } from 'react';
 
-const UserIdContext = createContext();
-// const { Provider } = UserIdContext;
+export const GET_ME = gql`
+  query Me {
+    me {
+      _id
+      firstName
+      lastName
+      email
+      picture
+      postcode
+      role
+      description
+      address
+      bookings {
+        BookedBy {
+          _id
+          firstName
+          lastName
+          email
+        }
+        BookedDate
+        id
+        price
+      }
+      orders {
+        _id
+        bookings {
+          BookedDate
+          id
+          price
+        }
+      }
+    }
+  }
+`;
 
-const UserIdProvider = ({ userId, children}) => {
-  return (
-    <UserIdContext.Provider 
-      value={userId}>
-      {children}
-    </UserIdContext.Provider>
-  );
-}
+const UserContext = createContext();
 
-const useUserIdContext = () => {
-  return useContext(UserIdContext)
+export const UserProvider = ({ children }) => {
+  const { data } = useQuery(GET_ME);
+  const user = data ? data.me : null;
+  return <UserContext.Provider value={user}>{children}</UserContext.Provider>;
 };
 
-export { UserIdProvider, useUserIdContext};
-
-
-// import { useProductReducer } from './reducers'
-
-// const StoreContext = createContext();
-// const { Provider } = StoreContext;
-
-// const StoreProvider = ({ value = [], ...props }) => {
-//   const [state, dispatch] = useProductReducer({
-//     products: [],
-//     cart: [],
-//     cartOpen: false,
-//     categories: [],
-//     currentCategory: '',
-//   });
-
-//   return <Provider value={[state, dispatch]} {...props} />;
-// };
-
-// const useStoreContext = () => {
-//   return useContext(StoreContext);
-// };
-
-// export { StoreProvider, useStoreContext };
+export const useUser = () => useContext(UserContext);
