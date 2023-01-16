@@ -1,16 +1,27 @@
 import React, { useState } from "react";
 import Carousel from 'react-bootstrap/Carousel';
 import Button from 'react-bootstrap/Button';
-import{ Link } from 'react-router-dom'
+import{ Link } from 'react-router-dom';
+import { loadStripe } from '@stripe/stripe-js';
 
+import Stripetest from '../components/stripetest'
 
 function Home() {
 
   const [index, setIndex] = useState(0);
+  const stripePromise = loadStripe('pk_test_51MQpZQCIw6RfRCJYcxVsxk9VUMvrKl3ClOMlMCl8mnKiQmUPGhR67xp8l81VLtCgdE33kV4MCOuFhB977aumnUpL00ZrDYPhrR')
+
+  const handlePayment = () => {
+    stripePromise.then((res) => {
+      res.redirectToCheckout();
+    })
+  }
 
   const handleSelect = (selectedIndex, e) => {
     setIndex(selectedIndex);
   };
+
+ 
 
 
   return (
@@ -60,6 +71,11 @@ function Home() {
         <Link to='NannyList'>
           <Button variant="primary" className="m-2 mb-5 p-3">Search for a Nanny</Button>{' '}
         </Link>
+      </div>
+      <div className="d-flex justify-content-center">
+        
+          <Button onClick={handlePayment} variant="primary" className="m-2 mb-5 p-3">Test Payment</Button>{' '}
+       
       </div>
 
 
