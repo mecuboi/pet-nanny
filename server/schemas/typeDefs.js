@@ -47,11 +47,12 @@ const typeDefs = gql`
     bookings: [Booking]
     userBooking(_id: ID!): Booking
     singleBooking(_id: ID!): Booking
+    checkout(order: ID!): Checkout
   }
  
   type Mutation {
     addUser(firstName: String!, lastName: String!, email: String!, password: String!, postcode: String, address: String, picture: String, description: String, role: String): Auth
-    updateUser(firstName: String, lastName: String, email: String, password: String, address: String, postcode: String, picture: String, description: String, role: String): User
+    updateUser(firstName: String, lastName: String, email: String, password: String, address: String, postcode: String, picture: String, description: String): User
     deleteUser(_id: ID!): User
     addOrder(bookings: [ID]!): Order
     deleteOrder(_id: ID!, bookingId: [ID]!): Order
