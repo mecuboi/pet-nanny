@@ -86,8 +86,8 @@ query User($nannyId: ID!, $role: String) {
 `;
 
 export const QUERY_SINGLE_USER = gql`
-query User($userId: ID!, $role: String) {
-  user(id: $userId, role: $role) {
+query User($userId: ID!) {
+  user(id: $userId) {
     _id
     address
     description

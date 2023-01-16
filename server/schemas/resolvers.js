@@ -11,8 +11,15 @@ const resolvers = {
     users: async () => {
       return await User.find({ role: 'User' });
     },
-    user: async (_, args) => {
-      return await User.findOne({ _id: args.id, role: 'User'});
+    user: async (_, args, context) => {
+      if (context.user) {
+        const userData = await User.findOne({
+          _id: context.user._id
+        })
+
+        return userData
+      }
+      throw new AuthenticationError('Not logged in')
     },
     nannies: async () => {
       return await User.find({ role: 'Nanny'});
@@ -108,11 +115,17 @@ const resolvers = {
 
       throw new AuthenticationError('Not logged in');
     },
-    addOrder: async (parent, {bookings, nanny}, context) => {
+    addOrder: async (parent, args, context) => {
       if (context.user) {
+        const updateUser = await User.findByIdAndUpdate(
+          { _id: context.user._id },
+          { $addToSet: {orders: args.newBook}},
+          { new: true, runValidators: true },
+        );
+        return updateUser
           const order = new Order({ bookings });
           await order.save();
-          await User.findByIdAndUpdate(context.user._id, { $push: { orders: order } });
+          await User.findByIdAndUpdate({_id: context.user._id}, { $push: { orders: order } }, { new: true});
       }
       throw new AuthenticationError('Not logged in');
   },

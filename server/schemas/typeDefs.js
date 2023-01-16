@@ -37,7 +37,7 @@ const typeDefs = gql`
   type Query {
     all: [User]
     users(role: String): [User]
-    user(id: ID!, role: String): User
+    user(id: ID!): User
     nannies(role: String): [User]
     nanny(id: ID!, role: String): User
     orders: [Order]

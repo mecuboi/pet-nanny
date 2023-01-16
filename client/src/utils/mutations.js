@@ -72,7 +72,7 @@ export const UPDATE_USER = gql`
 export const DELETE_USER = gql`
   mutation deleteUser($_id: String!) {
     deleteUser(_id: $_id) {
-      message
+      _id
     }
   }
 `;
@@ -91,6 +91,44 @@ export const ADD_ORDER = gql`
   }
 `;
 
+export const DELETE_ORDER = gql`
+mutation Mutation($bookings: [ID]!) {
+  deleteOrder(bookings: $bookings) {
+    _id
+  }
+}
+`;
 
 
+export const ADD_BOOKING = gql`
+mutation Mutation($bookedDate: Int!, $price: Float!) {
+  addBooking(BookedDate: $bookedDate, price: $price) {
+    BookedBy {
+      _id
+      email
+      firstName
+      lastName
+    }
+    BookedDate
+    id
+    price
+  }
+}
+`;
 
+export const UPDATE_BOOKING = gql`
+mutation Mutation($id: ID!, $bookedDate: Int!) {
+  updateBooking(_id: $id, BookedDate: $bookedDate) {
+    id
+    BookedDate
+  }
+}
+`;
+
+export const DELETE_BOOKING = gql`
+mutation Mutation($deleteBookingId: ID!) {
+  deleteBooking(id: $deleteBookingId) {
+    id
+  }
+}
+`;
