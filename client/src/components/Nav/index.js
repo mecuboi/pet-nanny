@@ -31,10 +31,14 @@ function Navigation() {
   function showProfile() {
     if (Auth.loggedIn()) {
       return (
-        <Nav.Link href='/me'>My Profile: <span className="text-primary">{getUser}</span></Nav.Link>
+        <Navbar.Text href='/me'>
+          <Link to='me' className='text-secondary text-decoration-none'>
+            My Profile: <span className="text-primary">{getUser}</span>
+          </Link>
+        </Navbar.Text>
       )
     } else {
-      return 
+      return
     }
   }
 
@@ -44,21 +48,21 @@ function Navigation() {
     <>
       <Navbar bg="light" expand="lg">
         <Container>
-          
+
           <Navbar.Brand href="/" className="text-secondary"><img
-              alt=""
-              src="/logo192.png"
-              width="30"
-              height="30"
-              className="d-inline-block align-top"
-            />{' '}PetNanny!</Navbar.Brand>
+            alt=""
+            src="/logo192.png"
+            width="30"
+            height="30"
+            className="d-inline-block align-top"
+          />{' '}PetNanny!</Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">
-              {/* <Nav.Link href="/NannyList"> */}
-                <Link to='NannyList'>Search for a Nanny</Link>
-                {/* </Nav.Link> */}
-              
+              <Navbar.Text>
+                <Link to='NannyList' className='text-secondary text-decoration-none'>Search for a Nanny</Link>
+              </Navbar.Text>
+
               {showProfile()}
             </Nav>
             <Nav>
@@ -90,10 +94,10 @@ function Navigation() {
           <Modal.Body>
             <Tab.Content className="">
               <Tab.Pane eventKey='login'>
-                <LoginForm/>
+                <LoginForm />
               </Tab.Pane>
               <Tab.Pane eventKey='signup'>
-                <SignupForm/>
+                <SignupForm />
               </Tab.Pane>
             </Tab.Content>
           </Modal.Body>

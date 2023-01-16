@@ -18,7 +18,6 @@ const AllNannyList = ({ profiles}) => {
           profiles.map((profile) => (
            
               
-                 
               <MDBCol size='md'>
 
                   <MDBCard className="w-auto mx-3 my-2 "  style={{ borderRadius: '15px', backgroundColor: '#ffff' }}>
