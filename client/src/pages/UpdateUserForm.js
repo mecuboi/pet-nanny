@@ -1,15 +1,17 @@
 import React, { useState } from 'react';
 import { useQuery, useMutation } from '@apollo/client';
-import { GET_ME } from '../utils/queries';
+import { QUERY_ME } from '../utils/queries';
 import { UPDATE_USER } from '../utils/mutations';
 import { useEffect } from 'react';
 import Dropzone from 'react-dropzone';
 
-const UpdateUserForm = () => {
+import Auth from '../utils/auth';
 
+
+const UpdateUserForm = () => {
 const [updateUserMutation, { loading, error }] = useMutation(UPDATE_USER);
 
-const { data } = useQuery(GET_ME);
+const { data } = useQuery(QUERY_ME);
 const [formData, setFormData] = useState({
   firstName: '',
   lastName: '',

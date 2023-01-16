@@ -1,18 +1,15 @@
 import MyOrders from '../components/MyOrders';
 
 import { useQuery } from '@apollo/client';
-import { GET_ME } from '../utils/queries';
+import { QUERY_ME } from '../utils/queries';
 
 const OrderList = (props) => {
-  const { loading, data, error } = useQuery(GET_ME);
-  let orders;
+  const { loading, data, error } = useQuery(QUERY_ME);
+
+  const orders = data?.me?.orders || {};
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error</p>;
-
-  if (data) {
-     orders = data.me.orders
-  }
 
     return (
       <div>

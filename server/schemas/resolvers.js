@@ -6,6 +6,7 @@ const stripe = require('stripe')('sk_test_4eC39HqLyjWDarjtT1zdp7dc');
 const resolvers = {
   Query: {
     me: async (parent, args, context) => {
+      console.log(context.user); // Log the context object
       if (context.user) {
         const userData = await User.findOne({
           _id: context.user._id
@@ -19,8 +20,8 @@ const resolvers = {
     users: async () => {
       return await User.find({ role: 'Pawrent' });
     },
-    user: async (_, args) => {
-      return await User.findOne({ _id: args.id});
+    user: async (_, { profileId }) => {
+      return await User.findOne({ _id: profileId});
     },
     nannies: async () => {
       return await User.find({ role: 'Nanny'});

@@ -1,18 +1,14 @@
 import MyBookings from '../components/MyBookings';
 
 import { useQuery } from '@apollo/client';
-import { GET_ME } from '../utils/queries';
+import { QUERY_ME } from '../utils/queries';
 
 const BookingList = (props) => {
-  const { loading, data, error } = useQuery(GET_ME);
-  let bookings;
+  const { loading, data, error } = useQuery(QUERY_ME);
+  const bookings = data?.me?.bookings || {};
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error</p>;
-
-  if (data) {
-     bookings = data.me.bookings
-  }
 
     return (
       <div>

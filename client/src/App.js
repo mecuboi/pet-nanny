@@ -63,7 +63,11 @@ function App() {
               element={<Home />}
             />
             <Route
-              path="/profile"
+              path="/me"
+              element={<Profile />}
+            />
+            <Route
+              path="/profiles/:profileId"
               element={<Profile />}
             />
             <Route

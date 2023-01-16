@@ -33,7 +33,7 @@ export const QUERY_All_PROFILES = gql`
   }
 `;
 
-export const QUERY_ALL_Nannies = gql`
+export const QUERY_ALL_NANNIES = gql`
 query Nannies($role: String) {
   nannies(role: $role) {
     _id
@@ -59,7 +59,7 @@ query Nannies($role: String) {
 }
 `;
 
-export const QUERY_SINGLE_Nanny = gql`
+export const QUERY_SINGLE_NANNY = gql`
 query User($nannyId: ID!, $role: String) {
   nanny(id: $nannyId, role: $role) {
     _id
@@ -110,7 +110,7 @@ query User($userId: ID!) {
 }
 `;
 
-export const GET_ME = gql`
+export const QUERY_ME = gql`
 query Me {
   me {
     _id
