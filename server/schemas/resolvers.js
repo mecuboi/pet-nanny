@@ -127,10 +127,11 @@ const resolvers = {
     },
     updateUser: async (parent, args, context) => {
       if (context.user) {
-        const { picture } = args;
-        const pictureBuffer = new Buffer.from(picture.split(',')[1], 'base64');
-        args.picture = pictureBuffer;
-        return await User.findByIdAndUpdate(context.user._id, args, { new: true });
+        return await User.findByIdAndUpdate(context.user_id, args, { new: true})
+        // const { picture } = args;
+        // const pictureBuffer = new Buffer.from(picture.split(',')[1], 'base64');
+        // args.picture = pictureBuffer;
+        // return await User.findByIdAndUpdate(context.user._id, args, { new: true });
       }
     
       throw new AuthenticationError('Not logged in');
