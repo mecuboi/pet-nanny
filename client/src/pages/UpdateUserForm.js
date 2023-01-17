@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useQuery, useMutation } from '@apollo/client';
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Navigate } from "react-router-dom";
 import { Form, Button, Alert, Col, Row, InputGroup } from 'react-bootstrap';
 import { QUERY_ME } from '../utils/queries';
 import { UPDATE_USER } from '../utils/mutations';
@@ -80,7 +80,7 @@ useEffect(() => {
                 }
         });
 
-        return navigate("/me");
+        return <Navigate to="/me" />;
         } catch (err) {
             console.log(err);
         }
