@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { indexOfAll } from "../../utils/utilfunction";
+import { indexOfAll, arrayUnique } from "../../utils/utilfunction";
 import {
   MDBCol,
   MDBContainer,
@@ -46,14 +46,20 @@ const AllNannyList = ({ profiles }) => {
 
   const searchNanny = () => {
     const nannyFirstName = [];
+    const nannylastName = [];
     for (let i = 0; i < profiles.length; i++) {
       nannyFirstName.push(profiles[i].firstName.toLowerCase());
+      nannylastName.push(profiles[i].lastName.toLowerCase());
     }
     const queryNannies = indexOfAll(nannyFirstName, nannyname.toLowerCase());
+    const queryNannieslast = indexOfAll(nannylastName, nannyname.toLowerCase())
+    const nannyArray = arrayUnique([...queryNannies, ...queryNannieslast])
+    
+
     const profileArray = [];
 
-    for (let i = 0; i < queryNannies.length; i++) {
-      profileArray.push(profiles[queryNannies[i]]);
+    for (let i = 0; i < nannyArray.length; i++) {
+      profileArray.push(profiles[nannyArray[i]]);
     }
 
     setrenderProfile(profileArray);
