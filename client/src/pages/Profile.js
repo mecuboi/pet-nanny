@@ -57,7 +57,7 @@ const Profile = () => {
     return (
         <div className="w-auto bg-light">
          <Card className="w-auto bg-white">
-            <Card.Header className="bg-secondary">
+            <Card.Header className="bg-secondary text-white">
                 <Card.Title>
                 {user.firstName + " " + user.lastName}
                 </Card.Title>

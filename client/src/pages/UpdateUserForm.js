@@ -68,7 +68,7 @@ useEffect(() => {
         }
 
         try {
-            const test = await updateUserMutation({
+            const updateUser = await updateUserMutation({
                 variables: { 
                 firstName: userFormData.firstName,
                 lastName: userFormData.lastName,
@@ -79,11 +79,18 @@ useEffect(() => {
                 description: userFormData.description
                 }
         });
-
-        return <Navigate to="/me" />;
         } catch (err) {
             console.log(err);
         }
+
+        // function removeFromUrl(url) {
+        //   const newUrl = url.replace("update-user-form/", "");
+        //   return newUrl;
+        // }
+
+        // const currentUrl = removeFromUrl(window.location.href);
+        // window.location.replace(currentUrl + '/me');
+        return navigate(-1);
     };
 
     return(
