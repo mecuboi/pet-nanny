@@ -13,16 +13,10 @@ import Home from './pages/Home';
 import Profile from './pages/Profile';
 // import TestProfile from './pages/TestProfile'
 import FooterNav from './components/Footer';
-// import Detail from './pages/Detail';
-// import NoMatch from './pages/NoMatch';
-// import Login from './pages/Login';
-// import Signup from './pages/Signup';
+import BookingPage from './pages/BookingPage'
 import Navigation from './components/Nav';
 import NannyList from './pages/NannyList';
 import UpdateUserForm from './pages/UpdateUserForm';
-// import { StoreProvider } from './utils/GlobalState';
-// import Success from './pages/Success';
-// import OrderHistory from './pages/OrderHistory';
 import UploadImageForm from './pages/UploadImageForm'
 
 const httpLink = createHttpLink({
@@ -83,6 +77,10 @@ function App() {
               path="/upload"
               element={<UploadImageForm />}
             />
+            <Route 
+                path="/bookingPage/:id" 
+                element={<BookingPage />} 
+              />
           </Routes>
           <FooterNav />
         </div>

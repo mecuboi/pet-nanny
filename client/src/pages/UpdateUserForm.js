@@ -80,7 +80,10 @@ useEffect(() => {
                 }
         });
 
-        return navigate("/me");
+        window.location.replace('/me');
+
+
+
         } catch (err) {
             console.log(err);
         }
