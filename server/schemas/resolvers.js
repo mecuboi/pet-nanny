@@ -90,6 +90,9 @@ const resolvers = {
         price: args.price,
         bookedBy: context.user._id
       })
+      await User.findByIdAndUpdate(context.user._id, 
+        { $addToSet: { bookings: newBooking._id } });
+
       const newOrder = new Order({ bookings: newBooking });
 
 
