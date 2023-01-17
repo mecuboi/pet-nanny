@@ -22,7 +22,7 @@ const Profile = () => {
 
     const { data, loading, error } = useQuery( profileId ? QUERY_SINGLE_USER : QUERY_ME,
         {
-          variables: { userId: profileId },
+          variables: { _id: profileId },
         }
       );
 
