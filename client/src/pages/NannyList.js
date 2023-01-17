@@ -5,6 +5,7 @@ import AllNannyList from '../components/AllNanies';
 import { QUERY_ALL_NANNIES } from '../utils/queries';
 import { NoFragmentCyclesRule } from 'graphql';
 
+
 function NannyList() {
   const { loading, data } = useQuery(QUERY_ALL_NANNIES);
   let nannies
@@ -18,6 +19,7 @@ function NannyList() {
           {loading ? (
             <div>Loading...</div>
           ) : (
+            
             <AllNannyList
               profiles={nannies}
             />

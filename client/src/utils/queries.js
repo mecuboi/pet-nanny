@@ -34,7 +34,7 @@ export const QUERY_All_USERS = gql`
 `;
 
 export const QUERY_ALL_NANNIES = gql`
-query Nannies($role: String) {
+query nannies($role: String) {
   nannies(role: $role) {
     _id
     address
@@ -208,3 +208,10 @@ query singleBooking($bookingId: ID!)  {
   }
 }
 `
+export const QUERY_CHECKOUT = gql`
+  query getCheckout($order: ID!) {
+    checkout(order: $order) {
+      session
+    }
+  }
+`;
