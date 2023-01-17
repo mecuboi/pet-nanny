@@ -3,17 +3,20 @@ import Carousel from 'react-bootstrap/Carousel';
 import Button from 'react-bootstrap/Button';
 import{ Link } from 'react-router-dom';
 import { loadStripe } from '@stripe/stripe-js';
+import { QUERY_CHECKOUT } from '../utils/queries';
+import { useLazyQuery } from '@apollo/client';
 
 import Stripetest from '../components/stripetest'
 
 function Home() {
+  const [getCheckout, { data }] = useLazyQuery(QUERY_CHECKOUT);
 
   const [index, setIndex] = useState(0);
   const stripePromise = loadStripe('pk_test_51MQpZQCIw6RfRCJYcxVsxk9VUMvrKl3ClOMlMCl8mnKiQmUPGhR67xp8l81VLtCgdE33kV4MCOuFhB977aumnUpL00ZrDYPhrR')
 
   const handlePayment = () => {
     stripePromise.then((res) => {
-      res.redirectToCheckout();
+      res.redirectToCheckout({sessionId: data.checkout.session});
     })
   }
 
@@ -69,14 +72,14 @@ function Home() {
       <h2 className="m-5 text-center text-secondary">Get your journey with your pets <span className="text-primary">(or in this case without your pets)</span> started here</h2>
       <div className="d-flex justify-content-center">
         <Link to='NannyList'>
-          <Button variant="primary" className="m-2 mb-5 p-3">Search for a Nanny</Button>{' '}
+          <Button variant="primary" className="m-2 mb-5 p-3 customfooter">Search for a Nanny</Button>{' '}
         </Link>
       </div>
-      <div className="d-flex justify-content-center">
+      {/* <div className="d-flex justify-content-center">
         
           <Button onClick={handlePayment} variant="primary" className="m-2 mb-5 p-3">Test Payment</Button>{' '}
        
-      </div>
+      </div> */}
 
 
     </>

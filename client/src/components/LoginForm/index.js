@@ -30,6 +30,7 @@ const LoginForm = () => {
         variables: {...userFormData}
       })
       Auth.login(data.login.token, data.login.user.firstName);
+      window.location.replace('/me')
       
     } catch (err) {
       console.error(err);
