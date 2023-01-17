@@ -84,17 +84,23 @@ const resolvers = {
     },
 
     checkout: async (parent, args, context) => {
-      const url = new URL(context.headers.referer).origin;
-      const newBooking = new Booking({
+      const url = "http://localhost:3000"
+      // const url = new URL('https://www.google.com');
+
+      const newBooking = await Booking.create({
         bookedDate: args.bookedDate,
         price: args.price,
-        bookedBy: context.user._id
+        bookedBy: context.user._id,
+        additionalNotes: args.additionalNotes
       })
-      await User.findByIdAndUpdate(context.user._id, 
+
+      await User.findByIdAndUpdate(args._id,
         { $addToSet: { bookings: newBooking._id } });
 
-      const newOrder = new Order({ bookings: newBooking });
+      const newOrder = await Order.create({ bookings: newBooking });
 
+      await User.findByIdAndUpdate(context.user._id,
+        { $addToSet: { orders: newOrder._id } });
 
       const product = await stripe.products.create({
         name: `Order Number: ${newOrder._id}`,
@@ -118,8 +124,9 @@ const resolvers = {
         payment_method_types: ['card'],
         line_items,
         mode: 'payment',
-        success_url: `${url}/success?session_id={CHECKOUT_SESSION_ID}`,
-        cancel_url: `${url}/`
+        success_url: `${url}/me`,
+        cancel_url: `${url}/me`
+        // success?session_id={CHECKOUT_SESSION_ID}
       });
 
       return { session: session.id };
@@ -154,7 +161,7 @@ const resolvers = {
     },
     addOrder: async (parent, { bookings, nanny }, context) => {
       if (context.user) {
-        const order = new Order({ bookings });
+        const order = Order.create({ bookings });
         await order.save();
         await User.findByIdAndUpdate(context.user._id, { $push: { orders: order } });
 
@@ -174,17 +181,19 @@ const resolvers = {
       }
       throw new AuthenticationError('Not logged in');
     },
+
+    //not used
     addBooking: async (parent, args, context) => {
-      if (context.user) {
-        // make sure that the BookedBy field is populated with the current user's id
-        args.bookedBy = context.user._id;
-        const booking = await Booking.create(args);
+      // if (context.user) {
+      // make sure that the BookedBy field is populated with the current user's id
+      args.bookedBy = "63c647d89d8c20708bf916d9";
+      const booking = await Booking.create(args);
 
-        const order = await Order.create({ bookings: booking._id })
+      const order = await Order.create({ bookings: booking._id })
 
-        return { booking, order };
-      }
-      throw new AuthenticationError('Not logged in');
+      return { booking, order };
+      // }
+      // throw new AuthenticationError('Not logged in');
     },
     updateBooking: async (parent, { _id, bookedDate }, context) => {
       if (context.user) {
