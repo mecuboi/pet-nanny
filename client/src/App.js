@@ -1,40 +1,33 @@
-import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import React from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import {
   ApolloClient,
   InMemoryCache,
   ApolloProvider,
   createHttpLink,
-} from '@apollo/client';
-import { setContext } from '@apollo/client/link/context';
-import 'bootstrap/dist/css/bootstrap.min.css'
+} from "@apollo/client";
+import { setContext } from "@apollo/client/link/context";
+import "bootstrap/dist/css/bootstrap.min.css";
 
-import Home from './pages/Home';
-import Profile from './pages/Profile';
-// import TestProfile from './pages/TestProfile'
-import FooterNav from './components/Footer';
-// import Detail from './pages/Detail';
-// import NoMatch from './pages/NoMatch';
-// import Login from './pages/Login';
-// import Signup from './pages/Signup';
-import Navigation from './components/Nav';
-import NannyList from './pages/NannyList';
-import UpdateUserForm from './pages/UpdateUserForm';
-// import { StoreProvider } from './utils/GlobalState';
-// import Success from './pages/Success';
-// import OrderHistory from './pages/OrderHistory';
-import UploadImageForm from './pages/UploadImageForm'
+import Home from "./pages/Home";
+import Profile from "./pages/Profile";
+import FooterNav from "./components/Footer";
+import Navigation from "./components/Nav";
+import NannyList from "./pages/NannyList";
+import UpdateUserForm from "./pages/UpdateUserForm";
+import UploadImageForm from "./pages/UploadImageForm";
+import Nannyprofile from "./pages/Nannyprofile";
 
 const httpLink = createHttpLink({
-  uri: '/graphql',
+  uri: "/graphql",
 });
 
 const authLink = setContext((_, { headers }) => {
-  const token = localStorage.getItem('id_token');
+  const token = localStorage.getItem("id_token");
   return {
     headers: {
       ...headers,
-      authorization: token ? `Bearer ${token}` : '',
+      authorization: token ? `Bearer ${token}` : "",
     },
   };
 });
@@ -43,8 +36,6 @@ const client = new ApolloClient({
   link: authLink.concat(httpLink),
   cache: new InMemoryCache(),
 });
-
-
 
 function App() {
   return (
@@ -59,30 +50,12 @@ function App() {
         <div>
           <Navigation />
           <Routes>
-            <Route
-              path="/"
-              element={<Home />}
-            />
-            <Route
-              path="/me"
-              element={<Profile />}
-            />
-            <Route
-              path="/NannyList"
-              element={<NannyList />}
-            />
-            <Route
-              path="/profiles/:profileId"
-              element={<Profile />}
-            />
-            <Route
-              path="/update-user-form"
-              element={<UpdateUserForm />}
-            />
-            <Route
-              path="/upload"
-              element={<UploadImageForm />}
-            />
+            <Route path="/" element={<Home />} />
+            <Route path="/me" element={<Profile />} />
+            <Route path="/nannylist" element={<NannyList />} />
+            <Route path="/nannylist/:_id" element={<Nannyprofile />} />
+            <Route path="/update-user-form" element={<UpdateUserForm />} />
+            <Route path="/upload" element={<UploadImageForm />} />
           </Routes>
           <FooterNav />
         </div>
