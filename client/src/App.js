@@ -79,7 +79,7 @@ function App() {
               element={<UploadImageForm />}
             />
             <Route 
-                path="/bookingPage/:id" 
+                path="/bookingPage/:_id" 
                 element={<BookingPage />} 
               />
 

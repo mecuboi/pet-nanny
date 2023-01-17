@@ -184,8 +184,8 @@ query singleBooking($bookingId: ID!)  {
 }
 `
 export const QUERY_CHECKOUT = gql`
-  query getCheckout($_id: ID!) {
-    checkout(_id: $_id) {
+  query getCheckout($_id: ID!, $bookedDate: String!, $price: Int!, $additionalNotes:String) {
+    checkout(_id: $_id, bookedDate: $bookedDate, price: $price, additionalNotes: $additionalNotes) {
       session
     }
   }

@@ -6,14 +6,14 @@ import { QUERY_ME } from '../utils/queries';
 const OrderList = (props) => {
   const { loading, data, error } = useQuery(QUERY_ME);
 
-  const orders = data?.me?.orders || {};
+  const orders = data?.user?.orders || [];
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error</p>;
 
     return (
       <div>
-        {orders.map(booking => (
+        {orders.map((booking) => (
           <MyOrders 
             key={booking.id}
             BookedDate={booking.bookings.bookedDate} 
