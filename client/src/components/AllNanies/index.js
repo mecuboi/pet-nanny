@@ -44,6 +44,12 @@ const AllNannyList = ({ profiles }) => {
     setStartDate(new Date());
   };
 
+  const handleEnterKey = (e) => {
+    if(e.key === 'Enter'){
+      searchNanny()
+    }
+  }
+
   const searchNanny = () => {
     const nannyFirstName = [];
     const nannylastName = [];
@@ -88,6 +94,7 @@ const AllNannyList = ({ profiles }) => {
               onChange={(e) => {
                 setnannyName(e.target.value);
               }}
+              onKeyDown={handleEnterKey}
               placeholder="Search"
               aria-label="Search"
             />
