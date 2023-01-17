@@ -152,7 +152,7 @@ const AllNannyList = ({ profiles }) => {
                       </div>
                       <div className="d-flex align-items-center mb-4">
                         <div className="flex-shrink-0">
-                          <Link to={`/nannylist/${profile._id}`}>
+                          <Link to={`${profile._id}`}>
                             <MDBCardImage
                               style={{ width: "75px" }}
                               className="img-fluid rounded-circle border border-dark border-3"

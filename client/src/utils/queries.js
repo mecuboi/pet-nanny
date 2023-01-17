@@ -59,32 +59,6 @@ query nannies($role: String) {
 }
 `;
 
-export const QUERY_SINGLE_NANNY = gql`
-query user($nannyId: ID!, $role: String) {
-  nanny(id: $nannyId, role: $role) {
-    _id
-    address
-    description
-    email
-    firstName
-    lastName
-    picture
-    postcode
-    role
-    bookings {
-      _id
-      price
-      bookedDate
-      bookedBy {
-        _id
-        firstName
-        lastName
-      }
-    }
-  }
-}
-`;
-
 export const QUERY_SINGLE_USER = gql`
 query user($_id: ID!) {
   user(_id: $_id) {
