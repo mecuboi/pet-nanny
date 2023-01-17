@@ -47,10 +47,9 @@ const AllNannyList = ({ profiles }) => {
   const searchNanny = () => {
     const nannyFirstName = [];
     for (let i = 0; i < profiles.length; i++) {
-      nannyFirstName.push(profiles[i].firstName);
+      nannyFirstName.push(profiles[i].firstName.toLowerCase());
     }
-    const queryNannies = indexOfAll(nannyFirstName, nannyname);
-    console.log(queryNannies);
+    const queryNannies = indexOfAll(nannyFirstName, nannyname.toLowerCase());
     const profileArray = [];
 
     for (let i = 0; i < queryNannies.length; i++) {
