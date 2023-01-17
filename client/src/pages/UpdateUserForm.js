@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useQuery, useMutation } from '@apollo/client';
-import { Navigate  } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 import { Form, Button, Alert, Col, Row, InputGroup } from 'react-bootstrap';
 import { QUERY_ME } from '../utils/queries';
 import { UPDATE_USER } from '../utils/mutations';
@@ -12,7 +12,7 @@ import Auth from '../utils/auth';
 import TestForm from './TestForm';
 
 const UpdateUserForm = () => {
-
+    const navigate = useNavigate();
 // Prefill the form with the user's current details
 const { data } = useQuery(QUERY_ME);
 const user = data?.me || data?.user || {};
@@ -39,22 +39,6 @@ useEffect(() => {
       });
   }, [data]);
 
-    // const [img, setImg] = useState();
-
-    // const handleOnDrop = (acceptedFiles) => {
-    //     setImg(acceptedFiles[0]);
-    //   };
-    
-    //   useEffect(() => {
-    //     if (img) {
-    //       setFormData((prevState) => ({
-    //         ...prevState,
-    //         picture: img,
-    //       }));
-    //     }
-    //   }, [img]);
-
-      // set state for form validation
   const [validated] = useState(false);
   // set state for alert
   const [showAlert, setShowAlert] = useState(false);
@@ -95,9 +79,8 @@ useEffect(() => {
                 description: userFormData.description
                 }
         });
-        console.log('test', test)
 
-       return <Navigate to="me"/>
+        return navigate("/me");
         } catch (err) {
             console.log(err);
         }
@@ -192,16 +175,6 @@ useEffect(() => {
         </Button>
         
         </Row>
-          {/* <Dropzone onDrop={handleOnDrop}>
-            {({ getRootProps, getInputProps }) => (
-            <div {...getRootProps()}>
-                <input {...getInputProps()} />
-                <p>Drag 'n' drop some files here, or click to select files</p>
-            </div>
-            )}
-          </Dropzone> */}
-        {/* <textarea name="description" value={userFormData.description} onChange={(e) => setFormData({ ...userFormData, description: e.target.value })} placeholder="Description"></textarea> */}
-        {/* <button type="submit" variant="primary" className='mt-3'>Save</button> */}
     </Form>
     </>
     )

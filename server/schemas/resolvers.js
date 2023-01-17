@@ -3,6 +3,20 @@ const { User, Booking, Order } = require('../models');
 const { signToken } = require('../utils/auth');
 const stripe = require('stripe')('sk_test_51MQpZQCIw6RfRCJYsWbRBGrgYW5YVwMK5ml5wRXASIFbJJEMGXObq31rAx0tZ2dDqZgF4We6nNfaA2ICrGzYck7100zSZKYleX');
 
+// For update profile picture
+// const updateUserPicture = async (_, args, context) => {
+//   if (context.user) {
+//     const userData = await User.findOneAndUpdate(
+//       { _id: context.user._id },
+//       { picture: args.picture },
+//       { new: true }
+//     );
+//     return userData;
+//   }
+//   throw new AuthenticationError('Not logged in');
+// }
+
+
 const resolvers = {
   Query: {
     me: async (parent, args, context) => {
