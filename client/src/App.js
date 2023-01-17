@@ -9,14 +9,17 @@ import {
 import { setContext } from "@apollo/client/link/context";
 import "bootstrap/dist/css/bootstrap.min.css";
 
-import Home from "./pages/Home";
-import Profile from "./pages/Profile";
-import FooterNav from "./components/Footer";
-import Navigation from "./components/Nav";
-import NannyList from "./pages/NannyList";
-import UpdateUserForm from "./pages/UpdateUserForm";
-import UploadImageForm from "./pages/UploadImageForm";
+
+import Home from './pages/Home';
+import Profile from './pages/Profile';
+import FooterNav from './components/Footer';
+import BookingPage from './pages/BookingPage'
+import Navigation from './components/Nav';
+import NannyList from './pages/NannyList';
+import UpdateUserForm from './pages/UpdateUserForm';
+import UploadImageForm from './pages/UploadImageForm'
 import Nannyprofile from "./pages/Nannyprofile";
+
 
 const httpLink = createHttpLink({
   uri: "/graphql",
@@ -50,12 +53,36 @@ function App() {
         <div>
           <Navigation />
           <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/me" element={<Profile />} />
-            <Route path="/nannylist" element={<NannyList />} />
-            <Route path="/nannylist/:_id" element={<Nannyprofile />} />
-            <Route path="/update-user-form" element={<UpdateUserForm />} />
-            <Route path="/upload" element={<UploadImageForm />} />
+
+            <Route
+              path="/"
+              element={<Home />}
+            />
+            <Route
+              path="/me"
+              element={<Profile />}
+            />
+            <Route
+              path="/nannylist"
+              element={<NannyList />}
+            />
+            <Route
+              path="/nannylist/:_id"
+              element={<Profile />}
+            />
+            <Route
+              path="/update-user-form"
+              element={<UpdateUserForm />}
+            />
+            <Route
+              path="/upload"
+              element={<UploadImageForm />}
+            />
+            <Route 
+                path="/bookingPage/:id" 
+                element={<BookingPage />} 
+              />
+
           </Routes>
           <FooterNav />
         </div>

@@ -2,23 +2,17 @@ import React, { useState } from "react";
 import Carousel from 'react-bootstrap/Carousel';
 import Button from 'react-bootstrap/Button';
 import{ Link } from 'react-router-dom';
-import { loadStripe } from '@stripe/stripe-js';
+
 import { QUERY_CHECKOUT } from '../utils/queries';
 import { useLazyQuery } from '@apollo/client';
 
-import Stripetest from '../components/stripetest'
+
 
 function Home() {
   const [getCheckout, { data }] = useLazyQuery(QUERY_CHECKOUT);
 
   const [index, setIndex] = useState(0);
-  const stripePromise = loadStripe('pk_test_51MQpZQCIw6RfRCJYcxVsxk9VUMvrKl3ClOMlMCl8mnKiQmUPGhR67xp8l81VLtCgdE33kV4MCOuFhB977aumnUpL00ZrDYPhrR')
-
-  const handlePayment = () => {
-    stripePromise.then((res) => {
-      res.redirectToCheckout({sessionId: data.checkout.session});
-    })
-  }
+  
 
   const handleSelect = (selectedIndex, e) => {
     setIndex(selectedIndex);

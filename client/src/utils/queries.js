@@ -59,6 +59,7 @@ query nannies($role: String) {
 }
 `;
 
+
 export const QUERY_SINGLE_USER = gql`
 query user($_id: ID!) {
   user(_id: $_id) {
@@ -85,7 +86,7 @@ query user($_id: ID!) {
 `;
 
 export const QUERY_ME = gql`
-query Me {
+query me {
   me {
     _id
     firstName
@@ -183,8 +184,8 @@ query singleBooking($bookingId: ID!)  {
 }
 `
 export const QUERY_CHECKOUT = gql`
-  query getCheckout($order: ID!) {
-    checkout(order: $order) {
+  query getCheckout($_id: ID!) {
+    checkout(_id: $_id) {
       session
     }
   }
