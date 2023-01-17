@@ -31,17 +31,16 @@ const handleFormSubmit = async (event) => {
 
         try {
             const res = await axios.post("/upload", {picture, userId: user._id})
-            console.log(navigate())
-            return navigate("/me");
         } catch (err) {
             console.log(err);
         }
+        return navigate(-1);
     };
 };
 
 return (
-    <div className="">
-    <Form className="w-100 vh-100 w-md-75" onSubmit={handleFormSubmit}>
+    <div className="d-flex justify-content-center align-items-center vh-100">
+    <Form className="w-100 w-md-75" onSubmit={handleFormSubmit}>
     <Form.Group className="mb-3">
     <Form.Label>Upload a profile picture!</Form.Label>
     <Form.Control

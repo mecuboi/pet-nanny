@@ -60,8 +60,8 @@ query nannies($role: String) {
 `;
 
 export const QUERY_SINGLE_NANNY = gql`
-query user($nannyId: ID!, $role: String) {
-  nanny(id: $nannyId, role: $role) {
+query nanny($_id: ID!, $role: String) {
+  nanny(_id: $_id, role: $role) {
     _id
     address
     description

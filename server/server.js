@@ -53,7 +53,7 @@ app.get('/', (req, res) => {
 });
 
 
-app.post('/upload', upload.single('picture'), async (req, res) => {
+app.post('/upload', upload.single('picture'), async (req, res, next) => {
   // const token = req.headers.authorization;
   try {
       // const decoded = jwt.verify(token, 'mysecretsshhhhh');
@@ -64,12 +64,11 @@ app.post('/upload', upload.single('picture'), async (req, res) => {
           { picture: req.body.picture },
           { new: true }
       );
-
-      console.log(updatedUser)
   } catch (err) {
       console.log(err);
       res.status(401).send({ message: "Unauthorized" });
   }
+  next();
 });
 
 // Create a new instance of an Apollo server with the GraphQL schema
