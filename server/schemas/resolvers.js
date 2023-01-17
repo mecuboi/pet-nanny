@@ -23,7 +23,7 @@ const resolvers = {
       return await User.find({ role: 'Pawrent' });
     },
     user: async (_, { profileId }) => {
-      return await User.findOne({ _id: profileId});
+      return await User.findOne({ _id: profileId });
     },
     nannies: async () => {
       return await User.find({ role: 'Nanny' });
@@ -33,7 +33,7 @@ const resolvers = {
     },
     orders: async () => {
       return await Order.find().populate("bookings")
-      
+
     },
     userOrder: async (parent, { _id }, context) => {
       if (context.user) {
@@ -43,15 +43,15 @@ const resolvers = {
         });
 
         return user.orders.id(_id);
-      }      
+      }
 
       throw new AuthenticationError('Not logged in');
     },
 
     singleOrder: async (__, { _id }, context) => {
       if (context.user) {
-        return await Order.findById( _id ).populate("bookings")
-      }     
+        return await Order.findById(_id).populate("bookings")
+      }
     },
 
     bookings: async () => {
@@ -85,34 +85,31 @@ const resolvers = {
 
     checkout: async (parent, args, context) => {
       const url = new URL(context.headers.referer).origin;
-      const order = new Order({ bookings: args.bookings });
+      const newBooking = new Booking({
+        bookedDate: args.bookedDate,
+        price: args.price,
+        bookedBy: context.user._id
+      })
+      const newOrder = new Order({ bookings: newBooking });
+
+
+      const product = await stripe.products.create({
+        name: `Order Number: ${newOrder._id}`,
+        description: "Nanny whole day booking"
+      })
+
+      const price = await stripe.prices.create({
+        product: product.id,
+        unit_amount: newBooking.price * 100,
+        currency: 'aud'
+      });
+
       const line_items = [
         {
-          price: args.bookings.price,
+          price: price.id,
           quantity: 1
         }
       ];
-
-      const { bookings } = await order.populate('bookings');
-
-      // for (let i = 0; i < bookings.length; i++) {
-      //   const product = await stripe.products.create({
-      //     name: bookings[i].name,
-      //     description: bookings[i].description,
-      //     images: [`${url}/images/${bookings[i].image}`]
-      //   });
-
-      //   const price = await stripe.prices.create({
-      //     product: product.id,
-      //     unit_amount: bookings[i].price * 100,
-      //     currency: 'aud',
-      //   });
-
-      //   line_items.push({
-      //     price: price.id,
-      //     quantity: 1
-      //   });
-      // }
 
       const session = await stripe.checkout.sessions.create({
         payment_method_types: ['card'],
@@ -134,15 +131,15 @@ const resolvers = {
     },
     updateUser: async (parent, args, context) => {
       if (context.user) {
-        const updatedUser = await User.findByIdAndUpdate(context.user._id, args, { new: true})
-       
+        const updatedUser = await User.findByIdAndUpdate(context.user._id, args, { new: true })
+
         return updatedUser;
         // const { picture } = args;
         // const pictureBuffer = new Buffer.from(picture.split(',')[1], 'base64');
         // args.picture = pictureBuffer;
         // return await User.findByIdAndUpdate(context.user._id, args, { new: true });
       }
-    
+
       throw new AuthenticationError('Not logged in');
     },
     deleteUser: async (parent, args, context) => {
@@ -165,7 +162,7 @@ const resolvers = {
     deleteOrder: async (parent, { _id, bookingId }, context) => {
       if (context.user) {
         const order = await Order.findByIdAndDelete(_id)
-        await User.findByIdAndUpdate(context.user._id, { $pull: {orders: {_id: _id}}  });
+        await User.findByIdAndUpdate(context.user._id, { $pull: { orders: { _id: _id } } });
         await Booking.findByIdAndDelete(bookingId)
         if (!order) {
           throw new Error('Order not found');
@@ -180,9 +177,9 @@ const resolvers = {
         args.bookedBy = context.user._id;
         const booking = await Booking.create(args);
 
-        const order = await Order.create({bookings: booking._id})
+        const order = await Order.create({ bookings: booking._id })
 
-        return {booking, order};
+        return { booking, order };
       }
       throw new AuthenticationError('Not logged in');
     },
@@ -198,7 +195,7 @@ const resolvers = {
     deleteBooking: async (parent, { _id }, context) => {
       if (context.user) {
         const booking = await Booking.findByIdAndDelete(_id);
-        await User.findByIdAndUpdate(context.user._id, { $pull: { bookings: {_id: _id}} }); 
+        await User.findByIdAndUpdate(context.user._id, { $pull: { bookings: { _id: _id } } });
 
         if (!booking) {
           throw new Error('Booking not found');
