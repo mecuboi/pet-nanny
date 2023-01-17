@@ -52,6 +52,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/me" element={<Profile />} />
+            <Route path="/profiles/:profileId" element={<Profile />}/>
             <Route path="/nannylist" element={<NannyList />} />
             <Route path="/nannylist/:_id" element={<Nannyprofile />} />
             <Route path="/update-user-form" element={<UpdateUserForm />} />

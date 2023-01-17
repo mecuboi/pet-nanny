@@ -34,7 +34,7 @@ const handleFormSubmit = async (event) => {
         } catch (err) {
             console.log(err);
         }
-        return navigate(-1);
+        return window.location.replace('/me')
     };
 };
 

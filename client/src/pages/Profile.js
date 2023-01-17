@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect } from 'react';
 import { Link, useParams, Navigate  } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
 import { QUERY_ME, QUERY_SINGLE_USER } from '../utils/queries';
@@ -25,7 +25,6 @@ const Profile = () => {
         }
       );
 
-      //   console.log(Auth.getProfile().data._id)
       const user = data?.me || data?.user || {};
       
       // Use React Router's `<Redirect />` component to redirect to personal profile page if username is yours
@@ -64,11 +63,13 @@ const Profile = () => {
             </Card.Header>
       <Card.Body>
       <img id="profile-img" className="rounded-circle" variant='top' src={user.picture} alt="Profile image" />
+      {Auth.getProfile().data._id === user._id &&   
         <Row className="pt-3">
             <Link to="/upload">
                 <FontAwesomeIcon icon={faCamera}/>
             </Link>
         </Row>
+      }
         <Col className='pt-3'>
         {Auth.getProfile().data._id === user._id &&   
             <Link className="customhomebutton" to="/update-user-form">

@@ -82,15 +82,7 @@ useEffect(() => {
         } catch (err) {
             console.log(err);
         }
-
-        // function removeFromUrl(url) {
-        //   const newUrl = url.replace("update-user-form/", "");
-        //   return newUrl;
-        // }
-
-        // const currentUrl = removeFromUrl(window.location.href);
-        // window.location.replace(currentUrl + '/me');
-        return navigate(-1);
+        return window.location.replace('/me')
     };
 
     return(
