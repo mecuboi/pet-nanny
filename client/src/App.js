@@ -53,7 +53,6 @@ function App() {
         <div>
           <Navigation />
           <Routes>
-
             <Route
               path="/"
               element={<Home />}
@@ -61,6 +60,10 @@ function App() {
             <Route
               path="/me"
               element={<Profile />}
+            />
+            <Route 
+            path="/profiles/:profileId" 
+            element={<Profile />}
             />
             <Route
               path="/nannylist"
