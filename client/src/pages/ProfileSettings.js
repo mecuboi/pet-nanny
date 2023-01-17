@@ -6,7 +6,7 @@ function DeleteUserButton({_id}) {
 
     const handleDelete = async () => {
         try {
-            await deleteUser({ variables: { _id } });
+            await deleteUser();
         } catch (e) {
             console.log(e);
         }

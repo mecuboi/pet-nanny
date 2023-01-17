@@ -16,6 +16,9 @@ const resolvers = {
 
       throw new AuthenticationError('Not logged in')
     },
+    all: async () => {
+      return await User.find()
+    },
     users: async () => {
       return await User.find({ role: 'Pawrent' });
     },

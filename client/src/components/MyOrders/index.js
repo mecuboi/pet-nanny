@@ -13,7 +13,7 @@ const MyOrders = (props) => {
           <h2>My Orders</h2>
           <div>
             <div>
-              Booked Date: {props.bookings.BookedDate}
+              Booked Date: {props.bookings.bookedDate}
             </div>
             <div>
               Booking ID: {props.id}

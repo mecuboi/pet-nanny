@@ -1,86 +1,62 @@
+import React, { useState } from 'react';
+import axios from 'axios';
+import { useQuery, useMutation } from '@apollo/client';
+import { useNavigate } from "react-router-dom";
+import { Form, Button, Alert, Col, Row, InputGroup } from 'react-bootstrap';
+import { QUERY_ME } from '../utils/queries';
+import { UPDATE_USER } from '../utils/mutations';
 
-import { useCallback } from 'react';
-import { useDropzone } from 'react-dropzone'
+function TestForm() {
+    const navigate = useNavigate();
 
-function TestForm () {
-  const maxSize = 1048576;
+const [updateUser, { loading, error }] = useMutation(UPDATE_USER);
 
-  const onDrop = useCallback(acceptedFiles => {
-    console.log(acceptedFiles);
-  }, []);
+const { data } = useQuery(QUERY_ME);
+const user = data?.me || data?.user || {};
 
-  const { isDragActive, getRootProps, getInputProps, isDragReject, acceptedFiles, rejectedFiles } = useDropzone({
-    onDrop,
-    accept: {
-              'image/*': ['.jpeg', '.png']
-            },
-    minSize: 0,
-    maxSize,
-  });
+console.log(user._id)
 
-  const isFileTooLarge = rejectedFiles.length > 0 && rejectedFiles[0].size > maxSize;
-  
-  return (
-    <div className="container text-center mt-5">
-      <div {...getRootProps()}>
-        <input {...getInputProps()} />
-        {!isDragActive && 'Click here or drop a file to upload!'}
-        {isDragActive && !isDragReject && "Drop it like it's hot!"}
-        {isDragReject && "File type not accepted, sorry!"}
-        {isFileTooLarge && (
-          <div className="text-danger mt-2">
-            File is too large.
-          </div>
-        )}
-      </div>
-    </div>
-  );
+const handleFormSubmit = async (event) => {
+    event.preventDefault();
+    // const token = localStorage.getItem("token");    
+
+    // Get the file from the input
+    const file = event.target.picture.files[0];
+
+    // Read the file into a base64 encoded string
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = async () => {
+        const picture = reader.result;
+
+        try {
+            const res = await axios.post("/upload", {picture, userId: user._id})
+            // , {
+            //     headers: {
+            //         "Authorization": `Bearer ${token}`
+            //     }
+            // });
+            return navigate("/me");
+        } catch (err) {
+            console.log(err);
+        }
+    };
+};
+
+return (
+    <Form className="w-100 w-md-75" onSubmit={handleFormSubmit}>
+    <Form.Group className="mb-3">
+    <Form.Label>Upload a profile picture!</Form.Label>
+    <Form.Control
+    type="file"
+    name='picture'
+    required
+    />
+    <Form.Control.Feedback type='invalid'>Invalid File!</Form.Control.Feedback>
+    </Form.Group>
+    <Button type="submit">Upload</Button>
+    </Form>
+)
 };
 
 export default TestForm;
-// export default function TestForm(props) {
-//   const {
-//     getRootProps,
-//     getInputProps,
-//     isDragActive,
-//     isDragAccept,
-//     isDragReject
-//   } = useDropzone({
-//     accept: {
-//       'image/*': ['.jpeg', '.png']
-//     }
-//   });
-
-//   return (
-//     <div className="container">
-//       <div {...getRootProps({className: "dropzone"})}>
-//         <input {...getInputProps()} />
-//         {isDragAccept && (<p>All files will be accepted</p>)}
-//           {isDragReject && (<p>Only jpeg, and png files are allowed</p>)}
-//           {!isDragActive && (<p>Drop some files here ...</p>)}
-//       </div>
-//     </div>
-//   );
-// }
-
-// import React, { useCallback } from 'react';
-// import { useDropzone } from 'react-dropzone';
-
-// function TestForm(props) {
-//   const onDrop = useCallback(acceptedFiles => {
-//     props.setFilename(acceptedFiles[0].name);
-//     props.callback(acceptedFiles);
-//     // eslint-disable-next-line react-hooks/exhaustive-deps
-//   }, []);
-//   const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
-
-//   return (
-//     <div className="upload" {...getRootProps()}>
-//       <input {...getInputProps()} />
-//       {isDragActive ? <p>upload or drag STL files</p> : <p>upload STL files</p>}
-//       {props.filename ? <p>Filename: {props.filename}</p> : null}
-//     </div>
-//   );
-// }
-
-// export default TestForm;

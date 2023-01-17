@@ -1,6 +1,27 @@
 const express = require('express');
 const { ApolloServer } = require('apollo-server-express');
 const path = require('path');
+const multer = require('multer');
+const bodyParser = require('body-parser');
+// const jwt = require('jsonwebtoken');
+const User = require('./models/User');
+
+
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, './uploads');
+  },
+  filename: (req, file, cb) => {
+    cb(null, Date.now() + '-' + file.originalname);
+  }
+});
+const upload = multer({ storage,
+  limits: {
+    fileSize: 50000000 // 50MB
+} });
+
+//  const updateUserPicture = require('./schemas/resolvers')
+
 const { authMiddleware } = require('./utils/auth');
 
 const { typeDefs, resolvers } = require('./schemas');
@@ -13,6 +34,9 @@ const server = new ApolloServer({
   resolvers,
   context: authMiddleware,
 });
+
+app.use(bodyParser.json({limit: '50mb'}));
+app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));
 
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
@@ -28,6 +52,25 @@ app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '../client/build/index.html'));
 });
 
+
+app.post('/upload', upload.single('picture'), async (req, res) => {
+  // const token = req.headers.authorization;
+  try {
+      // const decoded = jwt.verify(token, 'mysecretsshhhhh');
+      const userId = req.body.userId;
+      const file = req.file;
+      const updatedUser = await User.findOneAndUpdate(
+          { _id: userId },
+          { picture: req.body.picture },
+          { new: true }
+      );
+
+      console.log(updatedUser)
+  } catch (err) {
+      console.log(err);
+      res.status(401).send({ message: "Unauthorized" });
+  }
+});
 
 // Create a new instance of an Apollo server with the GraphQL schema
 const startApolloServer = async (typeDefs, resolvers) => {
