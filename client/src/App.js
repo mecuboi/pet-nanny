@@ -12,7 +12,7 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import Home from './pages/Home';
 import Profile from './pages/Profile';
 // import TestProfile from './pages/TestProfile'
-import FooterNav from './components/Footer'
+import FooterNav from './components/Footer';
 // import Detail from './pages/Detail';
 // import NoMatch from './pages/NoMatch';
 // import Login from './pages/Login';
@@ -23,7 +23,7 @@ import UpdateUserForm from './pages/UpdateUserForm';
 // import { StoreProvider } from './utils/GlobalState';
 // import Success from './pages/Success';
 // import OrderHistory from './pages/OrderHistory';
-import TestForm from './pages/TestForm'
+import UploadImageForm from './pages/UploadImageForm'
 
 const httpLink = createHttpLink({
   uri: '/graphql',
@@ -80,8 +80,8 @@ function App() {
               element={<UpdateUserForm />}
             />
             <Route
-              path="/test"
-              element={<TestForm />}
+              path="/upload"
+              element={<UploadImageForm />}
             />
           </Routes>
           <FooterNav />

@@ -78,10 +78,10 @@ db.once('open', async () => {
       password: 'password12345',
       address: 'clouds',
       role: 'Nanny',
-      bookings: [
-        { BookedDate: '20 Jan 2023', BookedBy:  savedUser1._id},
-        { BookedDate: '21 Jan 2023', BookedBy:  savedUser1._id},
-      ]
+      // bookings: [
+      //   { BookedDate: '20 Jan 2023', BookedBy:  savedUser1._id},
+      //   { BookedDate: '21 Jan 2023', BookedBy:  savedUser1._id},
+      // ]
     });
 
     const anon = await User.findOne({ email: 'anon@testmail.com' });
@@ -94,10 +94,10 @@ db.once('open', async () => {
     password: 'password12345',
     address: 'above',
     role: 'Nanny',
-    bookings: [
-      { BookedDate: '22 Jan 2023', BookedBy: anon._id.toString() },
-      { BookedDate: '23 Jan 2023', BookedBy: anon._id.toString() },
-    ]
+    // bookings: [
+    //   { BookedDate: '22 Jan 2023', BookedBy: anon._id.toString() },
+    //   { BookedDate: '23 Jan 2023', BookedBy: anon._id.toString() },
+    // ]
   });
 
 
@@ -111,13 +111,13 @@ db.once('open', async () => {
     password: 'password12345',
     address: 'high',
     role: 'Nanny',
-    bookings: [
-      { BookedDate: '24 Jan 2023', BookedBy: catdog._id.toString()  },
-      { BookedDate: '25 Jan 2023', BookedBy: catdog._id.toString() },
-    ]
+    // bookings: [
+    //   { BookedDate: '24 Jan 2023', BookedBy: catdog._id.toString()  },
+    //   { BookedDate: '25 Jan 2023', BookedBy: catdog._id.toString() },
+    // ]
   });
 
-  console.log('users & bookings seeded');
+  console.log('users seeded');
 
   // const bookings = await Booking.find({});
 

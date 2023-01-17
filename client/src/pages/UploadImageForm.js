@@ -6,7 +6,7 @@ import { Form, Button, Alert, Col, Row, InputGroup } from 'react-bootstrap';
 import { QUERY_ME } from '../utils/queries';
 import { UPDATE_USER } from '../utils/mutations';
 
-function TestForm() {
+function UploadImageForm() {
     const navigate = useNavigate();
 
 const [updateUser, { loading, error }] = useMutation(UPDATE_USER);
@@ -31,11 +31,7 @@ const handleFormSubmit = async (event) => {
 
         try {
             const res = await axios.post("/upload", {picture, userId: user._id})
-            // , {
-            //     headers: {
-            //         "Authorization": `Bearer ${token}`
-            //     }
-            // });
+            console.log(navigate())
             return navigate("/me");
         } catch (err) {
             console.log(err);
@@ -44,7 +40,8 @@ const handleFormSubmit = async (event) => {
 };
 
 return (
-    <Form className="w-100 w-md-75" onSubmit={handleFormSubmit}>
+    <div className="">
+    <Form className="w-100 vh-100 w-md-75" onSubmit={handleFormSubmit}>
     <Form.Group className="mb-3">
     <Form.Label>Upload a profile picture!</Form.Label>
     <Form.Control
@@ -56,7 +53,8 @@ return (
     </Form.Group>
     <Button type="submit">Upload</Button>
     </Form>
+    </div>
 )
 };
 
-export default TestForm;
+export default UploadImageForm;

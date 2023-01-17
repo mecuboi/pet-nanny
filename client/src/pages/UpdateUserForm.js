@@ -5,11 +5,11 @@ import { Form, Button, Alert, Col, Row, InputGroup } from 'react-bootstrap';
 import { QUERY_ME } from '../utils/queries';
 import { UPDATE_USER } from '../utils/mutations';
 import { useEffect } from 'react';
-import TestFrom from './TestForm';
+import TestFrom from './UploadImageForm';
 import Dropzone from 'react-dropzone';
 
 import Auth from '../utils/auth';
-import TestForm from './TestForm';
+import UploadImageForm from './UploadImageForm';
 
 const UpdateUserForm = () => {
     const navigate = useNavigate();

@@ -111,7 +111,7 @@ query user($_id: ID!) {
 `;
 
 export const QUERY_ME = gql`
-query me {
+query Me {
   me {
     _id
     firstName
