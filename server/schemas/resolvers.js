@@ -86,7 +86,7 @@ const resolvers = {
     checkout: async (parent, args, context) => {
       const url = "http://localhost:3000"
       // const url = new URL('https://www.google.com');
-      
+
       const newBooking = await Booking.create({
         bookedDate: args.bookedDate,
         price: args.price,
@@ -94,12 +94,12 @@ const resolvers = {
         additionalNotes: args.additionalNotes
       })
 
-      await User.findByIdAndUpdate(args._id, 
+      await User.findByIdAndUpdate(args._id,
         { $addToSet: { bookings: newBooking._id } });
 
       const newOrder = await Order.create({ bookings: newBooking });
-      
-      await User.findByIdAndUpdate(context.user._id, 
+
+      await User.findByIdAndUpdate(context.user._id,
         { $addToSet: { orders: newOrder._id } });
 
       const product = await stripe.products.create({
@@ -181,17 +181,19 @@ const resolvers = {
       }
       throw new AuthenticationError('Not logged in');
     },
+
+    //not used
     addBooking: async (parent, args, context) => {
-      if (context.user) {
-        // make sure that the BookedBy field is populated with the current user's id
-        args.bookedBy = context.user._id;
-        const booking = await Booking.create(args);
+      // if (context.user) {
+      // make sure that the BookedBy field is populated with the current user's id
+      args.bookedBy = "63c647d89d8c20708bf916d9";
+      const booking = await Booking.create(args);
 
-        const order = await Order.create({ bookings: booking._id })
+      const order = await Order.create({ bookings: booking._id })
 
-        return { booking, order };
-      }
-      throw new AuthenticationError('Not logged in');
+      return { booking, order };
+      // }
+      // throw new AuthenticationError('Not logged in');
     },
     updateBooking: async (parent, { _id, bookedDate }, context) => {
       if (context.user) {
