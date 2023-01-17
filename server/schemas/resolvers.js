@@ -22,8 +22,8 @@ const resolvers = {
     users: async () => {
       return await User.find({ role: 'Pawrent' });
     },
-    user: async (_, { profileId }) => {
-      return await User.findOne({ _id: profileId});
+    user: async (_, args) => {
+      return await User.findOne({_id: args._id});
     },
     nannies: async () => {
       return await User.find({ role: 'Nanny' });
