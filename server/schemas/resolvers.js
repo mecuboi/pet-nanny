@@ -90,7 +90,7 @@ const resolvers = {
       const newBooking = await Booking.create({
         bookedDate: args.bookedDate,
         price: args.price,
-        bookedBy: "63c647d89d8c20708bf916d9",
+        bookedBy: context.user._id,
         additionalNotes: args.additionalNotes
       })
 
@@ -99,7 +99,7 @@ const resolvers = {
 
       const newOrder = await Order.create({ bookings: newBooking });
       
-      await User.findByIdAndUpdate("63c647d89d8c20708bf916d9", 
+      await User.findByIdAndUpdate(context.user._id, 
         { $addToSet: { orders: newOrder._id } });
 
       const product = await stripe.products.create({
@@ -161,7 +161,7 @@ const resolvers = {
     },
     addOrder: async (parent, { bookings, nanny }, context) => {
       if (context.user) {
-        const order = new Order({ bookings });
+        const order = Order.create({ bookings });
         await order.save();
         await User.findByIdAndUpdate(context.user._id, { $push: { orders: order } });
 

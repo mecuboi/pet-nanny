@@ -30,7 +30,7 @@ function BookingPage() {
 
     const [userFormData, setUserFormData] = useState(
         {
-            bookedDate: new Date(),
+            // bookedDate: new Date(),
             price: 100,
             additionalNotes: '',
         });
@@ -44,7 +44,7 @@ function BookingPage() {
             stripePromise.then((res) => {
                 res.redirectToCheckout({ sessionId: data.checkout.session });
             });
-        }
+        } 
     }, [data]);
 
     const handleChange = (e) => {
@@ -54,10 +54,8 @@ function BookingPage() {
 
     const dateChange = (e) => {
         setStartDate(e);
-        setUserFormData({ ...userFormData, date: startDate })
+        // setUserFormData({ ...userFormData, bookedDate: startDate })
     };
-
-
 
     const handlePayment = (e) => {
         e.preventDefault()
@@ -65,7 +63,7 @@ function BookingPage() {
             variables: {
                 ...userFormData,
                 _id: _id,
-                price: 50
+                bookedDate: startDate
             },
         });
 
