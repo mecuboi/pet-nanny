@@ -1,34 +1,36 @@
-import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import React from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import {
   ApolloClient,
   InMemoryCache,
   ApolloProvider,
   createHttpLink,
-} from '@apollo/client';
-import { setContext } from '@apollo/client/link/context';
-import 'bootstrap/dist/css/bootstrap.min.css'
+} from "@apollo/client";
+import { setContext } from "@apollo/client/link/context";
+import "bootstrap/dist/css/bootstrap.min.css";
+
 
 import Home from './pages/Home';
 import Profile from './pages/Profile';
-// import TestProfile from './pages/TestProfile'
 import FooterNav from './components/Footer';
 import BookingPage from './pages/BookingPage'
 import Navigation from './components/Nav';
 import NannyList from './pages/NannyList';
 import UpdateUserForm from './pages/UpdateUserForm';
 import UploadImageForm from './pages/UploadImageForm'
+import Nannyprofile from "./pages/Nannyprofile";
+
 
 const httpLink = createHttpLink({
-  uri: '/graphql',
+  uri: "/graphql",
 });
 
 const authLink = setContext((_, { headers }) => {
-  const token = localStorage.getItem('id_token');
+  const token = localStorage.getItem("id_token");
   return {
     headers: {
       ...headers,
-      authorization: token ? `Bearer ${token}` : '',
+      authorization: token ? `Bearer ${token}` : "",
     },
   };
 });
@@ -37,8 +39,6 @@ const client = new ApolloClient({
   link: authLink.concat(httpLink),
   cache: new InMemoryCache(),
 });
-
-
 
 function App() {
   return (
@@ -53,6 +53,7 @@ function App() {
         <div>
           <Navigation />
           <Routes>
+
             <Route
               path="/"
               element={<Home />}
@@ -62,11 +63,11 @@ function App() {
               element={<Profile />}
             />
             <Route
-              path="/NannyList"
+              path="/nannylist"
               element={<NannyList />}
             />
             <Route
-              path="/profiles/:profileId"
+              path="/nannylist/:_id"
               element={<Profile />}
             />
             <Route
@@ -81,6 +82,7 @@ function App() {
                 path="/bookingPage/:id" 
                 element={<BookingPage />} 
               />
+
           </Routes>
           <FooterNav />
         </div>

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useQuery, useMutation } from '@apollo/client';
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Navigate } from "react-router-dom";
 import { Form, Button, Alert, Col, Row, InputGroup } from 'react-bootstrap';
 import { QUERY_ME } from '../utils/queries';
 import { UPDATE_USER } from '../utils/mutations';
@@ -68,7 +68,7 @@ useEffect(() => {
         }
 
         try {
-            const test = await updateUserMutation({
+            const updateUser = await updateUserMutation({
                 variables: { 
                 firstName: userFormData.firstName,
                 lastName: userFormData.lastName,
@@ -80,13 +80,18 @@ useEffect(() => {
                 }
         });
 
-        window.location.replace('/me');
-
-
-
         } catch (err) {
             console.log(err);
         }
+
+        // function removeFromUrl(url) {
+        //   const newUrl = url.replace("update-user-form/", "");
+        //   return newUrl;
+        // }
+
+        // const currentUrl = removeFromUrl(window.location.href);
+        // window.location.replace(currentUrl + '/me');
+        return navigate(-1);
     };
 
     return(
