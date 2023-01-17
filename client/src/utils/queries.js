@@ -208,3 +208,10 @@ query singleBooking($bookingId: ID!)  {
   }
 }
 `
+export const QUERY_CHECKOUT = gql`
+  query getCheckout($order: ID!) {
+    checkout(order: $order) {
+      session
+    }
+  }
+`;
