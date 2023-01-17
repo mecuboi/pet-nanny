@@ -29,7 +29,7 @@ function Home() {
 
   return (
     <>
-      <Carousel activeIndex={index} onSelect={handleSelect}>
+      <Carousel activeIndex={index} onSelect={handleSelect} className="h-100">
         <Carousel.Item>
           <img
             className="d-block w-100"

@@ -38,7 +38,7 @@ const typeDefs = gql`
     me: User
     all: [User]
     users(role: String): [User]
-    user(id: ID!): User
+    user(_id: ID!): User
     nannies(role: String): [User]
     nanny(_id: ID!, role: String): User
     orders: [Order]
@@ -47,7 +47,7 @@ const typeDefs = gql`
     bookings: [Booking]
     userBooking(_id: ID!): Booking
     singleBooking(_id: ID!): Booking
-    checkout(order: ID!): Checkout
+    checkout(_id: ID!, bookedDate: String!, price: Int!): Checkout
   }
  
   type Mutation {
