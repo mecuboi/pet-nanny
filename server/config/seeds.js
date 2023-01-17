@@ -117,15 +117,70 @@ db.once('open', async () => {
     // ]
   });
 
-  console.log('users seeded');
+  await User.create({
+    firstName: "Tom",
+        lastName: "Cruise",
+        email: "Iamtom@test.com",
+        password: "Password12345",
+        address: "78 Campbells River Road, Warrigal NSW",
+        postcode: "2825",
+        role: "Nanny",
+        picture:"http://t1.gstatic.com/licensed-image?q=tbn:ANd9GcRezb3QSPGhLptNSXoqUpKeVofpNCTLPXOG9n9o3Z2bnMp80f2AimK17SPKLa2PPkqsYkqIUAHfDgZFTs0",
+        description: "Huge dog lover. I feel sorry for people who don't have dogs. I hear they have to pick up food they drop on the floor",
 
-  // const bookings = await Booking.find({});
+  });
 
-  // await User.findOneAndUpdate(
-  //   { email: 'steve@testmail.com' },
-  //   { $push: { orders: { bookings: [bookings[0]._id, bookings[1]._id] } } }
-  // );
-  // await User.findOneAndUpdate(
+  await User.create({
+    firstName: "Will",
+        lastName: "smith",
+        email: "Freshprince@halleluja.com",
+        password: "Password12345",
+        address: "10 Cornish Street, Laverton VIC",
+        postcode: "3028",
+        role: "Nanny",
+        picture:"https://media.gq-magazine.co.uk/photos/62442745b63bdfb22a904ed7/master/pass/290322_CRWS_hp.jpg",
+        description: "I love my cats however they can always work out mathematically the exact place to sit that will cause the most inconvinience.",
+       
+  });
+
+  await User.create({
+    firstName: "Taylor",
+    lastName: "Swift",
+    email: "whytaylor@test.com",
+    password: "Password12345",
+    address: " 92 Capper Street, Penwhaupell QLD",
+    postcode: "4625",
+    role: "User",
+    description: "I ain't no nanny"
+    
+  });
+
+  await User.create({
+    firstName: "Britney",
+        lastName: " Spears ",
+        email: "popqueen@forreal.com",
+        password: "Password12345",
+        address: "33 Benny Street, Quoiba Tas",
+        postcode: "7310",
+        role: "Nanny",
+        description: "I occasionally enjoy a sing along with my pet parrot",
+        
+  });
+
+  await User.create({
+    firstName: "Dwayne",
+    lastName: "Johnson",
+    email: "Drock@mymail.com",
+    password: "Password12345",
+    address: "4 Wollombi street, Dunolly NSW",
+    postcode: "2330",
+    role: "Nanny",
+    picture:"https://assets.teenvogue.com/photos/59d3b74cc5559f37a703150c/3:2/w_2411,h_1607,c_limit/MCDMOAN_EC058.jpg",
+    description: "I have extensive experience in the wild. I am able to engage with all sorts of exotic pets.",
+    
+  });
+  
+  console.log('users seeded');te(
   //   { email: 'anon@testmail.com' },
   //   { $push: { orders: { bookings: [bookings[2]._id, bookings[3]._id] } } }
   // );
@@ -134,6 +189,14 @@ db.once('open', async () => {
   //   { $push: { orders: { bookings: [bookings[4]._id, bookings[5]._id] } } }
   // );
 
+
+  // const bookings = await Booking.find({});
+
+  // await User.findOneAndUpdate(
+  //   { email: 'steve@testmail.com' },
+  //   { $push: { orders: { bookings: [bookings[0]._id, bookings[1]._id] } } }
+  // );
+  // await User.findOneAndUpda
   // console.log('orders seeded');
 
   process.exit();

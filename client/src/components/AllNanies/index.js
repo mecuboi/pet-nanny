@@ -134,6 +134,7 @@ const AllNannyList = ({ profiles }) => {
           backgroundColor: "#eee",
           backgroundImage:
             "url(https://thumbs.dreamstime.com/z/paw-prints-background-6936081.jpg)",
+            minHeight: '400px'
         }}
       >
         <MDBContainer className="my-4">
@@ -143,7 +144,7 @@ const AllNannyList = ({ profiles }) => {
                 <MDBCol key={profile.id} md="4">
                   <MDBCard
                     className="w-auto mx-3 my-2 "
-                    style={{ borderRadius: "15px", backgroundColor: "#ffff" }}
+                    style={{ borderRadius: "15px", backgroundColor: "#ffff"}}
                   >
                     <MDBCardBody className="p-4 text-black">
                       <div>
@@ -172,12 +173,12 @@ const AllNannyList = ({ profiles }) => {
                         <div className="flex-grow-1 ms-3">
                           <div className="d-flex flex-row align-items-center mb-2">
                             <div>
-                              <p className="mb-0 me-2">{profile.description}</p>
+                              <p className="mb-0 me-2"></p>
                               <p
                                 className="mb-0 me-0"
                                 style={{ fontSize: "13px", fontWeight: "bold" }}
                               >
-                                postcode: {profile.postcode}{" "}
+                                postcode: {profile.postcode}
                               </p>
                             </div>
                             <ul

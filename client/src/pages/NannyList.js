@@ -15,7 +15,11 @@ function NannyList() {
     <>
       <div>
           {loading ? (
-            <div>Loading...</div>
+            <img
+            src="https://media.giphy.com/media/3oEjI6SIIHBdRxXI40/giphy.gif"
+            className="animation"
+            alt="loading"
+             />
           ) : (
             
             <AllNannyList
