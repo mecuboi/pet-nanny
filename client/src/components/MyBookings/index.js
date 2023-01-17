@@ -13,7 +13,7 @@ const MyBookings = (props) => {
           <h2>My Bookings</h2>
           <div>
             <div>
-              Booked Date: {props.BookedDate}
+              Booked Date: {props.bookedDate}
             </div>
             <div>
               Booking ID: {props.id}
@@ -22,10 +22,10 @@ const MyBookings = (props) => {
               Price: {props.price}
             </div>
             <div>
-              Booked By: {props.BookedBy.firstName} {props.BookedBy.lastName}
+              Booked By: {props.bookedBy.firstName} {props.bookedBy.lastName}
             </div>
             <div>
-              Email: {props.BookedBy.email}
+              Email: {props.bookedBy.email}
             </div>
           </div>
         </Col>

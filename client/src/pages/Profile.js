@@ -11,7 +11,7 @@ import '@fortawesome/react-fontawesome';
 import Auth from '../utils/auth';
 
 
-// import './Profile.css';
+import './Profile.css';
 import BookingList from './BookingList';
 import OrderList from './OrderList';
 
@@ -27,7 +27,7 @@ const Profile = () => {
 
       const user = data?.me || data?.user || {};
 
-      console.log('picture', user.picture)
+      console.log('picture', user.bookings)
 
       // Use React Router's `<Redirect />` component to redirect to personal profile page if username is yours
       if (Auth.loggedIn() && Auth.getProfile().data._id === profileId) {
@@ -118,7 +118,7 @@ const Profile = () => {
     </div> */}
             { user.role === 'Nanny' && 
                 <div className="booking-container">
-                    <BookingList />
+                    {/* <BookingList /> */}
                 </div>
             }
             { user.role === 'Pawrent' && 

@@ -1,5 +1,6 @@
 const db = require('./connection');
 const { Booking, Order, User } = require('../models');
+const getQuotedString  = require('../utils/helpers');
 
 db.once('open', async () => {
   await Booking.deleteMany();
@@ -22,19 +23,20 @@ db.once('open', async () => {
   await User.deleteMany();
 
   // Users
-  await User.create({
+  const user1 = await User.create({
     firstName: 'Steve',
     lastName: 'Legend',
     email: 'steve@testmail.com',
     password: 'password12345',
     address: 'somewhere',
-  
     // orders: [
     //   {
     //     bookings: [bookings[0]._id, bookings[1]._id]
     //   }
     // ]
   });
+
+  const savedUser1 = user1.save()
 
   await User.create({
     firstName: 'Anon',
@@ -66,6 +68,8 @@ db.once('open', async () => {
 
   const steve = await User.findOne({ email: 'steve@testmail.com' });
   if (!steve) throw new Error('User not found');
+
+  // console.log('steve', steve._id.toString())
   
   await User.create({
       firstName: 'Fanny',
@@ -75,8 +79,8 @@ db.once('open', async () => {
       address: 'clouds',
       role: 'Nanny',
       bookings: [
-        { BookedDate: '20 Jan 2023', BookedBy: steve._id },
-        { BookedDate: '21 Jan 2023', BookedBy: steve._id },
+        { BookedDate: '20 Jan 2023', BookedBy:  savedUser1._id},
+        { BookedDate: '21 Jan 2023', BookedBy:  savedUser1._id},
       ]
     });
 
@@ -91,8 +95,8 @@ db.once('open', async () => {
     address: 'above',
     role: 'Nanny',
     bookings: [
-      { BookedDate: '22 Jan 2023', BookedBy: anon._id },
-      { BookedDate: '23 Jan 2023', BookedBy: anon._id },
+      { BookedDate: '22 Jan 2023', BookedBy: anon._id.toString() },
+      { BookedDate: '23 Jan 2023', BookedBy: anon._id.toString() },
     ]
   });
 
@@ -108,8 +112,8 @@ db.once('open', async () => {
     address: 'high',
     role: 'Nanny',
     bookings: [
-      { BookedDate: '24 Jan 2023', BookedBy: catdog._id  },
-      { BookedDate: '25 Jan 2023', BookedBy: catdog._id },
+      { BookedDate: '24 Jan 2023', BookedBy: catdog._id.toString()  },
+      { BookedDate: '25 Jan 2023', BookedBy: catdog._id.toString() },
     ]
   });
 
