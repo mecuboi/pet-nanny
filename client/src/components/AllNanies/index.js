@@ -32,16 +32,16 @@ const AllNannyList = ({ profiles }) => {
   const [renderProfile, setrenderProfile] = useState(profiles);
   const [startDate, setStartDate] = useState(new Date());
 
-  const [isOpen, setIsOpen] = useState(false);
+  const [openProfileId, setOpenProfileId] = useState();
 
   const handleChange = (e) => {
-    setIsOpen(!isOpen);
+    setOpenProfileId();
     setStartDate(e);
   };
-  const handleClick = (e) => {
-    e.preventDefault();
-    setIsOpen(!isOpen);
-    setStartDate(new Date())
+  const handleClick = (newOpenProfileId) => {
+    // e.preventDefault();
+    setOpenProfileId(newOpenProfileId);
+    setStartDate(new Date());
   };
 
   const searchNanny = () => {
@@ -52,9 +52,8 @@ const AllNannyList = ({ profiles }) => {
       nannylastName.push(profiles[i].lastName.toLowerCase());
     }
     const queryNannies = indexOfAll(nannyFirstName, nannyname.toLowerCase());
-    const queryNannieslast = indexOfAll(nannylastName, nannyname.toLowerCase())
-    const nannyArray = arrayUnique([...queryNannies, ...queryNannieslast])
-    
+    const queryNannieslast = indexOfAll(nannylastName, nannyname.toLowerCase());
+    const nannyArray = arrayUnique([...queryNannies, ...queryNannieslast]);
 
     const profileArray = [];
 
@@ -217,15 +216,15 @@ const AllNannyList = ({ profiles }) => {
                         <button
                           type="button"
                           id={profile._id}
-                          style={{marginBottom:'5px'}}
+                          style={{ marginBottom: "5px" }}
                           class="btn btn-secondary"
-                          onClick={handleClick}
+                          onClick={() => handleClick(profile._id)}
                         >
                           <FontAwesomeIcon far icon={faClock} /> Book now
                         </button>
-                        {isOpen && (
+                        {openProfileId === profile._id && (
                           <DatePicker
-                          id={profile._id}
+                            id={profile._id}
                             selected={startDate}
                             onChange={handleChange}
                             minDate={new Date()}
