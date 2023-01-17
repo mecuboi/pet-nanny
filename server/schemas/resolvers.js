@@ -85,10 +85,12 @@ const resolvers = {
 
     checkout: async (parent, args, context) => {
       const url = new URL(context.headers.referer).origin;
+      
       const newBooking = new Booking({
         bookedDate: args.bookedDate,
         price: args.price,
-        bookedBy: context.user._id
+        bookedBy: context.user._id,
+        additionalNotes: args.additionalNotes
       })
       await User.findByIdAndUpdate(context.user._id, 
         { $addToSet: { bookings: newBooking._id } });
