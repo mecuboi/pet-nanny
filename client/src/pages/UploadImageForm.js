@@ -39,18 +39,21 @@ const handleFormSubmit = async (event) => {
 };
 
 return (
-    <div className="d-flex justify-content-center align-items-center vh-100">
-    <Form className="w-100 w-md-75" onSubmit={handleFormSubmit}>
+    <div className="bg-white d-flex justify-content-center align-items-center vh-100">
+    <Form className="w-50 w-md-75" onSubmit={handleFormSubmit}>
     <Form.Group className="mb-3">
-    <Form.Label>Upload a profile picture!</Form.Label>
+    <Form.Label><h3 className="text-center">Upload a profile picture!</h3></Form.Label>
     <Form.Control
     type="file"
     name='picture'
     required
+    className="py-5"
     />
     <Form.Control.Feedback type='invalid'>Invalid File!</Form.Control.Feedback>
     </Form.Group>
-    <Button type="submit">Upload</Button>
+    <div className='d-flex flex-end md-mx-3'>
+    <Button type="submit" className='w-25 md-w-25 my-1'>Upload</Button>
+    </div>
     </Form>
     </div>
 )
