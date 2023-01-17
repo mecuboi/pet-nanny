@@ -41,7 +41,7 @@ const AllNannyList = ({ profiles }) => {
   const handleClick = (e) => {
     e.preventDefault();
     setIsOpen(!isOpen);
-    console.log(e)
+    setStartDate(new Date())
   };
 
   const searchNanny = () => {
@@ -223,6 +223,8 @@ const AllNannyList = ({ profiles }) => {
                           id={profile._id}
                             selected={startDate}
                             onChange={handleChange}
+                            minDate={new Date()}
+                            isClearable
                           />
                         )}
                       </div>
