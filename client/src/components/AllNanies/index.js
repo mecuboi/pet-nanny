@@ -1,4 +1,5 @@
-import React from "react";
+import React, {useState}from "react";
+import {indexOfAll} from "../../utils/utilfunction"
 import {
   MDBCol,
   MDBContainer,
@@ -9,21 +10,92 @@ import {
   MDBTypography,
   MDBIcon,
 } from "mdb-react-ui-kit";
+import Dropdown from "react-bootstrap/Dropdown"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {faLightbulb, faStar} from '@fortawesome/free-solid-svg-icons';
+import {faClock, faStar, faMagnifyingGlass} from '@fortawesome/free-solid-svg-icons';
 import '@fortawesome/react-fontawesome';
 // Import Link component for all internal application hyperlinks
 import { Link } from "react-router-dom";
 import { chunk } from "lodash";
 
 const AllNannyList = ({ profiles }) => {
+  let sortProfile = [...profiles]
+
+const [nannyname, setnannyName] = useState('')
+const [renderProfile, setrenderProfile] = useState(profiles)
+
+const searchNanny = () => {
+  const nannyFirstName = []
+  for (let i = 0; i < profiles.length; i++){
+    nannyFirstName.push(profiles[i].firstName)
+  }
+  const queryNannies = indexOfAll(nannyFirstName, nannyname)
+  console.log(queryNannies)
+const profileArray = []
+
+  for (let i = 0; i < queryNannies.length; i++){
+    profileArray.push(profiles[queryNannies[i]])
+  }
+
+  setrenderProfile(profileArray)
+  setnannyName('')
+
+}
+
+const alphabeticalSort = () => {
+ sortProfile.sort(
+  (a, b) => a.firstName.toLowerCase() > b.firstName.toLowerCase() ? 1 : -1
+ )
+setrenderProfile(sortProfile)
+}
+  
+
+
   if (!profiles) {
     return <h3>No Profiles Yet</h3>;
   }
-  const profileRows = chunk(profiles, 3);
+  const profileRows = chunk(renderProfile, 3);
   return (
+    <div>
+      <div className="d-flex flex-row">
 
-    <div className=" w-100 p-3 my-4 " style={{ backgroundColor: "#eee" }}>
+          <MDBCol md="10" style={{marginLeft: "2%", paddingRight:"1px"}}>
+      <div className="input-group md-form form-sm form-1 pl-0">
+        <input
+          className="form-control my-0 py-1"
+          type="text"
+          value={nannyname}
+          onChange={(e) => {setnannyName(e.target.value)}}
+          placeholder="Search"
+          aria-label="Search"
+          />
+        <div className="input-group-prepend">
+          <button className="btn btn-secondary"
+          onClick={searchNanny}
+          >
+          <span className="input-group-text purple lighten-3" id="basic-text1">
+            <FontAwesomeIcon icon={faMagnifyingGlass} size="1x" />
+          </span>
+
+          </button>
+        </div>
+      </div>
+    </MDBCol>
+
+    <Dropdown style={{marginTop: "2px"}}>
+      <Dropdown.Toggle variant="secondary" id="dropdown-basic">
+        Sort
+      </Dropdown.Toggle>
+
+      <Dropdown.Menu>
+        <Dropdown.Item href="#/sort/A - Z" onClick={alphabeticalSort}>A - Z</Dropdown.Item>
+        <Dropdown.Item href="#/sort/Price">Price</Dropdown.Item>
+        <Dropdown.Item href="#sort/Nearest to me">Nearest to me</Dropdown.Item>
+      </Dropdown.Menu>
+    </Dropdown>
+            </div>
+    
+    <div className=" w-100 p-3 my-4 " style={{ backgroundColor: "#eee", backgroundImage:"url(https://thumbs.dreamstime.com/z/paw-prints-background-6936081.jpg)" }}>
       <MDBContainer className="my-4">
         {profileRows.map((profileRow) => (
           <MDBRow>
@@ -31,7 +103,7 @@ const AllNannyList = ({ profiles }) => {
               <MDBCol md="4" >
                 <MDBCard
                   className="w-auto mx-3 my-2 "
-                  style={{ borderRadius: "15px", backgroundColor: "#ffff",  }}
+                  style={{ borderRadius: "15px", backgroundColor: "#ffff"  }}
                 >
                   <MDBCardBody className="p-4 text-black">
                     <div>
@@ -70,31 +142,30 @@ const AllNannyList = ({ profiles }) => {
                           </div>
                           <ul
                             className="mb-0 list-unstyled d-flex flex-row"
-                            style={{ color: "#1B7B2C" }}
+                            style={{ color: "#1B7B2C", marginLeft: "25px" }}
                           >
                             <li>
-                            <FontAwesomeIcon icon={faStar}/>
-                            </li>
-
-                            <li>
-                            <FontAwesomeIcon icon={faStar}/>
+                            <FontAwesomeIcon icon={faStar} style={{color: "gold", marginTop: "30px"}}/>
                             </li>
                             <li>
-                            <FontAwesomeIcon icon={faStar}/>
+                            <FontAwesomeIcon icon={faStar} style={{color: "gold", marginTop: "30px"}}/>
                             </li>
                             <li>
-                            <FontAwesomeIcon icon={faStar}/>
+                            <FontAwesomeIcon icon={faStar} style={{color: "gold", marginTop: "30px"}}/>
                             </li>
                             <li>
-                            <FontAwesomeIcon icon={faStar}/>
+                            <FontAwesomeIcon icon={faStar} style={{color: "gold", marginTop: "30px"}}/>
                             </li>
+                            <li>
+                            <FontAwesomeIcon icon={faStar} style={{color: "#bbb", marginTop: "30px"}}/>
+                            </li>                      
                           </ul>
                         </div>
                       </div>
                     </div>
                     <hr />
-                    <button type="button" class="btn btn-primary">
-                      <MDBIcon far icon="clock me-2" /> Book now
+                    <button type="button" class="btn btn-secondary">
+                      <FontAwesomeIcon far icon={faClock} /> Book now
                     </button>
                   </MDBCardBody>
                 </MDBCard>
@@ -103,6 +174,7 @@ const AllNannyList = ({ profiles }) => {
           </MDBRow>
         ))}
       </MDBContainer>
+    </div>
     </div>
   );
 };
