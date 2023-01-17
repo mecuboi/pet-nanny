@@ -148,9 +148,12 @@ const AllNannyList = ({ profiles }) => {
                   >
                     <MDBCardBody className="p-4 text-black">
                       <div>
-                        <MDBTypography tag="h5">
+                      <Link to={`${profile._id}`} style={{textDecoration:'none', color:'black', fontWeight:'boldest'}}>
+
+                        <MDBTypography tag="h5" >
                           {profile.firstName} {profile.lastName}
                         </MDBTypography>
+                      </Link>
                         <div className="d-flex align-items-center justify-content-between mb-3">
                           <p className="small mb-0">
                             <MDBIcon far icon="clock me-2" />3 hrs
