@@ -138,9 +138,9 @@ const AllNannyList = ({ profiles }) => {
       >
         <MDBContainer className="my-4">
           {profileRows.map((profileRow) => (
-            <MDBRow>
+            <MDBRow key={profileRow.id}>
               {profileRow.map((profile) => (
-                <MDBCol md="4">
+                <MDBCol key={profile.id} md="4">
                   <MDBCard
                     className="w-auto mx-3 my-2 "
                     style={{ borderRadius: "15px", backgroundColor: "#ffff" }}

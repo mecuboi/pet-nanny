@@ -68,7 +68,7 @@ function App() {
             />
             <Route
               path="/nannylist/:_id"
-              element={<Profile />}
+              element={<Nannyprofile/>}
             />
             <Route
               path="/update-user-form"
