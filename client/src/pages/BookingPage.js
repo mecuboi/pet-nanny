@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useParams, Navigate } from 'react-router-dom';
 import { useQuery, useLazyQuery } from '@apollo/client';
-import { Button, Form, Container } from 'react-bootstrap';
+import { Button, Form, Container, InputGroup } from 'react-bootstrap';
 import DatePicker from "react-datepicker";
 import { loadStripe } from '@stripe/stripe-js';
 import { QUERY_CHECKOUT } from '../utils/queries';
@@ -17,7 +17,7 @@ import "@fortawesome/react-fontawesome";
 
 function BookingPage() {
 
-    
+
     const { _id } = useParams();
 
     const stripePromise = loadStripe('pk_test_51MQpZQCIw6RfRCJYcxVsxk9VUMvrKl3ClOMlMCl8mnKiQmUPGhR67xp8l81VLtCgdE33kV4MCOuFhB977aumnUpL00ZrDYPhrR');
@@ -31,6 +31,7 @@ function BookingPage() {
     const [userFormData, setUserFormData] = useState(
         {
             bookedDate: new Date(),
+            price: 100,
             additionalNotes: '',
         });
 
@@ -40,11 +41,11 @@ function BookingPage() {
 
     useEffect(() => {
         if (data) {
-          stripePromise.then((res) => {
-            res.redirectToCheckout({ sessionId: data.checkout.session });
-          });
+            stripePromise.then((res) => {
+                res.redirectToCheckout({ sessionId: data.checkout.session });
+            });
         }
-      }, [data]);
+    }, [data]);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -53,8 +54,8 @@ function BookingPage() {
 
     const dateChange = (e) => {
         setStartDate(e);
-        setUserFormData({...userFormData, date: startDate})
-      };
+        setUserFormData({ ...userFormData, date: startDate })
+    };
 
 
 
@@ -62,11 +63,11 @@ function BookingPage() {
         e.preventDefault()
         getCheckout({
             variables: {
-                ...userFormData, 
+                ...userFormData,
                 _id: _id,
                 price: 50
-             },
-          });
+            },
+        });
 
     }
 
@@ -93,16 +94,33 @@ function BookingPage() {
                         Double check your date
                     </Form.Text>
                 </Form.Group>
+                <fieldset disabled>
+                    <Form.Group className = "mb-3">
+                        <InputGroup>
+                            <InputGroup.Text>$</InputGroup.Text>
+                            <Form.Control
+                                type="number"
+                                name='price'
+                                readOnly
+                                value={userFormData.price}
+                            />
+                            <InputGroup.Text>.00</InputGroup.Text>
+                        </InputGroup>
+                        <Form.Text className="text-muted">
+                            Please note that this is a fixed rate for a full day
+                        </Form.Text>
+                    </Form.Group>
+                </fieldset>
 
                 <Form.Group className="mb-3" controlId="formBasicPassword">
                     <Form.Label>Additional Notes</Form.Label>
-                    <Form.Control 
-                    type="text" 
-                    placeholder="Any allergies?"
-                    onChange={handleChange}
-                    name='additionalNotes'
-                    value={userFormData.additionalNotes}
-                     />
+                    <Form.Control
+                        type="text"
+                        placeholder="Any allergies?"
+                        onChange={handleChange}
+                        name='additionalNotes'
+                        value={userFormData.additionalNotes}
+                    />
                 </Form.Group>
                 <Button variant="primary" type="submit" onClick={handlePayment}>
                     Proceed to payment

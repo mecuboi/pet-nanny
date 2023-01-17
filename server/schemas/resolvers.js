@@ -84,19 +84,23 @@ const resolvers = {
     },
 
     checkout: async (parent, args, context) => {
-      const url = new URL(context.headers.referer).origin;
+      const url = "http://localhost:3000"
+      // const url = new URL('https://www.google.com');
       
-      const newBooking = new Booking({
+      const newBooking = await Booking.create({
         bookedDate: args.bookedDate,
         price: args.price,
-        bookedBy: context.user._id,
+        bookedBy: "63c647d89d8c20708bf916d9",
         additionalNotes: args.additionalNotes
       })
-      await User.findByIdAndUpdate(context.user._id, 
+
+      await User.findByIdAndUpdate(args._id, 
         { $addToSet: { bookings: newBooking._id } });
 
-      const newOrder = new Order({ bookings: newBooking });
-
+      const newOrder = await Order.create({ bookings: newBooking });
+      
+      await User.findByIdAndUpdate("63c647d89d8c20708bf916d9", 
+        { $addToSet: { orders: newOrder._id } });
 
       const product = await stripe.products.create({
         name: `Order Number: ${newOrder._id}`,
@@ -120,8 +124,9 @@ const resolvers = {
         payment_method_types: ['card'],
         line_items,
         mode: 'payment',
-        success_url: `${url}/success?session_id={CHECKOUT_SESSION_ID}`,
-        cancel_url: `${url}/`
+        success_url: `${url}/me`,
+        cancel_url: `${url}/me`
+        // success?session_id={CHECKOUT_SESSION_ID}
       });
 
       return { session: session.id };
