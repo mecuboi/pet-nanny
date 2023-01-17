@@ -10,7 +10,6 @@ import '@fortawesome/react-fontawesome';
 
 import Auth from '../utils/auth';
 
-
 import './Profile.css';
 import BookingList from './BookingList';
 import OrderList from './OrderList';
@@ -26,14 +25,14 @@ const Profile = () => {
         }
       );
 
-      console.log(data)
+      //   console.log(Auth.getProfile().data._id)
       const user = data?.me || data?.user || {};
-
+      
       // Use React Router's `<Redirect />` component to redirect to personal profile page if username is yours
       if (Auth.loggedIn() && Auth.getProfile().data._id === profileId) {
-        return <Navigate to="/me" />;
-      }  
-
+          return <Navigate to="/me" />;
+        }  
+        
     if (loading) return <img
             src="https://media.giphy.com/media/3oEjI6SIIHBdRxXI40/giphy.gif"
             className="animation"
@@ -50,12 +49,15 @@ const Profile = () => {
               </h4>
             </Container>
           );
-      }
-  
+        }
+        
+    //     console.log(Auth.getProfile().data._id !== user._id)
+    //     console.log(user._id)
+    //   console.log( Auth.getProfile().data._id)
     return (
-        <div className="w-auto vh-100 bg-light">
-         <Card className="w-auto vh-100 bg-white">
-            <Card.Header className="bg-secondary">
+        <div className="w-auto bg-light">
+         <Card className="w-auto bg-white">
+            <Card.Header className="bg-secondary text-white">
                 <Card.Title>
                 {user.firstName + " " + user.lastName}
                 </Card.Title>
@@ -67,6 +69,16 @@ const Profile = () => {
                 <FontAwesomeIcon icon={faCamera}/>
             </Link>
         </Row>
+        <Col className='pt-3'>
+        {Auth.getProfile().data._id === user._id &&   
+            <Link className="customhomebutton" to="/update-user-form">
+                <Button variant="primary">Edit Profile</Button>
+            </Link>
+        }
+        { user.role === 'Nanny' && Auth.getProfile().data._id !== user._id &&
+        <Button className="customhomebutton" variant="secondary">Book</Button>
+        }
+        </Col>
         <div id="description-container" className='py-5'>
         <Card.Footer>
           {user.description}
@@ -85,14 +97,6 @@ const Profile = () => {
     </Row>
     </Card.Footer>
         </div>
-        {Auth.getProfile().data._id === user._id &&   
-            <Link to="/update-user-form">
-                <Button variant="primary">Edit Profile</Button>
-            </Link>
-        }
-        { user.role === 'Nanny' && Auth.getProfile().data._id === !user._id &&
-        <Button variant="secondary">Book</Button>
-        }
       </Card.Body>
     </Card>
             { user.role === 'Nanny' && 
