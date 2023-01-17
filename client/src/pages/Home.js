@@ -71,8 +71,8 @@ function Home() {
 
       <h2 className="m-5 text-center text-secondary">Get your journey with your pets <span className="text-primary">(or in this case without your pets)</span> started here</h2>
       <div className="d-flex justify-content-center">
-        <Link to='NannyList'>
-          <Button variant="primary" className="m-2 mb-5 p-3 customfooter">Search for a Nanny</Button>{' '}
+        <Link to='NannyList' className='customhomebutton'>
+          <Button variant="primary" className="m-2 mb-5 p-3">Search for a Nanny</Button>{' '}
         </Link>
       </div>
       {/* <div className="d-flex justify-content-center">

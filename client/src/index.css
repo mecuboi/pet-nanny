@@ -203,8 +203,8 @@ input:focus {
   color: var(--error);
 }
 
-.customfooter {
-  margin-bottom:100px;
+.customhomebutton{
+  margin-bottom:50px;
 }
 
 
