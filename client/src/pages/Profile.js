@@ -1,11 +1,11 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Link, useParams, Navigate  } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
 import { QUERY_ME, QUERY_SINGLE_USER } from '../utils/queries';
 
-import { Container, Row, Col, Button, Card, Nav, Navbar, Modal, Tab } from 'react-bootstrap';
+import { Container, Row, Col, Button, Card } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCog, faTrash, faCamera } from '@fortawesome/free-solid-svg-icons';
+import { faCamera } from '@fortawesome/free-solid-svg-icons';
 import '@fortawesome/react-fontawesome';
 
 import Auth from '../utils/auth';
