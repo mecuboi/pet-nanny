@@ -6,13 +6,6 @@ import DatePicker from "react-datepicker";
 import { loadStripe } from '@stripe/stripe-js';
 import { QUERY_CHECKOUT } from '../utils/queries';
 import { QUERY_SINGLE_USER } from '../utils/queries';
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-    faClock,
-    faStar,
-    faMagnifyingGlass,
-} from "@fortawesome/free-solid-svg-icons";
-import "@fortawesome/react-fontawesome";
 
 
 function BookingPage() {
@@ -44,7 +37,7 @@ function BookingPage() {
             stripePromise.then((res) => {
                 res.redirectToCheckout({ sessionId: data.checkout.session });
             });
-        } 
+        }
     }, [data]);
 
     const handleChange = (e) => {
@@ -69,6 +62,10 @@ function BookingPage() {
 
     }
 
+    if (getNanny.error) {
+        console.log(getNanny.error);
+        return (<h4 className="text-secondary m-3 text-center">Please login/signup to make a booking</h4>)
+    }
 
     return (
         <Container className='mt-3'>
@@ -93,7 +90,7 @@ function BookingPage() {
                     </Form.Text>
                 </Form.Group>
                 <fieldset disabled>
-                    <Form.Group className = "mb-3">
+                    <Form.Group className="mb-3">
                         <InputGroup>
                             <InputGroup.Text>$</InputGroup.Text>
                             <Form.Control

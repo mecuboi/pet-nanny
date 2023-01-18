@@ -3,6 +3,7 @@ import { Form, Button, Alert, Col, Row, InputGroup } from 'react-bootstrap';
 import { useMutation } from '@apollo/client';
 import { ADD_USER } from '../../utils/mutations';
 import Auth from '../../utils/auth';
+import { Link, Navigate } from "react-router-dom";
 
 const SignupForm = () => {
   //set initial form state
@@ -50,7 +51,7 @@ const SignupForm = () => {
       });
 
       Auth.login(data.addUser.token, data.addUser.user.firstName);
-      window.location.replace('/me')
+      window.location.href = "/me"
       
 
     } catch (err) {
@@ -168,6 +169,7 @@ const SignupForm = () => {
             value={userFormData.password}
             required
           />
+          <Form.Label className="text-secondary small">Password must have a minimum length of 5 characters</Form.Label>
           <Form.Control.Feedback type='invalid'>Password is required!</Form.Control.Feedback>
         </Form.Group>
         <Button

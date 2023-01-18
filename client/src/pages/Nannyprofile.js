@@ -50,10 +50,11 @@ const Nannyprofile = () => {
     );
   if (error) {
     console.log(error);
-    return <h2>Error</h2>;
+    return (<h4 className="text-secondary m-3 text-center">Please login to view this page</h4>)
   }
 
   return (
+
     <div
       className=" w-100 p-3 my-4 "
       style={{
@@ -129,16 +130,17 @@ const Nannyprofile = () => {
                 </div>
               </MDBCardBody>
               <div> 
+                <Link to={`/bookingPage/${user._id}`}>
                 <button
                   type="button"
                   id={user._id}
                   style={{ marginBottom: "25px" }}
                   class="btn btn-secondary"
-                  onClick={() => {window.location.assign(`/bookingPage/${user._id}`)} }
+                  // onClick={() => {window.location.assign(`/bookingPage/${user._id}`)} }
                 >
                   <FontAwesomeIcon far icon={faClock} /> Book now
                 </button>
-                
+                </Link>
               </div>
             </MDBCard>
           </MDBCol>
