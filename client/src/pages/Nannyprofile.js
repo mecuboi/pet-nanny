@@ -12,19 +12,14 @@ import {
   MDBTypography,
   MDBCardText,
 } from "mdb-react-ui-kit";
-import { Row, Button, Card } from "react-bootstrap";
 import "@fortawesome/react-fontawesome";
 
 import Auth from "../utils/auth";
-
-import "./Profile.css";
 import BookingList from "./BookingList";
 import OrderList from "./OrderList";
 import DatePicker from "react-datepicker";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faClock,
-} from "@fortawesome/free-solid-svg-icons";
+import { faClock } from "@fortawesome/free-solid-svg-icons";
 import "@fortawesome/react-fontawesome";
 
 const Nannyprofile = () => {
@@ -136,7 +131,7 @@ const Nannyprofile = () => {
                   </div>
                 </div>
               </MDBCardBody>
-              <div> 
+              <div>
                 <button
                   type="button"
                   id={user._id}
