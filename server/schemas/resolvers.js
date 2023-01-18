@@ -10,14 +10,21 @@ const resolvers = {
     me: async (parent, args, context) => {
       // if (context.user) {
       const userData = await User.findOne({
-        _id: context.user._id
-      }).populate({
-        path: 'orders.bookings',
-        select: 'bookedDate '
+        _id: "63c804f42162e7c7a904b509"
       })
+      // .populate('orders').populate({
+      //   path: 'orders',
+      //   populate:"bookings"
+      // })
+
+
+      // .populate({
+      //   path: 'orders.bookings',
+      //   select: 'bookedDate '
+      // })
 
       return userData
-      // }
+    // }
 
       throw new AuthenticationError('Not logged in')
     },
@@ -92,55 +99,57 @@ const resolvers = {
     },
 
     checkout: async (parent, args, context) => {
-      // const url = "http://localhost:3000"
-      const url = new URL(context.headers.referer).origin;
-      // const url = new URL('https://www.google.com');
+      if (context.user) {
+        const url = new URL(context.headers.referer).origin;
 
-      const newBooking = await Booking.create({
-        bookedDate: args.bookedDate,
-        price: args.price,
-        bookedBy: context.user._id,
-        additionalNotes: args.additionalNotes
-      })
+        const newBooking = await Booking.create({
+          bookedDate: args.bookedDate,
+          price: args.price,
+          bookedBy: context.user._id,
+          additionalNotes: args.additionalNotes
+        })
 
-      const newOrder = await Order.create({ bookings: newBooking });
+        const newOrder = await Order.create({ bookings: newBooking });
 
-      await User.findByIdAndUpdate(args._id,
-        { $addToSet: { bookings: newBooking } });
+        await User.findByIdAndUpdate(args._id,
+          { $addToSet: { bookings: newBooking } });
 
-      await User.findByIdAndUpdate(context.user._id,
-        { $addToSet: { orders: newOrder } });
+        await User.findByIdAndUpdate(context.user._id,
+          { $addToSet: { orders: newOrder } });
 
-      const date = args.bookedDate.split('T', 1)
+        const date = args.bookedDate.split('T', 1)
 
-      const product = await stripe.products.create({
-        name: `Booking date: ${date}`,
-        description: "Nanny whole day booking"
-      })
+        const product = await stripe.products.create({
+          name: `Booking date: ${date}`,
+          description: "Nanny whole day booking"
+        })
 
-      const price = await stripe.prices.create({
-        product: product.id,
-        unit_amount: newBooking.price * 100,
-        currency: 'aud'
-      });
+        const price = await stripe.prices.create({
+          product: product.id,
+          unit_amount: newBooking.price * 100,
+          currency: 'aud'
+        });
 
-      const line_items = [
-        {
-          price: price.id,
-          quantity: 1
-        }
-      ];
+        const line_items = [
+          {
+            price: price.id,
+            quantity: 1
+          }
+        ];
 
-      const session = await stripe.checkout.sessions.create({
-        payment_method_types: ['card'],
-        line_items,
-        mode: 'payment',
-        success_url: `${url}/success`,
-        cancel_url: `${url}/me`
-        // success?session_id={CHECKOUT_SESSION_ID}
-      });
+        const session = await stripe.checkout.sessions.create({
+          payment_method_types: ['card'],
+          line_items,
+          mode: 'payment',
+          success_url: `${url}/success`,
+          cancel_url: `${url}/me`
+          // success?session_id={CHECKOUT_SESSION_ID}
+        });
 
-      return { session: session.id };
+        return { session: session.id };
+      }
+      throw new AuthenticationError('Not logged in');
+
     },
 
     bookedNanny: async (parent, { _id }, context) => {
