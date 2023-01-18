@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Link, useParams, Navigate } from "react-router-dom";
 import { useQuery } from "@apollo/client";
 import { QUERY_SINGLE_USER } from "../utils/queries";
@@ -12,15 +12,8 @@ import {
   MDBTypography,
   MDBCardText,
 } from "mdb-react-ui-kit";
-import { Row, Button, Card } from "react-bootstrap";
 import "@fortawesome/react-fontawesome";
-
 import Auth from "../utils/auth";
-
-import "./Profile.css";
-import BookingList from "./BookingList";
-import OrderList from "./OrderList";
-import DatePicker from "react-datepicker";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faClock,
