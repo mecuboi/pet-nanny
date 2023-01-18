@@ -3,16 +3,21 @@ const { User, Booking, Order } = require('../models');
 const { signToken } = require('../utils/auth');
 const stripe = require('stripe')('sk_test_51MQpZQCIw6RfRCJYsWbRBGrgYW5YVwMK5ml5wRXASIFbJJEMGXObq31rAx0tZ2dDqZgF4We6nNfaA2ICrGzYck7100zSZKYleX');
 
+
+
 const resolvers = {
   Query: {
     me: async (parent, args, context) => {
       if (context.user) {
-        const userData = await User.findOne({
-          _id: context.user._id
-        })
+      const userData = await User.findById(context.user)
+      .populate('orders')
+      .populate({
+        path: 'orders',
+        populate:"bookings"
+      })
 
-        return userData
-      }
+      return userData
+    }
 
       throw new AuthenticationError('Not logged in')
     },
@@ -22,8 +27,11 @@ const resolvers = {
     users: async () => {
       return await User.find({ role: 'Pawrent' });
     },
-    user: async (_, { _id }) => {
-      return await User.findOne({ _id: _id });
+    user: async (_, { _id }, context) => {
+      if (context.user) {
+        return await User.findOne({ _id: _id });
+      }
+      throw new AuthenticationError('Not logged in');
     },
     nannies: async () => {
       return await User.find({ role: 'Nanny' });
@@ -84,53 +92,67 @@ const resolvers = {
     },
 
     checkout: async (parent, args, context) => {
-      const url = "http://localhost:3000"
-      // const url = new URL('https://www.google.com');
+      if (context.user) {
+        const url = new URL(context.headers.referer).origin;
 
-      const newBooking = await Booking.create({
-        bookedDate: args.bookedDate,
-        price: args.price,
-        bookedBy: context.user._id,
-        additionalNotes: args.additionalNotes
-      })
+        const newBooking = await Booking.create({
+          bookedDate: args.bookedDate,
+          price: args.price,
+          bookedBy: context.user._id,
+          additionalNotes: args.additionalNotes
+        })
 
-      await User.findByIdAndUpdate(args._id,
-        { $addToSet: { bookings: newBooking._id } });
+        const newOrder = await Order.create({ bookings: newBooking });
 
-      const newOrder = await Order.create({ bookings: newBooking });
+        await User.findByIdAndUpdate(args._id,
+          { $addToSet: { bookings: newBooking } });
 
-      await User.findByIdAndUpdate(context.user._id,
-        { $addToSet: { orders: newOrder._id } });
+        await User.findByIdAndUpdate(context.user._id,
+          { $addToSet: { orders: newOrder } });
 
-      const product = await stripe.products.create({
-        name: `Order Number: ${newOrder._id}`,
-        description: "Nanny whole day booking"
-      })
+        const date = args.bookedDate.split('T', 1)
 
-      const price = await stripe.prices.create({
-        product: product.id,
-        unit_amount: newBooking.price * 100,
-        currency: 'aud'
-      });
+        const product = await stripe.products.create({
+          name: `Booking date: ${date}`,
+          description: "Nanny whole day booking"
+        })
 
-      const line_items = [
-        {
-          price: price.id,
-          quantity: 1
-        }
-      ];
+        const price = await stripe.prices.create({
+          product: product.id,
+          unit_amount: newBooking.price * 100,
+          currency: 'aud'
+        });
 
-      const session = await stripe.checkout.sessions.create({
-        payment_method_types: ['card'],
-        line_items,
-        mode: 'payment',
-        success_url: `${url}/me`,
-        cancel_url: `${url}/me`
-        // success?session_id={CHECKOUT_SESSION_ID}
-      });
+        const line_items = [
+          {
+            price: price.id,
+            quantity: 1
+          }
+        ];
 
-      return { session: session.id };
-    }
+        const session = await stripe.checkout.sessions.create({
+          payment_method_types: ['card'],
+          line_items,
+          mode: 'payment',
+          success_url: `${url}/success`,
+          cancel_url: `${url}/me`
+          // success?session_id={CHECKOUT_SESSION_ID}
+        });
+
+        return { session: session.id };
+      }
+      throw new AuthenticationError('Not logged in');
+
+    },
+
+    bookedNanny: async (parent, { _id }, context) => {
+
+      const user = await User.findOne({ bookings: { price: 100 } })
+
+      return user
+
+    },
+
   },
   Mutation: {
     addUser: async (parent, args) => {

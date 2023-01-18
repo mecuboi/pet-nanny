@@ -207,6 +207,9 @@ input:focus {
   margin-bottom:50px;
 }
 
+.footermarginbottom {
+  margin-bottom: 75px;
+}
 
 @media screen and (max-width: 768px) {
   .card {

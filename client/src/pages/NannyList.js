@@ -13,16 +13,19 @@ function NannyList() {
   return (
     <>
       <div>
-        {loading ? (
-          <img
+          {loading ? 
+            <img
             src="https://media.giphy.com/media/3oEjI6SIIHBdRxXI40/giphy.gif"
             className="animation"
             alt="loading"
-          />
-        ) : (
-          <AllNannyList profiles={nannies} />
-        )}
-      </div>
+             />
+           : 
+            
+            <AllNannyList
+              profiles={nannies}
+            />
+          }
+        </div>
     </>
   );
 }

@@ -19,6 +19,9 @@ import NannyList from './pages/NannyList';
 import UpdateUserForm from './pages/UpdateUserForm';
 import UploadImageForm from './pages/UploadImageForm'
 import Nannyprofile from "./pages/Nannyprofile";
+import Success from "./pages/Success"
+import OrderList from './pages/OrderList'
+import BookingList from './pages/BookingList'
 
 
 const httpLink = createHttpLink({
@@ -85,8 +88,21 @@ function App() {
                 path="/bookingPage/:_id" 
                 element={<BookingPage />} 
               />
-
+              {/* FOR TESTING */}
+            <Route 
+                path="/orderlist" 
+                element={<OrderList />} 
+              />
+            <Route 
+                path="/bookinglist" 
+                element={<BookingList />} 
+              />
+              <Route
+            path="/success"
+            element={<Success />}
+            />
           </Routes>
+          
           <FooterNav />
         </div>
       </Router>

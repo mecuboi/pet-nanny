@@ -57,6 +57,7 @@ db.once('open', async () => {
     email: 'catdog@testmail.com',
     password: 'password12345',
     address: 'rainbow',
+    picture:"https://assets.teenvogue.com/photos/59d3b74cc5559f37a703150c/3:2/w_2411,h_1607,c_limit/MCDMOAN_EC058.jpg",
     // orders: [
     //   {
     //     bookings: [bookings[4]._id, bookings[5]._id]
@@ -76,7 +77,8 @@ db.once('open', async () => {
       lastName: 'Ishere',
       email: 'fanny@testmail.com',
       password: 'password12345',
-      address: 'clouds',
+      address: '35 Cloud Street',
+      picture:"https://assets.teenvogue.com/photos/59d3b74cc5559f37a703150c/3:2/w_2411,h_1607,c_limit/MCDMOAN_EC058.jpg",
       role: 'Nanny',
       // bookings: [
       //   { BookedDate: '20 Jan 2023', BookedBy:  savedUser1._id},
@@ -92,7 +94,8 @@ db.once('open', async () => {
     lastName: 'Washere',
     email: 'nanny@testmail.com',
     password: 'password12345',
-    address: 'above',
+    address: '65 Above Highway',
+    picture:"https://assets.teenvogue.com/photos/59d3b74cc5559f37a703150c/3:2/w_2411,h_1607,c_limit/MCDMOAN_EC058.jpg",
     role: 'Nanny',
     // bookings: [
     //   { BookedDate: '22 Jan 2023', BookedBy: anon._id.toString() },
@@ -109,7 +112,8 @@ db.once('open', async () => {
     lastName: 'Nothere',
     email: 'Janny@testmail.com',
     password: 'password12345',
-    address: 'high',
+    address: '15 High Avenue',
+    picture:"https://assets.teenvogue.com/photos/59d3b74cc5559f37a703150c/3:2/w_2411,h_1607,c_limit/MCDMOAN_EC058.jpg",
     role: 'Nanny',
     // bookings: [
     //   { BookedDate: '24 Jan 2023', BookedBy: catdog._id.toString()  },
@@ -163,6 +167,7 @@ db.once('open', async () => {
         address: "33 Benny Street, Quoiba Tas",
         postcode: "7310",
         role: "Nanny",
+        picture:"https://assets.teenvogue.com/photos/59d3b74cc5559f37a703150c/3:2/w_2411,h_1607,c_limit/MCDMOAN_EC058.jpg",
         description: "I occasionally enjoy a sing along with my pet parrot",
         
   });
@@ -180,7 +185,7 @@ db.once('open', async () => {
     
   });
   
-  console.log('users seeded');te(
+  console.log('users seeded');
   //   { email: 'anon@testmail.com' },
   //   { $push: { orders: { bookings: [bookings[2]._id, bookings[3]._id] } } }
   // );
