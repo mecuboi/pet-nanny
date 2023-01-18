@@ -13,7 +13,6 @@ import Auth from '../utils/auth';
 import './Profile.css';
 import BookingList from './BookingList';
 import OrderList from './OrderList';
-import UploadImageForm from './UploadImageForm';
 
 
 const Profile = () => {
@@ -26,6 +25,8 @@ const Profile = () => {
       );
 
       const user = data?.me || data?.user || {};
+
+      const bookingUrl = `/bookingPage/${user._id}`;
       
       // Use React Router's `<Redirect />` component to redirect to personal profile page if username is yours
       if (Auth.loggedIn() && Auth.getProfile().data._id === profileId) {
@@ -50,9 +51,6 @@ const Profile = () => {
           );
         }
         
-    //     console.log(Auth.getProfile().data._id !== user._id)
-    //     console.log(user._id)
-    //   console.log( Auth.getProfile().data._id)
     return (
         <div className="w-auto bg-light">
          <Card className="w-auto bg-white">
@@ -77,7 +75,11 @@ const Profile = () => {
             </Link>
         }
         { user.role === 'Nanny' && Auth.getProfile().data._id !== user._id &&
+        <Link
+        to={bookingUrl}
+        >
         <Button className="customhomebutton" variant="secondary">Book</Button>
+        </Link>
         }
         </Col>
         <div id="description-container" className='py-5'>
@@ -111,9 +113,6 @@ const Profile = () => {
                 </div>
             }
         </div>
-
-    
-
     );
 };
 

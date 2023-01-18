@@ -76,18 +76,17 @@ useEffect(() => {
                 address: userFormData.address,
                 picture: userFormData.picture,
                 postcode: userFormData.postcode,
-                description: userFormData.description
+      
+          description: userFormData.description
                 }
-        });
-
-        } catch (err) {
+        });        } catch (err) {
             console.log(err);
         }
         return window.location.replace('/me')
     };
 
     return(
-        <>
+      <>
          {/* This is needed for the validation functionality above */}
         <Form className="p-5 w-100 vh-100" validated={validated} onSubmit={handleFormSubmit}>
          {/* show alert if server response is bad */}

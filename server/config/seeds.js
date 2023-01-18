@@ -180,7 +180,7 @@ db.once('open', async () => {
     
   });
   
-  console.log('users seeded');te(
+  console.log('users seeded');
   //   { email: 'anon@testmail.com' },
   //   { $push: { orders: { bookings: [bookings[2]._id, bookings[3]._id] } } }
   // );
