@@ -47,6 +47,7 @@ const typeDefs = gql`
     bookings: [Booking]
     userBooking(_id: ID!): Booking
     singleBooking(_id: ID!): Booking
+    bookedNanny(_id: ID!): User
     checkout(_id: ID!, bookedDate: String!, price: Int!, additionalNotes:String): Checkout
   }
  

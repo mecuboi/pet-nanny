@@ -8,13 +8,16 @@ const stripe = require('stripe')('sk_test_51MQpZQCIw6RfRCJYsWbRBGrgYW5YVwMK5ml5w
 const resolvers = {
   Query: {
     me: async (parent, args, context) => {
-      if (context.user) {
+      // if (context.user) {
         const userData = await User.findOne({
-          _id: context.user._id
+          _id: "63c647d89d8c20708bf916d9"
+        }).populate({
+          path: 'orders.bookings',
+          select: 'bookedDate '
         })
 
         return userData
-      }
+      // }
 
       throw new AuthenticationError('Not logged in')
     },
@@ -124,7 +127,7 @@ const resolvers = {
           price: price.id,
           quantity: 1
         }
-      ];
+      ];  
 
       const session = await stripe.checkout.sessions.create({
         payment_method_types: ['card'],
@@ -136,7 +139,16 @@ const resolvers = {
       });
 
       return { session: session.id };
-    }
+    },
+
+    bookedNanny: async (parent, { _id }, context) => {
+
+        const user = await User.findOne({ bookings: {price: 100} })
+
+        return user
+
+    },
+
   },
   Mutation: {
     addUser: async (parent, args) => {
