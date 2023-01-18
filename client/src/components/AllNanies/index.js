@@ -233,16 +233,17 @@ const AllNannyList = ({ profiles }) => {
                           </div>
                         </div>
                       <div>
+                        <Link to={`/bookingPage/${profile._id}`}>
                         <button
                           type="button"
                           id={profile._id}
                           style={{ marginBottom: "5px" }}
                           className="btn btn-secondary"
-                          onClick={ () => {window.location.assign(`/bookingPage/${profile._id}`)}}
+                          // onClick={ () => {window.location.assign(`/bookingPage/${profile._id}`)}}
                         >
                           <FontAwesomeIcon far="true" icon={faClock} /> Book now
                         </button>
-                        
+                        </Link>
                       </div>
                     </MDBCardBody>
                   </MDBCard>

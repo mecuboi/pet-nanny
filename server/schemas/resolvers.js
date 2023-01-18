@@ -27,8 +27,11 @@ const resolvers = {
     users: async () => {
       return await User.find({ role: 'Pawrent' });
     },
-    user: async (_, { _id }) => {
-      return await User.findOne({ _id: _id });
+    user: async (_, { _id }, context) => {
+      if (context.user) {
+        return await User.findOne({ _id: _id });
+      }
+      throw new AuthenticationError('Not logged in');
     },
     nannies: async () => {
       return await User.find({ role: 'Nanny' });
