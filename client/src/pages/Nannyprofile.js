@@ -106,10 +106,7 @@ const Nannyprofile = () => {
                     email: {user.email}
                     </MDBCardText>
                     <MDBCardText className="small text-muted mb-0">
-                    Address: {user.address} 
-                    </MDBCardText>
-                    <MDBCardText className="small text-muted mb-0">
-                    Postcode: {user.postcode}
+                    Address: {user.address} {user.postcode}
                     </MDBCardText>
                   </div>
                 </div>
@@ -137,7 +134,7 @@ const Nannyprofile = () => {
                   id={user._id}
                   style={{ marginBottom: "25px" }}
                   class="btn btn-secondary"
-                  onClick={() => {window.location.replace(`/bookingPage/${user._id}`)} }
+                  onClick={() => {window.location.assign(`/bookingPage/${user._id}`)} }
                 >
                   <FontAwesomeIcon far icon={faClock} /> Book now
                 </button>

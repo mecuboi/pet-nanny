@@ -19,7 +19,7 @@ const OrderList = (props) => {
     return (
       (arrayOfOrders ? 
       <div className = "footermarginbottom">
-           <h3 className = "text-secondary m-2"> <strong>My Orders</strong></h3>
+           <h3 className = "text-secondary m-3 text-center"> <strong>My Orders</strong></h3>
         {arrayOfOrders.map((order) => (
           <MyOrders 
             key={order.bookings._id}

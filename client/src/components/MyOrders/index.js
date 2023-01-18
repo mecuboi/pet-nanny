@@ -4,7 +4,7 @@ import { Container, Row, Col } from 'react-bootstrap';
 const MyOrders = (props) => {
 
   return (
-    <Container fluid className="mb-3 border rounded">
+    <Container fluid className="mb-3 px-md-4 py-md-3 border rounded">
       <Row>
         <Col>
           <div>
