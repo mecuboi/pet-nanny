@@ -63,7 +63,7 @@ const Nannyprofile = () => {
               <div className="rounded-top text-white d-flex flex-row" style={{ backgroundColor: '#333', height: '200px' }}>
                 <div className="ms-4 mt-5 d-flex flex-column" style={{ width: '150px', }}>
                   <MDBCardImage  src={user.picture}
-                    alt="Generic placeholder image" className="mt-4 mb-2 img-thumbnail" fluid style={{ width: '150px', zIndex: '1', height:'200px' }} />
+                    alt="Generic placeholder image" className="mt-4 mb-2 img-thumbnail" fluid style={{ width: '150px', zIndex: '1', height:'200px', objectFit:'cover' }} />
                 </div>
                 <div className="ms-3" style={{ marginTop: '130px' }}>
                   <MDBTypography tag="h5">{user.firstName} {user.lastName}</MDBTypography>

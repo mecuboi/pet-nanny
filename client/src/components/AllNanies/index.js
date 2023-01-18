@@ -182,7 +182,7 @@ const AllNannyList = ({ profiles }) => {
                         <div className="flex-shrink-0">
                           <Link to={`${profile._id}`}>
                             <MDBCardImage
-                              style={{ width: "75px", height: "75px" }}
+                              style={{ width: "75px", height: "75px", objectFit:'cover' }}
                               className="img-fluid rounded-circle border border-dark border-3"
                               src={profile.picture}
                               alt="img"
