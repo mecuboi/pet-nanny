@@ -31,20 +31,10 @@ const AllNannyList = ({ profiles }) => {
 
   const [nannyname, setnannyName] = useState("");
   const [renderProfile, setrenderProfile] = useState(profiles);
-  const [startDate, setStartDate] = useState(new Date());
+
   const [isClicked, setisClicked] = useState(true);
-
-  const [openProfileId, setOpenProfileId] = useState();
-
-  const handleChange = (e) => {
-    setOpenProfileId();
-    setStartDate(e);
-  };
-  const handleClick = (newOpenProfileId) => {
-    // e.preventDefault();
-    setOpenProfileId(newOpenProfileId);
-    setStartDate(new Date());
-  };
+  const [openProfileId, setOpenProfileId] = useState()
+  
 
   const handleEnterKey = (e) => {
     if (e.key === "Enter") {
@@ -91,8 +81,8 @@ const AllNannyList = ({ profiles }) => {
   const profileRows = chunk(renderProfile, 3);
   return (
     <div>
-      <div className="d-flex flex-row">
-        <MDBCol md="10" style={{ marginLeft: "2%", paddingRight: "1px" }}>
+      <div className="d-flex flex-row pt-3 my-1">
+        <MDBCol md="10" style={{ marginLeft: "2%", paddingRight: "1px" } } >
           <div className="input-group md-form form-sm form-1 pl-0">
             <input
               className="form-control my-0 py-1"
@@ -145,14 +135,14 @@ const AllNannyList = ({ profiles }) => {
           backgroundColor: "#eee",
           backgroundImage:
             "url(https://thumbs.dreamstime.com/z/paw-prints-background-6936081.jpg)",
-          minHeight: "400px",
+          minHeight: "1200px",
         }}
       >
         <MDBContainer className="my-4">
           {profileRows.map((profileRow) => (
             <MDBRow key={profileRow.id}>
               {profileRow.map((profile) => (
-                <MDBCol key={profile.id} md="4">
+                <MDBCol key={`${profile.id}-col`} md="4">
                   <MDBCard
                     className="w-auto mx-3 my-2 "
                     style={{ borderRadius: "15px", backgroundColor: "#ffff" }}
@@ -245,20 +235,12 @@ const AllNannyList = ({ profiles }) => {
                           type="button"
                           id={profile._id}
                           style={{ marginBottom: "5px" }}
-                          class="btn btn-secondary"
-                          onClick={() => handleClick(profile._id)}
+                          className="btn btn-secondary"
+                          onClick={ () => {window.location.replace(`/bookingPage/${profile._id}`)}}
                         >
-                          <FontAwesomeIcon far icon={faClock} /> Book now
+                          <FontAwesomeIcon far="true" icon={faClock} /> Book now
                         </button>
-                        {openProfileId === profile._id && (
-                          <DatePicker
-                            id={profile._id}
-                            selected={startDate}
-                            onChange={handleChange}
-                            minDate={new Date()}
-                            isClearable
-                          />
-                        )}
+                        
                       </div>
                     </MDBCardBody>
                   </MDBCard>
