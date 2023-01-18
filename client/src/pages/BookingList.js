@@ -11,6 +11,9 @@ const BookingList = (props) => {
   if (error) return <p>Error</p>;
 
     return (
+        (bookings ?
+        <p>No Bookings</p>
+        :
       <div>
         {bookings.map(booking => (
           <MyBookings 
@@ -27,6 +30,7 @@ const BookingList = (props) => {
           />
         ))}
       </div>
+    )
     )
   }
 

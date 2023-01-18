@@ -20,6 +20,9 @@ import UpdateUserForm from './pages/UpdateUserForm';
 import UploadImageForm from './pages/UploadImageForm'
 import Nannyprofile from "./pages/Nannyprofile";
 
+import OrderList from './pages/OrderList'
+import BookingList from './pages/BookingList'
+
 
 const httpLink = createHttpLink({
   uri: "/graphql",
@@ -85,7 +88,15 @@ function App() {
                 path="/bookingPage/:_id" 
                 element={<BookingPage />} 
               />
-
+              {/* FOR TESTING */}
+            <Route 
+                path="/orderlist" 
+                element={<OrderList />} 
+              />
+            <Route 
+                path="/bookinglist" 
+                element={<BookingList />} 
+              />
           </Routes>
           <FooterNav />
         </div>
