@@ -52,7 +52,7 @@ const Profile = () => {
         }
         
     return (
-        <div className="w-auto bg-light">
+        <Container className="mt-5 w-auto bg-light">
          <Card className="w-auto bg-white">
             <Card.Header className="bg-secondary text-white">
                 <Card.Title>
@@ -112,7 +112,7 @@ const Profile = () => {
                     <OrderList />
                 </div>
             }
-        </div>
+        </Container>
     );
 };
 

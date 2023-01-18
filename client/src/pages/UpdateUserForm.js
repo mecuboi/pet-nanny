@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import { useQuery, useMutation } from '@apollo/client';
 import { useNavigate, Navigate } from "react-router-dom";
-import { Form, Button, Alert, Col, Row, InputGroup } from 'react-bootstrap';
+import { Form, Button, Alert, Col, Row, InputGroup, Container } from 'react-bootstrap';
 import { QUERY_ME } from '../utils/queries';
 import { UPDATE_USER } from '../utils/mutations';
 import { useEffect } from 'react';
 import TestFrom from './UploadImageForm';
-import Dropzone from 'react-dropzone';
+
 
 import Auth from '../utils/auth';
 import UploadImageForm from './UploadImageForm';
@@ -87,8 +87,9 @@ useEffect(() => {
 
     return(
       <>
+      <Container className = "border rounded mt-4 footermarginbottom p-1">
          {/* This is needed for the validation functionality above */}
-        <Form className="p-5 w-100 vh-100" validated={validated} onSubmit={handleFormSubmit}>
+        <Form className="p-5 w-100 " validated={validated} onSubmit={handleFormSubmit}>
          {/* show alert if server response is bad */}
          <Alert dismissible onClose={() => setShowAlert(false)} show={showAlert} variant='danger'>
           Not valid inputs
@@ -175,6 +176,7 @@ useEffect(() => {
         
         </Row>
     </Form>
+    </Container>
     </>
     )
 }

@@ -3,16 +3,21 @@ const { User, Booking, Order } = require('../models');
 const { signToken } = require('../utils/auth');
 const stripe = require('stripe')('sk_test_51MQpZQCIw6RfRCJYsWbRBGrgYW5YVwMK5ml5wRXASIFbJJEMGXObq31rAx0tZ2dDqZgF4We6nNfaA2ICrGzYck7100zSZKYleX');
 
+
+
 const resolvers = {
   Query: {
     me: async (parent, args, context) => {
-      if (context.user) {
+      // if (context.user) {
         const userData = await User.findOne({
           _id: context.user._id
+        }).populate({
+          path: 'orders.bookings',
+          select: 'bookedDate '
         })
 
         return userData
-      }
+      // }
 
       throw new AuthenticationError('Not logged in')
     },
@@ -102,8 +107,12 @@ const resolvers = {
       await User.findByIdAndUpdate(context.user._id,
         { $addToSet: { orders: newOrder._id } });
 
+      const date = args.bookedDate.split('T', 1)
+
+      const nanny = await User.findById(args._id).populate('firstName')
+
       const product = await stripe.products.create({
-        name: `Order Number: ${newOrder._id}`,
+        name: `Booking date: ${date}`,
         description: "Nanny whole day booking"
       })
 
@@ -118,19 +127,28 @@ const resolvers = {
           price: price.id,
           quantity: 1
         }
-      ];
+      ];  
 
       const session = await stripe.checkout.sessions.create({
         payment_method_types: ['card'],
         line_items,
         mode: 'payment',
-        success_url: `${url}/me`,
+        success_url: `${url}/success`,
         cancel_url: `${url}/me`
         // success?session_id={CHECKOUT_SESSION_ID}
       });
 
       return { session: session.id };
-    }
+    },
+
+    bookedNanny: async (parent, { _id }, context) => {
+
+        const user = await User.findOne({ bookings: {price: 100} })
+
+        return user
+
+    },
+
   },
   Mutation: {
     addUser: async (parent, args) => {

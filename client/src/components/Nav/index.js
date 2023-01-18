@@ -31,7 +31,7 @@ function Navigation() {
   function showProfile() {
     if (Auth.loggedIn()) {
       return (
-        <Navbar.Text className="ps-3">
+        <Navbar.Text className="ps-md-3">
           <Link to='me' className='text-secondary text-decoration-none'>
             My Profile: <span className="text-primary">{getUser}</span>
           </Link>

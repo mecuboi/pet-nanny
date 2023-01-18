@@ -31,20 +31,10 @@ const AllNannyList = ({ profiles }) => {
 
   const [nannyname, setnannyName] = useState("");
   const [renderProfile, setrenderProfile] = useState(profiles);
-  const [startDate, setStartDate] = useState(new Date());
+
   const [isClicked, setisClicked] = useState(true);
-
-  const [openProfileId, setOpenProfileId] = useState();
-
-  const handleChange = (e) => {
-    setOpenProfileId();
-    setStartDate(e);
-  };
-  const handleClick = (newOpenProfileId) => {
-    // e.preventDefault();
-    setOpenProfileId(newOpenProfileId);
-    setStartDate(new Date());
-  };
+  const [openProfileId, setOpenProfileId] = useState()
+  
 
   const handleEnterKey = (e) => {
     if (e.key === "Enter") {
@@ -91,7 +81,7 @@ const AllNannyList = ({ profiles }) => {
   const profileRows = chunk(renderProfile, 3);
   return (
     <div>
-      <div className="d-flex flex-row">
+      <div className="d-flex flex-row pt-3 my-1 justify-content-center">
         <MDBCol md="10" style={{ marginLeft: "2%", paddingRight: "1px" }}>
           <div className="input-group md-form form-sm form-1 pl-0">
             <input
@@ -106,7 +96,7 @@ const AllNannyList = ({ profiles }) => {
               aria-label="Search"
             />
             <div className="input-group-prepend">
-              <button className="btn btn-secondary" onClick={searchNanny}>
+              <button className="btn btn-secondary mx-1" onClick={searchNanny}>
                 <span
                   className="input-group-text purple lighten-3"
                   id="basic-text1"
@@ -118,8 +108,8 @@ const AllNannyList = ({ profiles }) => {
           </div>
         </MDBCol>
 
-        <Dropdown style={{ marginTop: "2px" }}>
-          <Dropdown.Toggle variant="secondary" id="dropdown-basic">
+        <Dropdown style={{ marginTop: "2px" }} >
+          <Dropdown.Toggle variant="secondary" id="dropdown-basic" className="px-4 py-2">
             Sort
           </Dropdown.Toggle>
 
@@ -145,14 +135,14 @@ const AllNannyList = ({ profiles }) => {
           backgroundColor: "#eee",
           backgroundImage:
             "url(https://thumbs.dreamstime.com/z/paw-prints-background-6936081.jpg)",
-          minHeight: "400px",
+          minHeight: "1200px",
         }}
       >
         <MDBContainer className="my-4">
           {profileRows.map((profileRow) => (
             <MDBRow key={profileRow.id}>
               {profileRow.map((profile) => (
-                <MDBCol key={profile.id} md="4">
+                <MDBCol key={`${profile.id}-col`} md="4">
                   <MDBCard
                     className="w-auto mx-3 my-2 "
                     style={{ borderRadius: "15px", backgroundColor: "#ffff" }}
@@ -171,18 +161,12 @@ const AllNannyList = ({ profiles }) => {
                             {profile.firstName} {profile.lastName}
                           </MDBTypography>
                         </Link>
-                        <div className="d-flex align-items-center justify-content-between mb-3">
-                          <p className="small mb-0">
-                            <MDBIcon far icon="clock me-2" />3 hrs
-                          </p>
-                          <p className="fw-bold mb-0">$90</p>
-                        </div>
                       </div>
-                      <div className="d-flex align-items-center mb-4">
+                      <div className="d-flex align-items-center justify-content-center mt-3 mb-2">
                         <div className="flex-shrink-0">
                           <Link to={`${profile._id}`}>
                             <MDBCardImage
-                              style={{ width: "75px", height: "75px", objectFit:'cover' }}
+                              style={{ width: "150px", height: "150px", objectFit:'cover' }}
                               className="img-fluid rounded-circle border border-dark border-3"
                               src={profile.picture}
                               alt="img"
@@ -190,20 +174,14 @@ const AllNannyList = ({ profiles }) => {
                             />
                           </Link>
                         </div>
-                        <div className="flex-grow-1 ms-3">
-                          <div className="d-flex flex-row align-items-center mb-2">
-                            <div>
-                              <p className="mb-0 me-2"></p>
-                              <p
-                                className="mb-0 me-0"
-                                style={{ fontSize: "13px", fontWeight: "bold" }}
-                              >
-                                postcode: {profile.postcode}
-                              </p>
-                            </div>
+                        
+                      </div>
+                      <div className="flex-grow-1 ms-3">
+                          <div className="d-flex flex-row align-items-center justify-content-center mb-2">
+                            
                             <ul
                               className="mb-0 list-unstyled d-flex flex-row"
-                              style={{ color: "#1B7B2C", marginLeft: "25px" }}
+                              style={{ color: "#1B7B2C",  }}
                             >
                               <li>
                                 <FontAwesomeIcon
@@ -238,27 +216,33 @@ const AllNannyList = ({ profiles }) => {
                             </ul>
                           </div>
                         </div>
-                      </div>
                       <hr />
+                      <div className="flex-grow-1 ms-3">
+                          <div className="d-flex flex-row align-items-center justify-content-center mb-2">
+                            
+                            <ul
+                              className="mb-0 list-unstyled d-flex flex-row"
+                              
+                            >
+                              <li>
+                                <p className="text-secondary">{profile.email}</p>
+                                
+                              </li>
+                              
+                            </ul>
+                          </div>
+                        </div>
                       <div>
                         <button
                           type="button"
                           id={profile._id}
                           style={{ marginBottom: "5px" }}
-                          class="btn btn-secondary"
-                          onClick={() => handleClick(profile._id)}
+                          className="btn btn-secondary"
+                          onClick={ () => {window.location.assign(`/bookingPage/${profile._id}`)}}
                         >
-                          <FontAwesomeIcon far icon={faClock} /> Book now
+                          <FontAwesomeIcon far="true" icon={faClock} /> Book now
                         </button>
-                        {openProfileId === profile._id && (
-                          <DatePicker
-                            id={profile._id}
-                            selected={startDate}
-                            onChange={handleChange}
-                            minDate={new Date()}
-                            isClearable
-                          />
-                        )}
+                        
                       </div>
                     </MDBCardBody>
                   </MDBCard>

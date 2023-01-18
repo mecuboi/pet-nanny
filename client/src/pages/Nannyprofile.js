@@ -38,18 +38,7 @@ const Nannyprofile = () => {
   const user = data?.user || {};
   console.log(user);
 
-  const [startDate, setStartDate] = useState(new Date());
-  const [openProfileId, setOpenProfileId] = useState();
 
-  const handleChange = (e) => {
-    setOpenProfileId();
-    setStartDate(e);
-  };
-  const handleClick = (newOpenProfileId) => {
-    // e.preventDefault();
-    setOpenProfileId(newOpenProfileId);
-    setStartDate(new Date());
-  };
 
   if (loading)
     return (
@@ -71,7 +60,7 @@ const Nannyprofile = () => {
         backgroundColor: "#eee",
         backgroundImage:
           "url(https://thumbs.dreamstime.com/z/paw-prints-background-6936081.jpg)",
-        minHeight: "400px",
+        minHeight: "1200px",
       }}
     >
       <MDBContainer className="my-4">
@@ -103,7 +92,7 @@ const Nannyprofile = () => {
                   <MDBTypography tag="h5">
                     {user.firstName} {user.lastName}
                   </MDBTypography>
-                  <MDBCardText> {user.address}</MDBCardText>
+                  
                 </div>
               </div>
               <div
@@ -112,18 +101,21 @@ const Nannyprofile = () => {
               >
                 <div className="d-flex justify-content-end text-center py-1">
                   <div>
-                    <MDBCardText className="mb-1 h5">{user.email}</MDBCardText>
+                    <MDBCardText className="mb-1 h5"></MDBCardText>
                     <MDBCardText className="small text-muted mb-0">
-                      Email
+                    email: {user.email}
+                    </MDBCardText>
+                    <MDBCardText className="small text-muted mb-0">
+                    Address: {user.address} {user.postcode}
                     </MDBCardText>
                   </div>
                 </div>
               </div>
               <MDBCardBody className="text-black p-4">
                 <div className="mb-5">
-                  <p className="lead fw-normal mb-1">About</p>
+                  <p className="lead fw-normal mb-1 text-secondary">About me:</p>
                   <div
-                    className="p-4"
+                    className="p-4 border rounded"
                     style={{
                       backgroundColor: "#f8f9fa",
                       paddingLeft: "500px",
@@ -142,19 +134,11 @@ const Nannyprofile = () => {
                   id={user._id}
                   style={{ marginBottom: "25px" }}
                   class="btn btn-secondary"
-                  onClick={() => handleClick(user._id)}
+                  onClick={() => {window.location.assign(`/bookingPage/${user._id}`)} }
                 >
                   <FontAwesomeIcon far icon={faClock} /> Book now
                 </button>
-                {openProfileId === user._id && (
-                  <DatePicker
-                    id={user._id}
-                    selected={startDate}
-                    onChange={handleChange}
-                    minDate={new Date()}
-                    isClearable
-                  />
-                )}
+                
               </div>
             </MDBCard>
           </MDBCol>
