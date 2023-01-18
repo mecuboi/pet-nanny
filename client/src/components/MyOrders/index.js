@@ -1,5 +1,6 @@
 import React from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
+import dateFormat from 'dateformat'
 
 const MyOrders = (props) => {
 
@@ -8,15 +9,16 @@ const MyOrders = (props) => {
       <Row>
         <Col>
           <div>
-            <div className='py-1'>
-              <strong>Booked Date:</strong> <br></br>{props.bookedDate}
-            </div>
-            <div className='py-1'>
+          <div className='py-1'>
               <strong>Booking Reference:</strong> <br></br>
-              {props.id}
+              {props.id.split("",8)}
             </div>
             <div className='py-1'>
-              <strong>Price:</strong> <br></br>${props.price}
+              <strong>Booked Date:</strong> <br></br>
+              {dateFormat(props.bookedDate, 'fullDate')}
+            </div>
+            <div className='py-1'>
+              <strong>Fee paid:</strong> <br></br>${props.price}
             </div>
           </div>
         </Col>

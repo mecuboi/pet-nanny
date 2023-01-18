@@ -11,7 +11,7 @@ const bookingSchema = new Schema({
   },
   // https://mongoosejs.com/docs/tutorials/dates.html Doc about type: Date
   bookedDate: {
-    type: Date,
+    type: String,
     // get: value => moment(value).format("DD MMM YYYY"),
     // the minimum the date can be in 11 Jan 2023.
     min: Date.now()

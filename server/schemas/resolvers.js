@@ -8,23 +8,16 @@ const stripe = require('stripe')('sk_test_51MQpZQCIw6RfRCJYsWbRBGrgYW5YVwMK5ml5w
 const resolvers = {
   Query: {
     me: async (parent, args, context) => {
-      // if (context.user) {
-      const userData = await User.findOne({
-        _id: "63c804f42162e7c7a904b509"
+      if (context.user) {
+      const userData = await User.findById(context.user)
+      .populate('orders')
+      .populate({
+        path: 'orders',
+        populate:"bookings"
       })
-      // .populate('orders').populate({
-      //   path: 'orders',
-      //   populate:"bookings"
-      // })
-
-
-      // .populate({
-      //   path: 'orders.bookings',
-      //   select: 'bookedDate '
-      // })
 
       return userData
-    // }
+    }
 
       throw new AuthenticationError('Not logged in')
     },

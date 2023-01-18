@@ -10,10 +10,10 @@ const orderSchema = new Schema({
     default: Date.now()
   },
   bookings: 
-    [{
+    {
       type: Schema.Types.ObjectId,
       ref: 'Booking'
-    }]
+    }
   
 });
 
