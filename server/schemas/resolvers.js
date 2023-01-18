@@ -10,7 +10,7 @@ const resolvers = {
     me: async (parent, args, context) => {
       // if (context.user) {
         const userData = await User.findOne({
-          _id: "63c647d89d8c20708bf916d9"
+          _id: context.user._id
         }).populate({
           path: 'orders.bookings',
           select: 'bookedDate '
