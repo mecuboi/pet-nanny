@@ -16,6 +16,7 @@ import {
   faClock,
   faStar,
   faMagnifyingGlass,
+  faBullseye,
 } from "@fortawesome/free-solid-svg-icons";
 import "@fortawesome/react-fontawesome";
 // Import Link component for all internal application hyperlinks
@@ -31,6 +32,7 @@ const AllNannyList = ({ profiles }) => {
   const [nannyname, setnannyName] = useState("");
   const [renderProfile, setrenderProfile] = useState(profiles);
   const [startDate, setStartDate] = useState(new Date());
+  const [isClicked, setisClicked] = useState(false);
 
   const [openProfileId, setOpenProfileId] = useState();
 
@@ -42,6 +44,12 @@ const AllNannyList = ({ profiles }) => {
     // e.preventDefault();
     setOpenProfileId(newOpenProfileId);
     setStartDate(new Date());
+  };
+
+  const handleEnterKey = (e) => {
+    if (e.key === "Enter") {
+      searchNanny();
+    }
   };
 
   const searchNanny = () => {
@@ -69,8 +77,13 @@ const AllNannyList = ({ profiles }) => {
     sortProfile.sort((a, b) =>
       a.firstName.toLowerCase() > b.firstName.toLowerCase() ? 1 : -1
     );
+    setisClicked(!isClicked)
+    if (isClicked === true){
+      setrenderProfile(sortProfile)
+    } else {
+    sortProfile.reverse();
     setrenderProfile(sortProfile);
-  };
+  }};
 
   if (!profiles) {
     return <h3>No Profiles Yet</h3>;
@@ -88,6 +101,7 @@ const AllNannyList = ({ profiles }) => {
               onChange={(e) => {
                 setnannyName(e.target.value);
               }}
+              onKeyDown={handleEnterKey}
               placeholder="Search"
               aria-label="Search"
             />
@@ -110,7 +124,11 @@ const AllNannyList = ({ profiles }) => {
           </Dropdown.Toggle>
 
           <Dropdown.Menu>
-            <Dropdown.Item href="#/sort/A - Z" onClick={alphabeticalSort}>
+            <Dropdown.Item
+              href="#/sort/A - Z"
+              onClick={alphabeticalSort}
+              
+            >
               A - Z
             </Dropdown.Item>
             <Dropdown.Item href="#/sort/Price">Price</Dropdown.Item>
@@ -127,22 +145,32 @@ const AllNannyList = ({ profiles }) => {
           backgroundColor: "#eee",
           backgroundImage:
             "url(https://thumbs.dreamstime.com/z/paw-prints-background-6936081.jpg)",
+          minHeight: "400px",
         }}
       >
         <MDBContainer className="my-4">
           {profileRows.map((profileRow) => (
-            <MDBRow>
+            <MDBRow key={profileRow.id}>
               {profileRow.map((profile) => (
-                <MDBCol md="4">
+                <MDBCol key={profile.id} md="4">
                   <MDBCard
                     className="w-auto mx-3 my-2 "
                     style={{ borderRadius: "15px", backgroundColor: "#ffff" }}
                   >
                     <MDBCardBody className="p-4 text-black">
                       <div>
-                        <MDBTypography tag="h5">
-                          {profile.firstName} {profile.lastName}
-                        </MDBTypography>
+                        <Link
+                          to={`${profile._id}`}
+                          style={{
+                            textDecoration: "none",
+                            color: "black",
+                            fontWeight: "boldest",
+                          }}
+                        >
+                          <MDBTypography tag="h5">
+                            {profile.firstName} {profile.lastName}
+                          </MDBTypography>
+                        </Link>
                         <div className="d-flex align-items-center justify-content-between mb-3">
                           <p className="small mb-0">
                             <MDBIcon far icon="clock me-2" />3 hrs
@@ -154,7 +182,7 @@ const AllNannyList = ({ profiles }) => {
                         <div className="flex-shrink-0">
                           <Link to={`${profile._id}`}>
                             <MDBCardImage
-                              style={{ width: "75px" }}
+                              style={{ width: "75px", height: "75px" }}
                               className="img-fluid rounded-circle border border-dark border-3"
                               src={profile.picture}
                               alt="img"
@@ -165,12 +193,12 @@ const AllNannyList = ({ profiles }) => {
                         <div className="flex-grow-1 ms-3">
                           <div className="d-flex flex-row align-items-center mb-2">
                             <div>
-                              <p className="mb-0 me-2">{profile.description}</p>
+                              <p className="mb-0 me-2"></p>
                               <p
                                 className="mb-0 me-0"
                                 style={{ fontSize: "13px", fontWeight: "bold" }}
                               >
-                                postcode: {profile.postcode}{" "}
+                                postcode: {profile.postcode}
                               </p>
                             </div>
                             <ul
