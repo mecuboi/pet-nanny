@@ -3,6 +3,8 @@ const { User, Booking, Order } = require('../models');
 const { signToken } = require('../utils/auth');
 const stripe = require('stripe')('sk_test_51MQpZQCIw6RfRCJYsWbRBGrgYW5YVwMK5ml5wRXASIFbJJEMGXObq31rAx0tZ2dDqZgF4We6nNfaA2ICrGzYck7100zSZKYleX');
 
+
+
 const resolvers = {
   Query: {
     me: async (parent, args, context) => {
@@ -102,8 +104,12 @@ const resolvers = {
       await User.findByIdAndUpdate(context.user._id,
         { $addToSet: { orders: newOrder._id } });
 
+      const date = args.bookedDate.split('T', 1)
+
+      const nanny = await User.findById(args._id).populate('firstName')
+
       const product = await stripe.products.create({
-        name: `Order Number: ${newOrder._id}`,
+        name: `Booking date: ${date}`,
         description: "Nanny whole day booking"
       })
 
@@ -124,7 +130,7 @@ const resolvers = {
         payment_method_types: ['card'],
         line_items,
         mode: 'payment',
-        success_url: `${url}/me`,
+        success_url: `${url}/success`,
         cancel_url: `${url}/me`
         // success?session_id={CHECKOUT_SESSION_ID}
       });

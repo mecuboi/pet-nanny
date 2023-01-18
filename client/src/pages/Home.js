@@ -3,13 +3,9 @@ import Carousel from 'react-bootstrap/Carousel';
 import Button from 'react-bootstrap/Button';
 import{ Link } from 'react-router-dom';
 
-import { QUERY_CHECKOUT } from '../utils/queries';
-import { useLazyQuery } from '@apollo/client';
-
 
 
 function Home() {
-  const [getCheckout, { data }] = useLazyQuery(QUERY_CHECKOUT);
 
   const [index, setIndex] = useState(0);
   
@@ -17,8 +13,6 @@ function Home() {
   const handleSelect = (selectedIndex, e) => {
     setIndex(selectedIndex);
   };
-
- 
 
 
   return (
@@ -69,11 +63,6 @@ function Home() {
           <Button variant="primary" className="m-2 mb-5 p-3">Search for a Nanny</Button>{' '}
         </Link>
       </div>
-      {/* <div className="d-flex justify-content-center">
-        
-          <Button onClick={handlePayment} variant="primary" className="m-2 mb-5 p-3">Test Payment</Button>{' '}
-       
-      </div> */}
 
 
     </>

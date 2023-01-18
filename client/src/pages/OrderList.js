@@ -15,7 +15,7 @@ const OrderList = (props) => {
 
     return (
       (orders ? 
-      <p>No Orders</p>
+      <p className="text-secondary ms-3 text-center">No Orders yet</p>
         :
       <div>
         {orders.map((order) => (
