@@ -9,14 +9,14 @@ const resolvers = {
   Query: {
     me: async (parent, args, context) => {
       // if (context.user) {
-        const userData = await User.findOne({
-          _id: context.user._id
-        }).populate({
-          path: 'orders.bookings',
-          select: 'bookedDate '
-        })
+      const userData = await User.findOne({
+        _id: context.user._id
+      }).populate({
+        path: 'orders.bookings',
+        select: 'bookedDate '
+      })
 
-        return userData
+      return userData
       // }
 
       throw new AuthenticationError('Not logged in')
@@ -92,7 +92,8 @@ const resolvers = {
     },
 
     checkout: async (parent, args, context) => {
-      const url = "http://localhost:3000"
+      // const url = "http://localhost:3000"
+      const url = new URL(context.headers.referer).origin;
       // const url = new URL('https://www.google.com');
 
       const newBooking = await Booking.create({
@@ -102,17 +103,15 @@ const resolvers = {
         additionalNotes: args.additionalNotes
       })
 
-      await User.findByIdAndUpdate(args._id,
-        { $addToSet: { bookings: newBooking._id } });
-
       const newOrder = await Order.create({ bookings: newBooking });
 
+      await User.findByIdAndUpdate(args._id,
+        { $addToSet: { bookings: newBooking } });
+
       await User.findByIdAndUpdate(context.user._id,
-        { $addToSet: { orders: newOrder._id } });
+        { $addToSet: { orders: newOrder } });
 
       const date = args.bookedDate.split('T', 1)
-
-      const nanny = await User.findById(args._id).populate('firstName')
 
       const product = await stripe.products.create({
         name: `Booking date: ${date}`,
@@ -130,7 +129,7 @@ const resolvers = {
           price: price.id,
           quantity: 1
         }
-      ];  
+      ];
 
       const session = await stripe.checkout.sessions.create({
         payment_method_types: ['card'],
@@ -146,9 +145,9 @@ const resolvers = {
 
     bookedNanny: async (parent, { _id }, context) => {
 
-        const user = await User.findOne({ bookings: {price: 100} })
+      const user = await User.findOne({ bookings: { price: 100 } })
 
-        return user
+      return user
 
     },
 
