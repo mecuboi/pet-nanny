@@ -72,6 +72,16 @@ query user($_id: ID!) {
     picture
     postcode
     role
+    bookings{
+      _id
+      bookedDate
+      bookedBy{
+        _id
+        firstName
+        lastName
+        email
+      }
+    }
     orders {
       _id
       purchaseDate
@@ -81,6 +91,7 @@ query user($_id: ID!) {
         bookedDate
       }
     }
+
   }
 }
 `;

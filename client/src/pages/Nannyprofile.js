@@ -27,11 +27,8 @@ const Nannyprofile = () => {
   const { data, loading, error } = useQuery(QUERY_SINGLE_USER, {
     variables: { _id: _id },
   });
-  console.log(data);
 
   const user = data?.user || {};
-  console.log(user);
-
 
 
   if (loading)
@@ -129,15 +126,15 @@ const Nannyprofile = () => {
                   type="button"
                   id={user._id}
                   style={{ marginBottom: "25px" }}
-                  class="btn btn-secondary"
+                  className="btn btn-secondary"
                   // onClick={() => {window.location.assign(`/bookingPage/${user._id}`)} }
                 >
-                  <FontAwesomeIcon far icon={faClock} /> Book now
+                  <FontAwesomeIcon far='true' icon={faClock} /> Book now
                 </button>
                 </Link>
               </div>
               <div className="order-container">
-                    <BookingList 
+                    <BookingList id={_id}
                     />
                 </div>
             </MDBCard>

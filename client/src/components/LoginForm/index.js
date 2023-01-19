@@ -32,8 +32,9 @@ const LoginForm = () => {
         variables: {...userFormData}
       })
       Auth.login(data.login.token, data.login.user.firstName);
-      // window.location.assign('/me')
-      setToMe(true)
+      window.location.href = '/me'
+
+      // setToMe(true)
       
     } catch (err) {
       console.error(err);
@@ -46,9 +47,9 @@ const LoginForm = () => {
     });
   }
 
-  if (toMe) {
-    return (<Navigate to='me'/>)
-  }
+  // if (toMe) {
+  //   return (<Navigate to='me'/>)
+  // }
 
   return (
     <Form className="w-100 w-md-75" validated={validated} onSubmit={handleSubmit}>
