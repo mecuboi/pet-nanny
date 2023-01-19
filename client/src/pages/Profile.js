@@ -18,20 +18,16 @@ import OrderList from './OrderList';
 const Profile = () => {
     const { profileId } = useParams();
 
-    const { data, loading, error } = useQuery( profileId ? QUERY_SINGLE_USER : QUERY_ME,
-        {
-          variables: { _id: profileId },
-        }
-      );
+    const { data, loading, error } = useQuery(QUERY_ME);
 
-      const user = data?.me || data?.user || {};
+      const user = data?.me || {};
 
       const bookingUrl = `/bookingPage/${user._id}`;
       
       // Use React Router's `<Redirect />` component to redirect to personal profile page if username is yours
-      if (Auth.loggedIn() && Auth.getProfile().data._id === profileId) {
-          return <Navigate to="/me" />;
-        }  
+      // if (Auth.loggedIn() && Auth.getProfile().data._id === profileId) {
+      //     return <Navigate to="/me" />;
+      //   }  
         
     if (loading) return <img
             src="https://media.giphy.com/media/3oEjI6SIIHBdRxXI40/giphy.gif"
@@ -50,7 +46,8 @@ const Profile = () => {
             </Container>
           );
         }
-        
+      
+    if (user) {   
     return (
         <Container className="mt-5 w-auto bg-light">
          <Card className="w-auto bg-white">
@@ -115,5 +112,6 @@ const Profile = () => {
         </Container>
     );
 };
+}
 
 export default Profile;
