@@ -3,6 +3,7 @@ import { Form, Button, Alert } from 'react-bootstrap';
 import { useMutation } from '@apollo/client';
 import { LOGIN } from '../../utils/mutations'
 import Auth from '../../utils/auth';
+import { Navigate } from 'react-router-dom'
 
 const LoginForm = () => {
 
@@ -10,6 +11,7 @@ const LoginForm = () => {
   const [validated] = useState(false);
   const [showAlert, setShowAlert] = useState(false);
   const [login, { error }] = useMutation(LOGIN)
+  const [toMe, setToMe ] = useState(false)
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -31,7 +33,7 @@ const LoginForm = () => {
       })
       Auth.login(data.login.token, data.login.user.firstName);
       // window.location.assign('/me')
-      
+      setToMe(true)
       
     } catch (err) {
       console.error(err);
@@ -42,6 +44,10 @@ const LoginForm = () => {
       email: '',
       password: '',
     });
+  }
+
+  if (toMe) {
+    return (<Navigate to='me'/>)
   }
 
   return (
