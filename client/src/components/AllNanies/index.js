@@ -34,7 +34,7 @@ const AllNannyList = ({ profiles }) => {
 
   const [isClicked, setisClicked] = useState(true);
   const [openProfileId, setOpenProfileId] = useState()
-  
+
 
   const handleEnterKey = (e) => {
     if (e.key === "Enter") {
@@ -68,12 +68,13 @@ const AllNannyList = ({ profiles }) => {
       a.firstName.toLowerCase() > b.firstName.toLowerCase() ? 1 : -1
     );
     setisClicked(!isClicked)
-    if (isClicked === true){
+    if (isClicked === true) {
       setrenderProfile(sortProfile)
     } else {
-    sortProfile.reverse();
-    setrenderProfile(sortProfile);
-  }};
+      sortProfile.reverse();
+      setrenderProfile(sortProfile);
+    }
+  };
 
   if (!profiles) {
     return <h3>No Profiles Yet</h3>;
@@ -117,7 +118,7 @@ const AllNannyList = ({ profiles }) => {
             <Dropdown.Item
               href="#/sort/A - Z"
               onClick={alphabeticalSort}
-              
+
             >
               A - Z
             </Dropdown.Item>
@@ -139,11 +140,12 @@ const AllNannyList = ({ profiles }) => {
         }}
       >
         <MDBContainer className="my-4">
-          {profileRows.map((profileRow) => (
-            <MDBRow key={profileRow.id}>
+          {profileRows.map((profileRow, index) => (
+            <MDBRow key={`${profileRow._id}${index}`}>
               {profileRow.map((profile) => (
-                <MDBCol key={`${profile.id}-col`} md="4">
+                <MDBCol key={`${profile._id}col`} md="4">
                   <MDBCard
+                    key={profile._id}
                     className="w-auto mx-3 my-2 "
                     style={{ borderRadius: "15px", backgroundColor: "#ffff" }}
                   >
@@ -166,7 +168,7 @@ const AllNannyList = ({ profiles }) => {
                         <div className="flex-shrink-0">
                           <Link to={`${profile._id}`}>
                             <MDBCardImage
-                              style={{ width: "150px", height: "150px", objectFit:'cover' }}
+                              style={{ width: "150px", height: "150px", objectFit: 'cover' }}
                               className="img-fluid rounded-circle border border-dark border-3"
                               src={profile.picture}
                               alt="img"
@@ -174,75 +176,75 @@ const AllNannyList = ({ profiles }) => {
                             />
                           </Link>
                         </div>
-                        
+
                       </div>
                       <div className="flex-grow-1 ms-3">
-                          <div className="d-flex flex-row align-items-center justify-content-center mb-2">
-                            
-                            <ul
-                              className="mb-0 list-unstyled d-flex flex-row"
-                              style={{ color: "#1B7B2C",  }}
-                            >
-                              <li>
-                                <FontAwesomeIcon
-                                  icon={faStar}
-                                  style={{ color: "gold", marginTop: "30px" }}
-                                />
-                              </li>
-                              <li>
-                                <FontAwesomeIcon
-                                  icon={faStar}
-                                  style={{ color: "gold", marginTop: "30px" }}
-                                />
-                              </li>
-                              <li>
-                                <FontAwesomeIcon
-                                  icon={faStar}
-                                  style={{ color: "gold", marginTop: "30px" }}
-                                />
-                              </li>
-                              <li>
-                                <FontAwesomeIcon
-                                  icon={faStar}
-                                  style={{ color: "gold", marginTop: "30px" }}
-                                />
-                              </li>
-                              <li>
-                                <FontAwesomeIcon
-                                  icon={faStar}
-                                  style={{ color: "#bbb", marginTop: "30px" }}
-                                />
-                              </li>
-                            </ul>
-                          </div>
+                        <div className="d-flex flex-row align-items-center justify-content-center mb-2">
+
+                          <ul
+                            className="mb-0 list-unstyled d-flex flex-row"
+                            style={{ color: "#1B7B2C", }}
+                          >
+                            <li>
+                              <FontAwesomeIcon
+                                icon={faStar}
+                                style={{ color: "gold", marginTop: "30px" }}
+                              />
+                            </li>
+                            <li>
+                              <FontAwesomeIcon
+                                icon={faStar}
+                                style={{ color: "gold", marginTop: "30px" }}
+                              />
+                            </li>
+                            <li>
+                              <FontAwesomeIcon
+                                icon={faStar}
+                                style={{ color: "gold", marginTop: "30px" }}
+                              />
+                            </li>
+                            <li>
+                              <FontAwesomeIcon
+                                icon={faStar}
+                                style={{ color: "gold", marginTop: "30px" }}
+                              />
+                            </li>
+                            <li>
+                              <FontAwesomeIcon
+                                icon={faStar}
+                                style={{ color: "#bbb", marginTop: "30px" }}
+                              />
+                            </li>
+                          </ul>
                         </div>
+                      </div>
                       <hr />
                       <div className="flex-grow-1 ms-3">
-                          <div className="d-flex flex-row align-items-center justify-content-center mb-2">
-                            
-                            <ul
-                              className="mb-0 list-unstyled d-flex flex-row"
-                              
-                            >
-                              <li>
-                                <p className="text-secondary">{profile.email}</p>
-                                
-                              </li>
-                              
-                            </ul>
-                          </div>
+                        <div className="d-flex flex-row align-items-center justify-content-center mb-2">
+
+                          <ul
+                            className="mb-0 list-unstyled d-flex flex-row"
+
+                          >
+                            <li>
+                              <p className="text-secondary">{profile.email}</p>
+
+                            </li>
+
+                          </ul>
                         </div>
+                      </div>
                       <div>
                         <Link to={`/bookingPage/${profile._id}`}>
-                        <button
-                          type="button"
-                          id={profile._id}
-                          style={{ marginBottom: "5px" }}
-                          className="btn btn-secondary"
+                          <button
+                            type="button"
+                            id={profile._id}
+                            style={{ marginBottom: "5px" }}
+                            className="btn btn-secondary"
                           // onClick={ () => {window.location.assign(`/bookingPage/${profile._id}`)}}
-                        >
-                          <FontAwesomeIcon far="true" icon={faClock} /> Book now
-                        </button>
+                          >
+                            <FontAwesomeIcon far="true" icon={faClock} /> Book now
+                          </button>
                         </Link>
                       </div>
                     </MDBCardBody>

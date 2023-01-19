@@ -1,34 +1,33 @@
-import React from 'react';
+import MyOrders from '../components/MyOrders';
+
 import { useQuery } from '@apollo/client';
-import AllNannyList from '../components/AllNanies';
-import { QUERY_ALL_NANNIES } from '../utils/queries';
+import { QUERY_ME , QUERY_ALL_NANNIES} from '../utils/queries';
 
+const NannyList = (props) => {
+  const { loading, data, error } = useQuery(QUERY_ME);
 
-function NannyList() {
-  const { loading, data } = useQuery(QUERY_ALL_NANNIES);
-  let nannies
-  if (data) {
-    nannies = data?.nannies;
+  const arrayOfOrders = data?.me.orders;
+
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>Error</p>;
+
+    return (
+      (arrayOfOrders.length ? 
+      <div className = "footermarginbottom">
+           <h3 className = "text-secondary m-3 text-center"> <strong>Bookings:</strong></h3>
+        {arrayOfOrders.map((order) => (
+          <MyOrders 
+            key={order.bookings._id}
+            bookedDate= {order.bookings.bookedDate}
+            id={order._id} 
+            price={order.bookings.price} 
+          />
+        ))}
+      </div> :
+
+       <p className="text-secondary ms-3 p-3 text-center">No Orders yet</p>
+      )
+    )
   }
 
-  return (
-    <>
-      <div>
-          {loading ? 
-            <img
-            src="https://media.giphy.com/media/3oEjI6SIIHBdRxXI40/giphy.gif"
-            className="animation"
-            alt="loading"
-             />
-           : 
-            
-            <AllNannyList
-              profiles={nannies}
-            />
-          }
-        </div>
-    </>
-  );
-}
-
-export default NannyList;
+  export default NannyList;
