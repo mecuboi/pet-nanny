@@ -31,7 +31,7 @@ const LoginForm = () => {
       })
       Auth.login(data.login.token, data.login.user.firstName);
       // window.location.assign('/me')
-      window.location.href = "me"
+      
       
     } catch (err) {
       console.error(err);

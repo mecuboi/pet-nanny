@@ -51,7 +51,7 @@ const SignupForm = () => {
       });
 
       Auth.login(data.addUser.token, data.addUser.user.firstName);
-      window.location.href = "me"
+      // window.location.href = "/me"
       
 
     } catch (err) {

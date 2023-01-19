@@ -32,7 +32,7 @@ class AuthService {
     localStorage.setItem('id_token', idToken);
     localStorage.setItem('firstName', Name);
 
-    window.location.assign('/');
+    window.location.assign('/me');
   }
 
   logout() {
