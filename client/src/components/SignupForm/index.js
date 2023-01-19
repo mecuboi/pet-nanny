@@ -3,7 +3,7 @@ import { Form, Button, Alert, Col, Row, InputGroup } from 'react-bootstrap';
 import { useMutation } from '@apollo/client';
 import { ADD_USER } from '../../utils/mutations';
 import Auth from '../../utils/auth';
-import { Link, Navigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const SignupForm = () => {
   //set initial form state
@@ -24,12 +24,14 @@ const SignupForm = () => {
 
   const [addUser, { error }] = useMutation(ADD_USER)
 
+  const navigate = useNavigate();
+
   const handleInputChange = (event) => {
     const { name, value } = event.target;
     setUserFormData({ ...userFormData, [name]: value })
   };
 
-  const validateNumberOnly =(event) => {
+  const validateNumberOnly = (event) => {
     if (!/[0-9]/.test(event.key)) {
       event.preventDefault();
     }
@@ -47,12 +49,12 @@ const SignupForm = () => {
 
     try {
       const { data } = await addUser({
-        variables: {...userFormData},
+        variables: { ...userFormData },
       });
 
       Auth.login(data.addUser.token, data.addUser.user.firstName);
-      window.location.href = "/me"
-      
+      navigate('/me')
+
 
     } catch (err) {
       console.error(err);
@@ -136,14 +138,14 @@ const SignupForm = () => {
         <Form.Group className='mt-3'>
           <Form.Label >Role</Form.Label>
           <Form.Select
-          name='role'
-          onChange={handleInputChange}
-          value={userFormData.role}
-          required>
+            name='role'
+            onChange={handleInputChange}
+            value={userFormData.role}
+            required>
             <option>Pawrent</option>
             <option>Nanny</option>
           </Form.Select>
-          
+
         </Form.Group>
 
         <Form.Group className='mt-3'>
@@ -173,7 +175,7 @@ const SignupForm = () => {
           <Form.Control.Feedback type='invalid'>Password is required!</Form.Control.Feedback>
         </Form.Group>
         <Button
-          
+
           type='submit'
           variant='primary'
           className='mt-3'>
@@ -183,7 +185,7 @@ const SignupForm = () => {
     </>
   );
 
-  
+
 };
 
 export default SignupForm;
