@@ -36,7 +36,8 @@ const LoginForm = () => {
         variables: {...userFormData}
       })
       Auth.login(data.login.token, data.login.user.firstName);
-      navigate('/me')
+      // navigate('/me')
+      window.location.href = '/me'
 
       // setToMe(true)
       
