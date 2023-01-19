@@ -28,15 +28,15 @@ const resolvers = {
       return await User.find({ role: 'Pawrent' });
     },
     user: async (_, { _id }, context) => {
-      // if (context.user) {
+      if (context.user) {
         return await User.findOne({ _id: _id })
           .populate('bookings')
           .populate({
             path: 'bookings',
             populate: "bookedBy"
           });
-      // }
-      // throw new AuthenticationError('Not logged in');
+      }
+      throw new AuthenticationError('Not logged in');
     },
     nannies: async () => {
       return await User.find({ role: 'Nanny' });
@@ -107,13 +107,14 @@ const resolvers = {
           additionalNotes: args.additionalNotes
         })
 
+        await User.findByIdAndUpdate(args._id,
+          { $push: { bookings: newBooking } });
+
         const newOrder = await Order.create({ bookings: newBooking });
 
-        await User.findByIdAndUpdate(args._id,
-          { $addToSet: { bookings: newBooking } });
-
+        
         await User.findByIdAndUpdate(context.user._id,
-          { $addToSet: { orders: newOrder } });
+          { $push: { orders: newOrder } });
 
         const date = args.bookedDate.split('T', 1)
 
@@ -148,16 +149,7 @@ const resolvers = {
       }
       throw new AuthenticationError('Not logged in');
 
-    },
-
-    bookedNanny: async (parent, { _id }, context) => {
-
-      const user = await User.findOne({ bookings: { price: 100 } })
-
-      return user
-
-    },
-
+    }
   },
   Mutation: {
     addUser: async (parent, args) => {
