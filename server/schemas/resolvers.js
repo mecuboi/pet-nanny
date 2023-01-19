@@ -28,15 +28,15 @@ const resolvers = {
       return await User.find({ role: 'Pawrent' });
     },
     user: async (_, { _id }, context) => {
-      if (context.user) {
+      // if (context.user) {
         return await User.findOne({ _id: _id })
-          .populate('orders')
+          .populate('bookings')
           .populate({
-            path: 'orders',
-            populate: "bookings"
+            path: 'bookings',
+            populate: "bookedBy"
           });
-      }
-      throw new AuthenticationError('Not logged in');
+      // }
+      // throw new AuthenticationError('Not logged in');
     },
     nannies: async () => {
       return await User.find({ role: 'Nanny' });

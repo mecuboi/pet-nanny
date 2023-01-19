@@ -19,7 +19,7 @@ import {
   faClock,
 } from "@fortawesome/free-solid-svg-icons";
 import "@fortawesome/react-fontawesome";
-import NannyList from "./NannyList"
+import BookingList from "./BookingList"
 
 const Nannyprofile = () => {
   const { _id } = useParams();
@@ -101,7 +101,7 @@ const Nannyprofile = () => {
                     email: {user.email}
                     </MDBCardText>
                     <MDBCardText className="small text-muted mb-0">
-                    Address: {user.address} {user.postcode}
+                    Postcode: {user.postcode}
                     </MDBCardText>
                   </div>
                 </div>
@@ -137,7 +137,8 @@ const Nannyprofile = () => {
                 </Link>
               </div>
               <div className="order-container">
-                    <NannyList />
+                    <BookingList 
+                    />
                 </div>
             </MDBCard>
               
