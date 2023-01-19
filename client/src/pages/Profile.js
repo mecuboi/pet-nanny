@@ -31,7 +31,7 @@ const Profile = () => {
         
     if (loading) return <img
             src="https://media.giphy.com/media/3oEjI6SIIHBdRxXI40/giphy.gif"
-            className="animation"
+            className="animation text-center"
             alt="loading"
              />;
     if (error) return <p>Error</p>;
