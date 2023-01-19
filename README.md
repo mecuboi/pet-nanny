@@ -52,11 +52,11 @@ Permission is hereby granted, free of charge, to any person obtaining a copy of 
 ### Screenshots
 Below are screenshots of the application:
 
-![Petnanny-homepage]()
-![Petnanny-nannylist]()
-![Petnanny-nannyprofile]()
-![Petnanny-booking]()
-![Petnanny-payment]()
+![Petnanny-homepage](https://github.com/mecuboi/pet-nanny/blob/main/screenshots/Homepage.png)
+![Petnanny-nannylist](https://github.com/mecuboi/pet-nanny/blob/main/screenshots/Nannylist.png)
+![Petnanny-nannyprofile](https://github.com/mecuboi/pet-nanny/blob/main/screenshots/Nannyprofile.png)
+![Petnanny-booking](https://github.com/mecuboi/pet-nanny/blob/main/screenshots/Booking.png)
+![Petnanny-payment](https://github.com/mecuboi/pet-nanny/blob/main/screenshots/Payment.png)
 
 
 
