@@ -137,6 +137,7 @@ const AllNannyList = ({ profiles }) => {
           backgroundImage:
             "url(https://thumbs.dreamstime.com/z/paw-prints-background-6936081.jpg)",
           minHeight: "1200px",
+          objectFit: "cover"
         }}
       >
         <MDBContainer className="my-4">
