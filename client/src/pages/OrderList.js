@@ -14,7 +14,7 @@ const OrderList = (props) => {
     return (
       (arrayOfOrders.length ? 
       <div className = "footermarginbottom">
-           <h3 className = "text-secondary m-3 text-center"> <strong>My Orders</strong></h3>
+           <h4 className = "text-secondary m-3 text-center"> <strong>My Orders</strong></h4>
         {arrayOfOrders.map((order) => (
           <MyOrders 
             key={order.bookings._id}
