@@ -30,7 +30,7 @@ db.once('open', async () => {
     password: 'password12345',
     address: '312 Vaucluse road, Vaucluse',
     postcode: '2029',
-    role: 'pawrent'
+    role: 'Pawrent'
     // orders: [
     //   {
     //     bookings: [bookings[0]._id, bookings[1]._id]

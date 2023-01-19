@@ -38,15 +38,23 @@ const resolvers = {
       }
       throw new AuthenticationError('Not logged in');
     },
-    getNanny: async (_, { _id }, context) => {
-      // if (context.user) {
-      
+    // getNanny: async (_, { _id }, context) => {
+    //   // if (context.user) {
+    //     const users = await User.find({}).populate('bookings')
 
-        return await User.findOne({ bookings: {_id: {$match:_id}} })
+    //   const bookings = users.map(user => user.bookings)
+
+    //   const nanny = bookings.filter(booking => booking == "63c8c96ce74affec63d4f987")
         
-      // }
-      // throw new AuthenticationError('Not logged in');
-    },
+
+    //     return nanny
+           
+
+    //     // return await User.find({ bookings:{ $eq: [_id ]} })
+        
+    //   // }
+    //   // throw new AuthenticationError('Not logged in');
+    // },
     nannies: async () => {
       return await User.find({ role: 'Nanny' });
     },
