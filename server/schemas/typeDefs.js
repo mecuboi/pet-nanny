@@ -40,6 +40,7 @@ const typeDefs = gql`
     all: [User]
     users(role: String): [User]
     user(_id: ID!): User
+    getNanny(_id: ID!): User
     nannies(role: String): [User]
     nanny(_id: ID!, role: String): User
     orders: [Order]

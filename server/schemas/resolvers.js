@@ -38,6 +38,15 @@ const resolvers = {
       }
       throw new AuthenticationError('Not logged in');
     },
+    getNanny: async (_, { _id }, context) => {
+      // if (context.user) {
+      
+
+        return await User.findOne({ bookings: {_id: {$match:_id}} })
+        
+      // }
+      // throw new AuthenticationError('Not logged in');
+    },
     nannies: async () => {
       return await User.find({ role: 'Nanny' });
     },

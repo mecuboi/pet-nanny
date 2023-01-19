@@ -28,7 +28,9 @@ db.once('open', async () => {
     lastName: 'Legend',
     email: 'steve@testmail.com',
     password: 'password12345',
-    address: 'somewhere',
+    address: '312 Vaucluse road, Vaucluse',
+    postcode: '2029',
+    role: 'pawrent'
     // orders: [
     //   {
     //     bookings: [bookings[0]._id, bookings[1]._id]
@@ -43,7 +45,8 @@ db.once('open', async () => {
     lastName: 'Peeps',
     email: 'anon@testmail.com',
     password: 'password12345',
-    address: 'over',
+    address: '245 Cherry street, Orange',
+    postcode: '3030'
     // orders: [
     //   {
     //     bookings: [bookings[2]._id, bookings[3]._id]
@@ -77,9 +80,11 @@ db.once('open', async () => {
       lastName: 'Ishere',
       email: 'fanny@testmail.com',
       password: 'password12345',
-      address: '35 Cloud Street',
-      picture:"https://assets.teenvogue.com/photos/59d3b74cc5559f37a703150c/3:2/w_2411,h_1607,c_limit/MCDMOAN_EC058.jpg",
+      address: '35 Cloud Street, Cheetah',
+      postcode: '4023',
+      picture:"https://www.indiewire.com/wp-content/uploads/2015/04/dakota-fanning-by-daniel-bergeron.jpg?w=780",
       role: 'Nanny',
+      description: 'I think my record is walking 13 dogs at once, that was fun'
       // bookings: [
       //   { BookedDate: '20 Jan 2023', BookedBy:  savedUser1._id},
       //   { BookedDate: '21 Jan 2023', BookedBy:  savedUser1._id},
@@ -95,8 +100,9 @@ db.once('open', async () => {
     email: 'nanny@testmail.com',
     password: 'password12345',
     address: '65 Above Highway',
-    picture:"https://assets.teenvogue.com/photos/59d3b74cc5559f37a703150c/3:2/w_2411,h_1607,c_limit/MCDMOAN_EC058.jpg",
+    picture:"https://images.thedirect.com/media/article_full/capagent_1.jpg",
     role: 'Nanny',
+    description:'Does it look like I have time for your pets? I am saving the world'
     // bookings: [
     //   { BookedDate: '22 Jan 2023', BookedBy: anon._id.toString() },
     //   { BookedDate: '23 Jan 2023', BookedBy: anon._id.toString() },
@@ -115,6 +121,7 @@ db.once('open', async () => {
     address: '15 High Avenue',
     picture:"https://assets.teenvogue.com/photos/59d3b74cc5559f37a703150c/3:2/w_2411,h_1607,c_limit/MCDMOAN_EC058.jpg",
     role: 'Nanny',
+    description: 'hmmmmmmm...............................'
     // bookings: [
     //   { BookedDate: '24 Jan 2023', BookedBy: catdog._id.toString()  },
     //   { BookedDate: '25 Jan 2023', BookedBy: catdog._id.toString() },
@@ -123,13 +130,13 @@ db.once('open', async () => {
 
   await User.create({
     firstName: "Tom",
-        lastName: "Cruise",
+        lastName: "Holland",
         email: "Iamtom@test.com",
         password: "Password12345",
         address: "78 Campbells River Road, Warrigal NSW",
         postcode: "2825",
         role: "Nanny",
-        picture:"http://t1.gstatic.com/licensed-image?q=tbn:ANd9GcRezb3QSPGhLptNSXoqUpKeVofpNCTLPXOG9n9o3Z2bnMp80f2AimK17SPKLa2PPkqsYkqIUAHfDgZFTs0",
+        picture:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRMneUFqjkV025L2OrZSvqG8KxCIJaSM0Q9bQ&usqp=CAU",
         description: "Huge dog lover. I feel sorry for people who don't have dogs. I hear they have to pick up food they drop on the floor",
 
   });
@@ -167,7 +174,7 @@ db.once('open', async () => {
         address: "33 Benny Street, Quoiba Tas",
         postcode: "7310",
         role: "Nanny",
-        picture:"https://assets.teenvogue.com/photos/59d3b74cc5559f37a703150c/3:2/w_2411,h_1607,c_limit/MCDMOAN_EC058.jpg",
+        picture:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcThIoZ_VxZ9NkHTz-iqtdWU4Qq8CN6iHHP6wg&usqp=CAU",
         description: "I occasionally enjoy a sing along with my pet parrot",
         
   });
