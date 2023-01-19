@@ -1,4 +1,4 @@
-# pet-nanny[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+## Pet Nanny! [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/mecuboi/pet-nanny/blob/main/LICENSE)
 
 ### Description
 
@@ -20,14 +20,14 @@ Inorder for a User to successfully book a nanny, they must meet some criterias
 
 This application is responsive and in both mobile ad desktop devices.
 
-- [Installation](#installation)
+- [Deployed Link](#deployed-link)
 - [Credits](#credits)
 - [Licenses](#licenses)
 - [Screenshots](#screenshots)
 
-### Installation
+### Deployed Link
 
-The application is web based and does not require any installation. 
+[Click here to go to the deployed app](https://github.com/mecuboi/pet-nanny/blob/main/LICENSE)
 
 ### Credits
 
@@ -37,14 +37,8 @@ The application is web based and does not require any installation.
 
 ### Licenses
 
-Copyright 2023 Matthew Dharmawan Jusuf, Chibuike Okoye, Samuel Wai Weng Yong
-Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-      The above copyright notice and this permission notice (including the next paragraph) shall be included in all copies or substantial portions of the Software.
-      THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/mecuboi/pet-nanny/blob/main/LICENSE)
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-
-[MIT License](https://opensource.org/licenses/MIT)
 
 
 ---

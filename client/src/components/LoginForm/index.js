@@ -13,7 +13,7 @@ const LoginForm = () => {
   const [validated] = useState(false);
   const [showAlert, setShowAlert] = useState(false);
   const [login, { error }] = useMutation(LOGIN)
-  const [toMe, setToMe ] = useState(false)
+
 
   const navigate = useNavigate()
   
@@ -36,10 +36,10 @@ const LoginForm = () => {
         variables: {...userFormData}
       })
       Auth.login(data.login.token, data.login.user.firstName);
-      // navigate('/me')
+
       window.location.href = '/me'
 
-      // setToMe(true)
+
       
     } catch (err) {
       console.error(err);
