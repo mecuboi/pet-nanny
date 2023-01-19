@@ -27,7 +27,7 @@ This application is responsive and in both mobile ad desktop devices.
 
 ### Deployed Link
 
-[Click here to go to the deployed app](https://github.com/mecuboi/pet-nanny/blob/main/LICENSE)
+[Click here to go to the deployed app](https://pet-nanny-msc.herokuapp.com/)
 
 ### Credits
 
