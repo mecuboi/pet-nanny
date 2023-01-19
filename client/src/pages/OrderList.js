@@ -1,7 +1,7 @@
 import MyOrders from '../components/MyOrders';
 
 import { useQuery } from '@apollo/client';
-import { QUERY_ME , QUERY_ALL_NANNIES} from '../utils/queries';
+import { QUERY_ME } from '../utils/queries';
 
 const OrderList = (props) => {
   const { loading, data, error } = useQuery(QUERY_ME);

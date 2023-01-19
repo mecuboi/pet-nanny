@@ -9,15 +9,15 @@ const resolvers = {
   Query: {
     me: async (parent, args, context) => {
       if (context.user) {
-      const userData = await User.findById(context.user)
-      .populate('orders')
-      .populate({
-        path: 'orders',
-        populate:"bookings"
-      })
+        const userData = await User.findById(context.user)
+          .populate('orders')
+          .populate({
+            path: 'orders',
+            populate: "bookings"
+          })
 
-      return userData
-    }
+        return userData
+      }
 
       throw new AuthenticationError('Not logged in')
     },
@@ -29,7 +29,12 @@ const resolvers = {
     },
     user: async (_, { _id }, context) => {
       if (context.user) {
-        return await User.findOne({ _id: _id });
+        return await User.findOne({ _id: _id })
+          .populate('orders')
+          .populate({
+            path: 'orders',
+            populate: "bookings"
+          });
       }
       throw new AuthenticationError('Not logged in');
     },

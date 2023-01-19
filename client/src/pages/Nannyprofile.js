@@ -19,6 +19,7 @@ import {
   faClock,
 } from "@fortawesome/free-solid-svg-icons";
 import "@fortawesome/react-fontawesome";
+import NannyList from "./NannyList"
 
 const Nannyprofile = () => {
   const { _id } = useParams();
@@ -135,7 +136,11 @@ const Nannyprofile = () => {
                 </button>
                 </Link>
               </div>
+              <div className="order-container">
+                    <NannyList />
+                </div>
             </MDBCard>
+              
           </MDBCol>
         </MDBRow>
       </MDBContainer>
