@@ -4,6 +4,8 @@ import { useMutation } from '@apollo/client';
 import { LOGIN } from '../../utils/mutations'
 import Auth from '../../utils/auth';
 import { Navigate } from 'react-router-dom'
+import { useNavigate } from "react-router-dom";
+
 
 const LoginForm = () => {
 
@@ -13,6 +15,8 @@ const LoginForm = () => {
   const [login, { error }] = useMutation(LOGIN)
   const [toMe, setToMe ] = useState(false)
 
+  const navigate = useNavigate()
+  
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setUserFormData({ ...userFormData, [name]: value })
@@ -32,7 +36,7 @@ const LoginForm = () => {
         variables: {...userFormData}
       })
       Auth.login(data.login.token, data.login.user.firstName);
-      window.location.href = '/me'
+      navigate('/me')
 
       // setToMe(true)
       
