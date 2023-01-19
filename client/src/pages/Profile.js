@@ -101,7 +101,7 @@ const Profile = () => {
     </Card>
             { user.role === 'Nanny' && 
                 <div className="booking-container">
-                    <BookingList />
+                    <BookingList id={user._id} />
                 </div>
             }
             { user.role === 'Pawrent' && 

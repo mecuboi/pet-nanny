@@ -5,7 +5,7 @@ import dateFormat from 'dateformat'
 const MyBookings = (props) => {
 
   return (
-    <Container fluid className="mb-3 px-md-4 py-md-3 border rounded w-auto mx-2 mx-md-4">
+    <Container fluid className="mb-3 px-md-4 py-md-3 border rounded w-auto mx-md-4 border">
       <Row>
         <Col>
           <div className='text-start'>
