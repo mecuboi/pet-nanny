@@ -21,6 +21,7 @@ const typeDefs = gql`
     bookedDate: String
     price: Float
     bookedBy: User
+    additionalNotes: String
   }
   type Order {
     _id: ID

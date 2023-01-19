@@ -75,6 +75,7 @@ query user($_id: ID!) {
     bookings{
       _id
       bookedDate
+      additionalNotes
       bookedBy{
         _id
         firstName

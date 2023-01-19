@@ -22,9 +22,10 @@ const BookingList = (props) => {
         {bookings.map(booking => (
           <MyBookings 
             key={booking._id}
-            bookedDate={booking.bookedDate} 
+            // bookedDate={booking.bookedDate} 
             id={booking._id} 
-            price={booking.price} 
+            // price={booking.price}
+            booking={booking} 
             bookedBy={booking.bookedBy}
             // bookedBy={{ 
             //   _id: booking.bookedBy._id, 
