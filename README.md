@@ -89,7 +89,7 @@ Users can sign up for PetNanny with two different roles: parent or nanny.
 Clone this repository: 
 
 ```
-git clone https://github.com/yourusername/petnanny.git
+git clone git@github.com:mecuboi/pet-nanny.git
 ```
 
 Install the dependencies on the root directory: 
