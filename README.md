@@ -1,63 +1,159 @@
-## Pet Nanny! [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/mecuboi/pet-nanny/blob/main/LICENSE)
+<div align="center">
+<h1>Pet Nanny: A Booking App for Pet Care Services</h1>
+<a name="readme-top"></a>
+</div>
 
-### Description
+Deployed URL: [https://pet-nanny-msc.herokuapp.com/](https://pet-nanny-msc.herokuapp.com/)
+ 
+<!-- TABLE OF CONTENTS -->
+  ## Table of Contents
+  <ol>
+    <li><a href="#screenshots">Screenshots</a></li>
+    <li><a href="#description">Description</a></li>
+    <li><a href="#usage">Usage</a></li>
+    <li><a href="#installation">Installation</a></li>
+    <li><a href="#technologies">Technologies</a></li>
+    <li><a href="#license">License</a></li>
+    <li><a href="#links">Links</a></li>
+    <li><a href="#credits">Credits</a></li>
+    <li><a href="#roadmap">Roadmap</a></li>
+  </ol>
+  
+<!-- Screenshots -->
+## Screenshots
+```Homepage```
+<br>
 
-PetNanny is a simple and easy to use booking application that provides nannies for your pets at a price. A user can view the full list of available nannies without logining in. However the user needs to be logged in to book any of the nannies specified.
+![Petnanny-homepage](screenshots/Homepage.png)
 
-A user may log in or sign up from the homepage. During sign up the user is presented with two different role options.
+<br>
 
-- Create an accout as a parent.
-- Create an account as a nanny.
+```Nanny Search Page```
+![Petnanny-nannylist](screenshots/Nannylist.png)
 
-The user may also switch between roles with approval from the admistrator.
+<br>
 
-Inorder for a User to successfully book a nanny, they must meet some criterias
+```Nanny Profile Page```
+![Petnanny-nannyprofile](screenshots/Nannyprofile.png)
 
-- Be logged in.
-- Select a desired nanny.
-- Schedule a day for the booking.
-- Pay for the service.
+<br>
 
-This application is responsive and in both mobile ad desktop devices.
+```Booking Page```
+![Petnanny-booking](screenshots/Booking.png)
 
-- [Deployed Link](#deployed-link)
-- [Credits](#credits)
-- [Licenses](#licenses)
-- [Screenshots](#screenshots)
+<br>
 
-### Deployed Link
+```Payment Page```
+![Petnanny-payment](screenshots/Payment.png)
 
-[Click here to go to the deployed app](https://pet-nanny-msc.herokuapp.com/)
 
-### Credits
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-- Matthew Dharmawan Jusuf (https://github.com/mecuboi) 
-- Chibuike Okoye (https://github.com/Notchibby)
-- Samuel Wai Weng Yong (https://github.com/KangaZero)
+## Description
 
-### Licenses
+PetNanny is a web application that allows users to find and book nannies for their pets at affordable prices. Users can browse through a list of available nannies, view their profiles and ratings, select a date and time for the booking, and pay securely online.
+
+Users can sign up for PetNanny with two different roles: parent or nanny.
+
+- <strong>Parents</strong> are users who want to book nannies for their pets. They can view all the nannies on the platform, filter them by location and availability, and make bookings with their preferred nannies.
+- <strong>Nannies</strong> are users who offer pet care services. They can create their own profiles with their rates, skills, experience, and availability. They can also accept or decline bookings from parents.
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+<!-- Usage -->
+## Usage
+
+```To use PetNanny as a parent:```
+
+- Sign up or log in with your email and password
+- Choose “Parent” as your role
+- Browse through the list of nannies
+- Click on a nanny’s name to view their profile
+- Click on “Book Now” to make a booking
+- Select a date and time from the calendar
+- Enter your payment details
+- Confirm your booking
+
+```To use PetNanny as a nanny:```
+
+- Sign up or log in with your email and password
+- Choose “Nanny” as your role
+- Fill out your profile with your information
+- Check your dashboard for incoming bookings
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+<!-- Installation -->
+## Installation
+
+Clone this repository: 
+
+```
+git clone https://github.com/yourusername/petnanny.git
+```
+
+Install the dependencies on the root directory: 
+```
+npm install
+```
+
+Start the server:
+```
+npm run develop
+```
+
+Open your browser and go to [http://localhost:3001](http://localhost:3001)
+
+<!--Technologies used-->
+## Technologies
+
+<p align="center">
+  <a href="https://skillicons.dev">
+    <img src="https://skillicons.dev/icons?i=javascript,react,mongodb,heroku,css,bootstrap,apollo,express,graphql" />
+  </a>
+</p>
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+## License
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/mecuboi/pet-nanny/blob/main/LICENSE)
 
+Distributed under the MIT License. See `LICENSE.txt` for more information.
 
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
----
-  
-### Screenshots
-Below are screenshots of the application:
+<!--Links-->
+## Links
 
-![Petnanny-homepage](https://github.com/mecuboi/pet-nanny/blob/main/screenshots/Homepage.png)
-![Petnanny-nannylist](https://github.com/mecuboi/pet-nanny/blob/main/screenshots/Nannylist.png)
-![Petnanny-nannyprofile](https://github.com/mecuboi/pet-nanny/blob/main/screenshots/Nannyprofile.png)
-![Petnanny-booking](https://github.com/mecuboi/pet-nanny/blob/main/screenshots/Booking.png)
-![Petnanny-payment](https://github.com/mecuboi/pet-nanny/blob/main/screenshots/Payment.png)
+* Deployed URL - https://pet-nanny-msc.herokuapp.com/
+* GitHub Repository - https://github.com/KangaZero/pet-nanny
 
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+ 
+<!--Credits-->
+## Credits
 
+We would like to acknowledge and credit all contributors.
+1. Matthew Dharmawan Jusuf [https://github.com/mecuboi](https://github.com/mecuboi) 
+2. Chibuike Okoye [https://github.com/Notchibby](https://github.com/Notchibby)
+3. Samuel Wai Weng Yong [https://github.com/KangaZero](https://github.com/KangaZero)
 
-##### The repository for this application can be found at: 
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-https://github.com/mecuboi/pet-nanny
+<!-- Roadmap -->
+## Roadmap
 
-##### The deployed application can be found at: 
+We are constantly working on improving PetNanny and adding new features. Some of our future plans include:
 
-https://pet-nanny-msc.herokuapp.com/
+- Adding reviews and ratings for nannies
+- Implementing chat functionality between parents and nannies
+- Integrating Google Maps API for location-based services
+
+If you have any suggestions or feedback for us, please feel free to share them via email:
+[Send feedback](mailto:samuelyongw@gmail.com)
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+ 
+<p align="center">Thanks for reading 😄!</p>
+
